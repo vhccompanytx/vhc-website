@@ -1142,130 +1142,72 @@
 
                         <!-- BASE TRACKS: only 0/90° angles, fillets via Q -->
                         <g fill="none" stroke="rgba(0,0,0,0.12)" stroke-width="1.8" stroke-dasharray="4 7">
-                            <!-- Sun→Solar | Solar→Inverter | Inverter→Main (all vertical, x=150) -->
+                            <!-- Vertical Spine (centered x=150) -->
                             <line x1="150" y1="54" x2="150" y2="82"/>
                             <line x1="150" y1="132" x2="150" y2="157"/>
                             <line x1="150" y1="207" x2="150" y2="232"/>
-                            <!-- Main→Home (L: down then left, fillet r=8) -->
-                            <path d="M150,282 L150,314 Q150,322 142,322 L113,322"/>
-                            <!-- Main→Battery (L: down then right, fillet r=8) -->
-                            <path d="M150,282 L150,314 Q150,322 158,322 L187,322"/>
-                            <!-- Inverter→Battery side track (right arm) -->
-                            <path d="M188,182 L225,182 Q233,182 233,190 L233,322"/>
-                            <!-- Battery→Grid (vertical) -->
-                            <line x1="225" y1="372" x2="225" y2="407"/>
-                            <!-- Grid→Main return (L: left then up, fillet r=8) -->
-                            <path d="M187,432 L162,432 Q154,432 154,424 L154,282"/>
+                            <!-- Main Panel to Home (lateral entry x=93) -->
+                            <path d="M112,257 L101,257 Q93,257 93,265 L93,347"/>
+                            <!-- Main Panel to Battery (lateral entry x=207) -->
+                            <path d="M188,257 L199,257 Q207,257 207,265 L207,347"/>
+                            <!-- Inverter to Battery (side arm entry x=207) -->
+                            <path d="M188,182 L217,182 Q225,182 225,190 L225,314 Q225,322 217,322 L207,322"/>
+                            <!-- Battery to Grid (lateral x=207) -->
+                            <path d="M207,372 L207,419 Q207,427 215,427 L245,427"/>
+                            <!-- Grid to Main return (lateral x=112) -->
+                            <path d="M207,432 L101,432 Q93,432 93,424 L93,280 Q93,272 101,272 L112,272"/>
                         </g>
 
                         <!-- FLOW GROUP 0: Solar Only -->
                         <g id="mfg0">
-                            <!-- Sun→Solar (vertical) -->
-                            <line x1="150" y1="54" x2="150" y2="82" stroke="#E2BB57" stroke-width="2.5" opacity="0.65"/>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="0.45s" repeatCount="indefinite" path="M150,54 L150,82"/></circle>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="0.45s" begin="0.22s" repeatCount="indefinite" path="M150,54 L150,82"/></circle>
-                            <!-- Solar→Inverter (vertical) -->
-                            <line x1="150" y1="132" x2="150" y2="157" stroke="#E2BB57" stroke-width="2.5" opacity="0.65"/>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="0.6s" repeatCount="indefinite" path="M150,132 L150,157"/></circle>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="0.6s" begin="0.3s" repeatCount="indefinite" path="M150,132 L150,157"/></circle>
-                            <!-- Inverter→Main (vertical) -->
-                            <line x1="150" y1="207" x2="150" y2="232" stroke="#E2BB57" stroke-width="2.5" opacity="0.65"/>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="0.55s" repeatCount="indefinite" path="M150,207 L150,232"/></circle>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="0.55s" begin="0.27s" repeatCount="indefinite" path="M150,207 L150,232"/></circle>
-                            <!-- Main→Home: gold parallel line (L-path with fillet) -->
-                            <path d="M147,282 L147,314 Q147,322 139,322 L113,322" fill="none" stroke="#E2BB57" stroke-width="2.5" opacity="0.65"/>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="1.4s" repeatCount="indefinite" path="M147,282 L147,314 Q147,322 139,322 L113,322"/></circle>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="1.4s" begin="0.7s" repeatCount="indefinite" path="M147,282 L147,314 Q147,322 139,322 L113,322"/></circle>
-                            <!-- Main→Home: blue parallel line -->
-                            <path d="M153,282 L153,314 Q153,322 145,322 L113,322" fill="none" stroke="#3B82F6" stroke-width="2.5" opacity="0.5"/>
-                            <circle r="4" fill="#3B82F6" filter="url(#blu-m)"><animateMotion dur="2.2s" repeatCount="indefinite" path="M153,282 L153,314 Q153,322 145,322 L113,322"/></circle>
-                            <circle r="4" fill="#3B82F6" filter="url(#blu-m)"><animateMotion dur="2.2s" begin="1.1s" repeatCount="indefinite" path="M153,282 L153,314 Q153,322 145,322 L113,322"/></circle>
-                            <!-- Main→Grid: gold export -->
-                            <path d="M150,282 L150,322 L187,322 L187,407" fill="none" stroke="#E2BB57" stroke-width="2.5" opacity="0.4"/>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="2.0s" repeatCount="indefinite" path="M150,282 L150,322 L187,322 L187,407"/></circle>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="2.0s" begin="1.0s" repeatCount="indefinite" path="M150,282 L150,322 L187,322 L187,407"/></circle>
-                            <!-- Grid→Main: blue import -->
-                            <path d="M187,432 L154,432 L154,282" fill="none" stroke="#3B82F6" stroke-width="2.5" opacity="0.4"/>
-                            <circle r="4" fill="#3B82F6" filter="url(#blu-m)"><animateMotion dur="2.8s" repeatCount="indefinite" path="M187,432 L154,432 L154,282"/></circle>
-                            <circle r="4" fill="#3B82F6" filter="url(#blu-m)"><animateMotion dur="2.8s" begin="1.4s" repeatCount="indefinite" path="M187,432 L154,432 L154,282"/></circle>
+                            <line x1="150" y1="54" x2="150" y2="82" stroke="#E2BB57" stroke-width="2.5" opacity="0.65"/><circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="0.45s" repeatCount="indefinite" path="M150,54 L150,82"/></circle>
+                            <line x1="150" y1="132" x2="150" y2="157" stroke="#E2BB57" stroke-width="2.5" opacity="0.65"/><circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="0.6s" repeatCount="indefinite" path="M150,132 L150,157"/></circle>
+                            <line x1="150" y1="207" x2="150" y2="232" stroke="#E2BB57" stroke-width="2.5" opacity="0.65"/><circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="0.55s" repeatCount="indefinite" path="M150,207 L150,232"/></circle>
+                            <!-- Main→Home: Lateral Gold (exit y=250, enter y=340) -->
+                            <path d="M112,250 L101,250 Q93,250 93,258 L93,340" fill="none" stroke="#E2BB57" stroke-width="2.5" opacity="0.65"/><circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="1.2s" repeatCount="indefinite" path="M112,250 L101,250 Q93,250 93,258 L93,340"/></circle>
+                            <!-- Main→Home: Lateral Blue parallel (exit y=264, enter y=354) -->
+                            <path d="M112,264 L105,264 Q97,264 97,272 L97,354" fill="none" stroke="#3B82F6" stroke-width="2.5" opacity="0.5"/><circle r="4" fill="#3B82F6" filter="url(#blu-m)"><animateMotion dur="2.0s" repeatCount="indefinite" path="M112,264 L105,264 Q97,264 97,272 L97,354"/></circle>
+                            <!-- Main→Grid export -->
+                            <path d="M188,264 L199,264 Q207,264 207,272 L207,427 L245,427" fill="none" stroke="#E2BB57" stroke-width="2.5" opacity="0.4"/><circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="2.2s" repeatCount="indefinite" path="M188,264 L199,264 Q207,264 207,272 L207,427 L245,427"/></circle>
+                            <!-- Grid→Main return -->
+                            <path d="M207,432 L93,432 L93,272 L112,272" fill="none" stroke="#3B82F6" stroke-width="2.5" opacity="0.4"/><circle r="4" fill="#3B82F6" filter="url(#blu-m)"><animateMotion dur="2.8s" repeatCount="indefinite" path="M207,432 L93,432 L93,272 L112,272"/></circle>
                         </g>
 
                         <!-- FLOW GROUP 1: Battery Backup -->
                         <g id="mfg1" style="display:none">
-                            <!-- Sun→Solar -->
-                            <line x1="150" y1="54" x2="150" y2="82" stroke="#E2BB57" stroke-width="2.5" opacity="0.65"/>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="0.45s" repeatCount="indefinite" path="M150,54 L150,82"/></circle>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="0.45s" begin="0.22s" repeatCount="indefinite" path="M150,54 L150,82"/></circle>
-                            <!-- Solar→Inverter -->
-                            <line x1="150" y1="132" x2="150" y2="157" stroke="#E2BB57" stroke-width="2.5" opacity="0.65"/>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="0.6s" repeatCount="indefinite" path="M150,132 L150,157"/></circle>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="0.6s" begin="0.3s" repeatCount="indefinite" path="M150,132 L150,157"/></circle>
-                            <!-- Inverter→Main -->
-                            <line x1="150" y1="207" x2="150" y2="232" stroke="#E2BB57" stroke-width="2.5" opacity="0.65"/>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="0.55s" repeatCount="indefinite" path="M150,207 L150,232"/></circle>
-                            <!-- Inverter→Battery charge (gold, right arm) -->
-                            <path d="M188,182 L233,182 L233,322" fill="none" stroke="#E2BB57" stroke-width="2.5" opacity="0.5"/>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="1.8s" repeatCount="indefinite" path="M188,182 L233,182 L233,322"/></circle>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="1.8s" begin="0.9s" repeatCount="indefinite" path="M188,182 L233,182 L233,322"/></circle>
-                            <!-- Battery→Inverter discharge (green) -->
-                            <path d="M217,322 L217,182 L188,182" fill="none" stroke="#10B981" stroke-width="2.5" opacity="0.65"/>
-                            <circle r="4" fill="#10B981" filter="url(#cyn-m)"><animateMotion dur="2.2s" repeatCount="indefinite" path="M217,322 L217,182 L188,182"/></circle>
-                            <circle r="4" fill="#10B981" filter="url(#cyn-m)"><animateMotion dur="2.2s" begin="1.1s" repeatCount="indefinite" path="M217,322 L217,182 L188,182"/></circle>
-                            <!-- Main→Home: gold (solar) -->
-                            <path d="M147,282 L147,314 Q147,322 139,322 L113,322" fill="none" stroke="#E2BB57" stroke-width="2.5" opacity="0.65"/>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="1.4s" repeatCount="indefinite" path="M147,282 L147,314 Q147,322 139,322 L113,322"/></circle>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="1.4s" begin="0.7s" repeatCount="indefinite" path="M147,282 L147,314 Q147,322 139,322 L113,322"/></circle>
-                            <!-- Main→Home: green (battery) parallel -->
-                            <path d="M153,282 L153,314 Q153,322 145,322 L113,322" fill="none" stroke="#10B981" stroke-width="2.5" opacity="0.65"/>
-                            <circle r="4" fill="#10B981" filter="url(#cyn-m)"><animateMotion dur="1.8s" repeatCount="indefinite" path="M153,282 L153,314 Q153,322 145,322 L113,322"/></circle>
-                            <circle r="4" fill="#10B981" filter="url(#cyn-m)"><animateMotion dur="1.8s" begin="0.9s" repeatCount="indefinite" path="M153,282 L153,314 Q153,322 145,322 L113,322"/></circle>
+                            <line x1="150" y1="54" x2="150" y2="82" stroke="#E2BB57" stroke-width="2.5" opacity="0.65"/><circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="0.45s" repeatCount="indefinite" path="M150,54 L150,82"/></circle>
+                            <line x1="150" y1="132" x2="150" y2="157" stroke="#E2BB57" stroke-width="2.5" opacity="0.65"/><circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="0.6s" repeatCount="indefinite" path="M150,132 L150,157"/></circle>
+                            <line x1="150" y1="207" x2="150" y2="232" stroke="#E2BB57" stroke-width="2.5" opacity="0.65"/><circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="0.55s" repeatCount="indefinite" path="M150,207 L150,232"/></circle>
+                            <!-- Inverter charges Battery lateral -->
+                            <path d="M188,182 L217,182 Q225,182 225,190 L225,314 Q225,322 217,322 L207,322" fill="none" stroke="#E2BB57" stroke-width="2.5" opacity="0.5"/><circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="1.8s" repeatCount="indefinite" path="M188,182 L217,182 Q225,182 225,190 L225,314 Q225,322 217,322 L207,322"/></circle>
+                            <!-- Battery discharges to Inverter green -->
+                            <path d="M207,340 L219,340 Q227,340 227,332 L227,192 Q227,184 219,184 L188,184" fill="none" stroke="#10B981" stroke-width="2.5" opacity="0.65"/><circle r="4" fill="#10B981" filter="url(#cyn-m)"><animateMotion dur="2.2s" repeatCount="indefinite" path="M207,340 L219,340 Q227,340 227,332 L227,192 Q227,184 219,184 L188,184"/></circle>
+                            <!-- Main→Home: Lateral Gold (exit 250, enter 340) -->
+                            <path d="M112,250 L101,250 Q93,250 93,258 L93,340" fill="none" stroke="#E2BB57" stroke-width="2.5" opacity="0.65"/><circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="1.2s" repeatCount="indefinite" path="M112,250 L101,250 Q93,250 93,258 L93,340"/></circle>
+                            <!-- Main→Home: Lateral Green (exit 257, enter 347) -->
+                            <path d="M112,257 L103,257 Q95,257 95,265 L95,347" fill="none" stroke="#10B981" stroke-width="2.5" opacity="0.65"/><circle r="4" fill="#10B981" filter="url(#cyn-m)"><animateMotion dur="1.6s" repeatCount="indefinite" path="M112,257 L103,257 Q95,257 95,265 L95,347"/></circle>
                         </g>
 
                         <!-- FLOW GROUP 2: Complete System -->
                         <g id="mfg2" style="display:none">
-                            <!-- Sun→Solar -->
-                            <line x1="150" y1="54" x2="150" y2="82" stroke="#E2BB57" stroke-width="2.5" opacity="0.65"/>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="0.45s" repeatCount="indefinite" path="M150,54 L150,82"/></circle>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="0.45s" begin="0.22s" repeatCount="indefinite" path="M150,54 L150,82"/></circle>
-                            <!-- Solar→Inverter -->
-                            <line x1="150" y1="132" x2="150" y2="157" stroke="#E2BB57" stroke-width="2.5" opacity="0.65"/>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="0.6s" repeatCount="indefinite" path="M150,132 L150,157"/></circle>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="0.6s" begin="0.3s" repeatCount="indefinite" path="M150,132 L150,157"/></circle>
-                            <!-- Inverter→Main -->
-                            <line x1="150" y1="207" x2="150" y2="232" stroke="#E2BB57" stroke-width="2.5" opacity="0.65"/>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="0.55s" repeatCount="indefinite" path="M150,207 L150,232"/></circle>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="0.55s" begin="0.27s" repeatCount="indefinite" path="M150,207 L150,232"/></circle>
-                            <!-- Inverter→Battery charge (gold, right arm) -->
-                            <path d="M188,182 L233,182 L233,322" fill="none" stroke="#E2BB57" stroke-width="2.5" opacity="0.5"/>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="1.8s" repeatCount="indefinite" path="M188,182 L233,182 L233,322"/></circle>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="1.8s" begin="0.9s" repeatCount="indefinite" path="M188,182 L233,182 L233,322"/></circle>
-                            <!-- Battery→Inverter discharge (green) -->
-                            <path d="M217,322 L217,182 L188,182" fill="none" stroke="#10B981" stroke-width="2.5" opacity="0.65"/>
-                            <circle r="4" fill="#10B981" filter="url(#cyn-m)"><animateMotion dur="2.2s" repeatCount="indefinite" path="M217,322 L217,182 L188,182"/></circle>
-                            <circle r="4" fill="#10B981" filter="url(#cyn-m)"><animateMotion dur="2.2s" begin="1.1s" repeatCount="indefinite" path="M217,322 L217,182 L188,182"/></circle>
-                            <!-- Battery→Grid (green) -->
-                            <line x1="225" y1="372" x2="225" y2="407" stroke="#10B981" stroke-width="2.5" opacity="0.5"/>
-                            <circle r="4" fill="#10B981" filter="url(#cyn-m)"><animateMotion dur="0.8s" repeatCount="indefinite" path="M225,372 L225,407"/></circle>
-                            <!-- Main→Home: gold parallel -->
-                            <path d="M146,282 L146,314 Q146,322 138,322 L113,322" fill="none" stroke="#E2BB57" stroke-width="2.5" opacity="0.65"/>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="1.4s" repeatCount="indefinite" path="M146,282 L146,314 Q146,322 138,322 L113,322"/></circle>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="1.4s" begin="0.7s" repeatCount="indefinite" path="M146,282 L146,314 Q146,322 138,322 L113,322"/></circle>
-                            <!-- Main→Home: green parallel -->
-                            <path d="M150,282 L150,314 Q150,322 142,322 L113,322" fill="none" stroke="#10B981" stroke-width="2.5" opacity="0.65"/>
-                            <circle r="4" fill="#10B981" filter="url(#cyn-m)"><animateMotion dur="1.8s" repeatCount="indefinite" path="M150,282 L150,314 Q150,322 142,322 L113,322"/></circle>
-                            <circle r="4" fill="#10B981" filter="url(#cyn-m)"><animateMotion dur="1.8s" begin="0.9s" repeatCount="indefinite" path="M150,282 L150,314 Q150,322 142,322 L113,322"/></circle>
-                            <!-- Main→Home: blue parallel -->
-                            <path d="M154,282 L154,314 Q154,322 146,322 L113,322" fill="none" stroke="#3B82F6" stroke-width="2.5" opacity="0.65"/>
-                            <circle r="4" fill="#3B82F6" filter="url(#blu-m)"><animateMotion dur="2.4s" repeatCount="indefinite" path="M154,282 L154,314 Q154,322 146,322 L113,322"/></circle>
-                            <circle r="4" fill="#3B82F6" filter="url(#blu-m)"><animateMotion dur="2.4s" begin="1.2s" repeatCount="indefinite" path="M154,282 L154,314 Q154,322 146,322 L113,322"/></circle>
-                            <!-- Main→Grid: gold export -->
-                            <path d="M154,282 L154,322 L187,322 L187,407" fill="none" stroke="#E2BB57" stroke-width="2.5" opacity="0.4"/>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="2.0s" repeatCount="indefinite" path="M154,282 L154,322 L187,322 L187,407"/></circle>
-                            <circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="2.0s" begin="1.0s" repeatCount="indefinite" path="M154,282 L154,322 L187,322 L187,407"/></circle>
-                            <!-- Grid→Main: blue import -->
-                            <path d="M187,432 L158,432 L158,282" fill="none" stroke="#3B82F6" stroke-width="2.5" opacity="0.4"/>
-                            <circle r="4" fill="#3B82F6" filter="url(#blu-m)"><animateMotion dur="2.8s" repeatCount="indefinite" path="M187,432 L158,432 L158,282"/></circle>
-                            <circle r="4" fill="#3B82F6" filter="url(#blu-m)"><animateMotion dur="2.8s" begin="1.4s" repeatCount="indefinite" path="M187,432 L158,432 L158,282"/></circle>
+                            <line x1="150" y1="54" x2="150" y2="82" stroke="#E2BB57" stroke-width="2.5" opacity="0.65"/><circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="0.45s" repeatCount="indefinite" path="M150,54 L150,82"/></circle>
+                            <line x1="150" y1="132" x2="150" y2="157" stroke="#E2BB57" stroke-width="2.5" opacity="0.65"/><circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="0.6s" repeatCount="indefinite" path="M150,132 L150,157"/></circle>
+                            <line x1="150" y1="207" x2="150" y2="232" stroke="#E2BB57" stroke-width="2.5" opacity="0.65"/><circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="0.55s" repeatCount="indefinite" path="M150,207 L150,232"/></circle>
+                            <!-- Inverter charges Battery sidebar -->
+                            <path d="M188,182 L217,182 Q225,182 225,190 L225,314 Q225,322 217,322 L207,322" fill="none" stroke="#E2BB57" stroke-width="2.5" opacity="0.5"/><circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="1.8s" repeatCount="indefinite" path="M188,182 L217,182 Q225,182 225,190 L225,314 Q225,322 217,322 L207,322"/></circle>
+                            <!-- Battery discharges via Main lateral -->
+                            <path d="M207,347 L199,347 Q191,347 191,339 L191,264 L188,264" fill="none" stroke="#10B981" stroke-width="2.5" opacity="0.65"/><circle r="4" fill="#10B981" filter="url(#cyn-m)"><animateMotion dur="2.2s" repeatCount="indefinite" path="M207,347 L199,347 Q191,347 191,339 L191,264 L188,264"/></circle>
+                            <!-- Battery to Grid -->
+                            <path d="M207,372 L207,419 Q207,427 215,427 L245,427" fill="none" stroke="#10B981" stroke-width="2.5" opacity="0.5"/><circle r="4" fill="#10B981" filter="url(#cyn-m)"><animateMotion dur="0.8s" repeatCount="indefinite" path="M207,372 L207,419 Q207,427 215,427 L245,427"/></circle>
+                            <!-- Main→Home Lateral Gold (exit 250, enter 340) -->
+                            <path d="M112,250 L101,250 Q93,250 93,258 L93,340" fill="none" stroke="#E2BB57" stroke-width="2.5" opacity="0.65"/><circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="1.4s" repeatCount="indefinite" path="M112,250 L101,250 Q93,250 93,258 L93,340"/></circle>
+                            <!-- Main→Home Lateral Green (exit 257, enter 347) -->
+                            <path d="M112,257 L103,257 Q95,257 95,265 L95,347" fill="none" stroke="#10B981" stroke-width="2.5" opacity="0.65"/><circle r="4" fill="#10B981" filter="url(#cyn-m)"><animateMotion dur="1.8s" repeatCount="indefinite" path="M112,257 L103,257 Q95,257 95,265 L95,347"/></circle>
+                            <!-- Main→Home Lateral Blue (exit 264, enter 354) -->
+                            <path d="M112,264 L105,264 Q97,264 97,272 L97,354" fill="none" stroke="#3B82F6" stroke-width="2.5" opacity="0.65"/><circle r="4" fill="#3B82F6" filter="url(#blu-m)"><animateMotion dur="2.4s" repeatCount="indefinite" path="M112,264 L105,264 Q97,264 97,272 L97,354"/></circle>
+                            <!-- Grid Export/Import -->
+                            <path d="M188,264 L199,264 Q207,264 207,272 L207,427 L245,427" fill="none" stroke="#E2BB57" stroke-width="2.5" opacity="0.4"/><circle r="4" fill="#E2BB57" filter="url(#gld-m)"><animateMotion dur="2.0s" repeatCount="indefinite" path="M188,264 L199,264 Q207,264 207,272 L207,427 L245,427"/></circle>
+                            <path d="M207,432 L93,432 L93,272 L112,272" fill="none" stroke="#3B82F6" stroke-width="2.5" opacity="0.4"/><circle r="4" fill="#3B82F6" filter="url(#blu-m)"><animateMotion dur="2.8s" repeatCount="indefinite" path="M207,432 L93,432 L93,272 L112,272"/></circle>
                         </g>
 
                         <!-- ═══ NODES (mobile compact) ═══ -->
@@ -1321,7 +1263,7 @@
                         </g>
 
                         <!-- HOME (bottom-left) -->
-                        <g transform="translate(75,347)">
+                        <g transform="translate(55,347)">
                             <rect x="-38" y="-25" width="76" height="50" rx="10" fill="rgba(203,213,225,0.8)" stroke="rgba(0,0,0,0.07)" stroke-width="1.2"/>
                             <path d="M-20 4 L0 -16 L20 4" fill="none" stroke="#1E293B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M-14 0 L-14 18 L14 18 L14 0" fill="none" stroke="#1E293B" stroke-width="1.8" stroke-linejoin="round"/>
@@ -1330,7 +1272,7 @@
                         </g>
 
                         <!-- BATTERY (bottom-right upper) -->
-                        <g id="mnd-batt" transform="translate(225,347)" style="transition:opacity 0.5s;">
+                        <g id="mnd-batt" transform="translate(245,347)" style="transition:opacity 0.5s;">
                             <rect x="-38" y="-25" width="76" height="50" rx="10" fill="rgba(203,213,225,0.8)" stroke="rgba(0,0,0,0.07)" stroke-width="1.2"/>
                             <rect x="-5" y="-22" width="10" height="5" rx="1" fill="#1E293B"/>
                             <rect x="-14" y="-17" width="28" height="36" rx="3" fill="none" stroke="#1E293B" stroke-width="1.5"/>
@@ -1341,20 +1283,22 @@
                         </g>
 
                         <!-- GRID (bottom-right lower) -->
-                        <g id="mnd-grid" transform="translate(225,432)" style="transition:opacity 0.5s;">
-                            <rect x="-38" y="-25" width="76" height="50" rx="10" fill="rgba(203,213,225,0.8)" stroke="rgba(0,0,0,0.07)" stroke-width="1.2"/>
-                            <rect x="-2" y="-18" width="5" height="36" rx="1.5" fill="#1E293B"/>
-                            <rect x="-16" y="-14" width="33" height="4" rx="1" fill="#1E293B"/>
-                            <rect x="-11" y="-5" width="23" height="4" rx="1" fill="#1E293B"/>
-                            <path d="M-15 -10 Q-7 -4 0 -10" fill="none" stroke="#1E293B" stroke-width="1.2"/>
-                            <path d="M0 -10 Q7 -4 15 -10" fill="none" stroke="#1E293B" stroke-width="1.2"/>
-                            <circle cx="-13" cy="-14" r="1.2" fill="#C9A035"/>
-                            <circle cx="13" cy="-14" r="1.2" fill="#C9A035"/>
-                            <text id="mgrid-lbl" y="35" text-anchor="middle" font-size="9" fill="#1E293B" font-family="var(--font-display)" font-weight="700" letter-spacing="0.06em">RED ELÉCTRICA</text>
-                            <g id="mgrid-x" style="display:none">
-                                <line x1="-18" y1="-22" x2="18" y2="8" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round"/>
-                                <line x1="18" y1="-22" x2="-18" y2="8" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round"/>
-                            </g>
+                        <g id="mgrid-box" transform="translate(245,432)">
+                             <rect x="-38" y="-25" width="76" height="50" rx="10" fill="rgba(203,213,225,0.8)" stroke="rgba(0,0,0,0.07)" stroke-width="1.2"/>
+                             <g id="mnd-grid" style="transition:opacity 0.5s;">
+                                 <rect x="-2" y="-18" width="5" height="36" rx="1.5" fill="#1E293B"/>
+                                 <rect x="-16" y="-14" width="33" height="4" rx="1" fill="#1E293B"/>
+                                 <rect x="-11" y="-5" width="23" height="4" rx="1" fill="#1E293B"/>
+                                 <path d="M-15 -10 Q-7 -4 0 -10" fill="none" stroke="#1E293B" stroke-width="1.2"/>
+                                 <path d="M0 -10 Q7 -4 15 -10" fill="none" stroke="#1E293B" stroke-width="1.2"/>
+                                 <circle cx="-13" cy="-14" r="1.2" fill="#C9A035"/>
+                                 <circle cx="13" cy="-14" r="1.2" fill="#C9A035"/>
+                                 <text id="mgrid-lbl" y="35" text-anchor="middle" font-size="9" fill="#1E293B" font-family="var(--font-display)" font-weight="700" letter-spacing="0.06em">RED ELÉCTRICA</text>
+                                 <g id="mgrid-x" style="display:none">
+                                     <line x1="-18" y1="-22" x2="18" y2="8" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round"/>
+                                     <line x1="18" y1="-22" x2="-18" y2="8" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round"/>
+                                 </g>
+                             </g>
                         </g>
 
                         <!-- Leyenda: ancho completo, 3 columnas, línea sobre texto -->
