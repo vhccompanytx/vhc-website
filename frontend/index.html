@@ -1126,12 +1126,12 @@
                 }
 
                 /* Show/hide SVG versions */
-                .hiw-svg-desktop { display: block; }
-                .hiw-svg-mobile  { display: none; }
+                .hiw-svg-desktop { display: block !important; }
+                .hiw-svg-mobile  { display: none  !important; }
 
                 @media (max-width: 600px) {
-                    .hiw-svg-desktop { display: none; }
-                    .hiw-svg-mobile  { display: block; }
+                    .hiw-svg-desktop { display: none  !important; }
+                    .hiw-svg-mobile  { display: block !important; }
                     .hiw-tab { padding: 0.5rem 1rem; font-size: 0.8rem; }
                 }
             </style>
