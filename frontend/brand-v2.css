@@ -1,0 +1,221 @@
+/* ═══════════════════════════════════════════════════════════
+   VHC Company Services — Brand System V2 (Precision Design)
+   Dirección de arte: Ingeniería B2B · Energía Limpia · Clean Glassmorphism
+   Autor: Antigravity
+   Versión: 2.1 — 2026
+   ═══════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap');
+
+/* ──────────────────────────────────────────
+   TOKENS DE DISEÑO
+   ────────────────────────────────────────── */
+:root {
+  /* Colores primarios — Precisión y profundidad */
+  --vhc-navy:        #1B2D6E;
+  --vhc-navy-dark:   #111D4A;
+  --vhc-navy-deep:   #0B1332;
+
+  /* Acento único — Eficiencia y Premium B2B */
+  --vhc-gold:        #C9A035;
+  --vhc-gold-light:  #E2BB57;
+  --vhc-gold-dark:   #A07B20;
+  --vhc-gold-pale:   rgba(201,160,53,0.12);
+
+  /* Neutros Absolutos — Alto Contraste para Monocromo */
+  --vhc-pure-white:  #FFFFFF;
+  --vhc-black:       #050814;
+  
+  /* Neutros Interfaz */
+  --vhc-surface:     #F4F6F9;    /* Fondo frío técnico */
+  --vhc-surface-2:   #EAECF2;
+  --vhc-border:      #D8DCE8;
+  --vhc-mid-gray:    #6B7280;
+  --vhc-dark:        #1A1F2E;
+
+  /* Gradientes */
+  --grad-hero:       linear-gradient(135deg, #0B1332 0%, #111D4A 60%, #1B2D6E 100%);
+  --grad-navy:       linear-gradient(180deg, #111D4A 0%, #1B2D6E 100%);
+  --grad-gold:       linear-gradient(135deg, #A07B20 0%, #C9A035 50%, #E2BB57 100%);
+  --grad-surface:    linear-gradient(180deg, #F4F6F9 0%, #EAECF2 100%);
+  --grad-glass-dark: linear-gradient(135deg, rgba(11, 19, 50, 0.8) 0%, rgba(17, 29, 74, 0.6) 100%);
+
+  /* Tipografía */
+  --font-display:    'Inter', 'DM Sans', system-ui, sans-serif;
+  --font-body:       'DM Sans', 'Inter', system-ui, sans-serif;
+  --font-mono:       'DM Mono', 'Courier New', monospace;
+
+  /* Escala tipográfica */
+  --text-xs:         0.6875rem; 
+  --text-sm:         0.8125rem; 
+  --text-base:       1rem;      
+  --text-lg:         1.125rem;  
+  --text-xl:         1.25rem;   
+  --text-2xl:        1.5rem;    
+  --text-3xl:        1.875rem;  
+  --text-4xl:        2.25rem;   
+  --text-5xl:        3rem;      
+
+  /* Pesos */
+  --fw-light:        300;
+  --fw-regular:      400;
+  --fw-medium:       500;
+  --fw-semibold:     600;
+  --fw-bold:         700;
+  --fw-extrabold:    800;
+
+  /* Line-heights */
+  --lh-tight:        1.15;
+  --lh-snug:         1.35;
+  --lh-base:         1.55;
+  --lh-loose:        1.75;
+
+  /* Espaciado 4pt grid */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+
+  /* Radios */
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-full: 9999px;
+
+  /* Sombras y Elevaciones Nav/vCards */
+  --shadow-xs:   0 1px 2px rgba(11, 19, 50, 0.06);
+  --shadow-sm:   0 2px 8px rgba(11, 19, 50, 0.08), 0 1px 2px rgba(11, 19, 50, 0.04);
+  --shadow-md:   0 4px 16px rgba(11, 19, 50, 0.10), 0 2px 4px rgba(11, 19, 50, 0.06);
+  --shadow-glass:0 12px 40px rgba(5, 8, 20, 0.25);
+  --shadow-gold: 0 4px 24px rgba(201,160,53,0.25);
+
+  /* Transiciones */
+  --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:   cubic-bezier(0.4, 0, 1, 1);
+  --duration:  300ms;
+}
+
+/* ──────────────────────────────────────────
+   RESET & BASE
+   ────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--vhc-dark);
+  background: var(--vhc-surface);
+  line-height: var(--lh-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; outline: none; }
+
+/* ──────────────────────────────────────────
+   GLASSMORPHISM & FLOAT VCARDS (MODERN B2B)
+   ────────────────────────────────────────── */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-glass);
+}
+
+.glass-panel-dark {
+  background: var(--grad-glass-dark);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-glass);
+  color: var(--vhc-pure-white);
+}
+
+.vcard-floating {
+  transition: transform var(--duration) var(--ease-out), box-shadow var(--duration) var(--ease-out);
+}
+.vcard-floating:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 48px rgba(11, 19, 50, 0.15);
+}
+
+/* ──────────────────────────────────────────
+   LABEL UTILITY
+   ────────────────────────────────────────── */
+.vhc-label {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--vhc-gold);
+  /* Modern Tech Typographic Style */
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.vhc-label::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--vhc-gold);
+}
+
+/* ──────────────────────────────────────────
+   BOTONES
+   ────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  padding: 0.75rem 1.75rem; background: var(--vhc-navy-deep);
+  color: var(--vhc-pure-white); font-family: var(--font-display);
+  font-size: var(--text-sm); font-weight: var(--fw-semibold);
+  letter-spacing: 0.04em; border-radius: var(--radius-md);
+  border: 1px solid rgba(255,255,255,0.05); cursor: pointer;
+  transition: all var(--duration) var(--ease-out);
+  box-shadow: var(--shadow-md);
+}
+.btn-primary:hover {
+  background: var(--vhc-navy); transform: translateY(-2px);
+  box-shadow: var(--shadow-glass);
+}
+
+.btn-gold {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  padding: 0.75rem 1.75rem; background: var(--grad-gold);
+  color: var(--vhc-navy-deep); font-family: var(--font-display);
+  font-size: var(--text-sm); font-weight: var(--fw-bold);
+  letter-spacing: 0.02em; border-radius: var(--radius-md);
+  border: none; cursor: pointer; transition: all var(--duration) var(--ease-out);
+  box-shadow: var(--shadow-gold);
+}
+.btn-gold:hover {
+  filter: brightness(1.1); transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(201,160,53,0.4);
+}
+
+.btn-ghost-dark {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  padding: 0.6875rem 1.625rem; background: rgba(255,255,255,0.05);
+  color: var(--vhc-pure-white); font-family: var(--font-display);
+  font-size: var(--text-sm); font-weight: var(--fw-medium);
+  letter-spacing: 0.04em; border-radius: var(--radius-md);
+  border: 1px solid rgba(255,255,255,0.15); cursor: pointer;
+  backdrop-filter: blur(12px); transition: all var(--duration) var(--ease-out);
+}
+.btn-ghost-dark:hover {
+  background: rgba(255,255,255,0.1); border-color: rgba(201,160,53,0.6);
+  color: var(--vhc-gold-light);
+}
+
+@media print { * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; } @page { margin: 0; } body { padding: 2cm; } }
