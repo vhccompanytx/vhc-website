@@ -194,6 +194,41 @@
     .hero-desc { font-size: var(--text-xl); font-weight: var(--fw-light); color: rgba(255,255,255,0.8); margin-bottom: var(--space-10); max-width: 600px; }
     .hero-buttons { display: flex; gap: var(--space-4); }
 
+    @media (max-width: 600px) {
+        .hero-section {
+            padding-top: var(--space-32);
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            background-position: center 65%;
+        }
+        .hero-content {
+            margin-top: 0;
+            text-align: center;
+            max-width: 100%;
+        }
+        .hero-title {
+            font-size: clamp(2.25rem, 8vw, 2.75rem);
+            margin-bottom: var(--space-4);
+        }
+        .hero-desc {
+            font-size: 1rem;
+            margin: 0 auto var(--space-8) auto;
+            line-height: 1.6;
+        }
+        .hero-buttons {
+            flex-direction: column;
+            gap: var(--space-3);
+            width: 100%;
+        }
+        .hero-buttons .btn-gold,
+        .hero-buttons .btn-ghost-dark {
+            width: 100%;
+            justify-content: center;
+            padding: 0.875rem 1.5rem;
+        }
+    }
+
     /* Services Grid */
     .section-header { text-align: center; margin-bottom: var(--space-16); }
     .section-header h2 { font-family: var(--font-display); font-size: var(--text-4xl); color: var(--vhc-navy-deep); margin-top: var(--space-2); }
