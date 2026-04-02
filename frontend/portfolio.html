@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>USA & Texas Solar Portfolio | VHC Company Services | Our Installations</title>
     <meta name="description" content="Explore our recent residential solar installations across Texas and the United States. High-efficiency engineering and quality workmanship by VHC Company Services.">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://vhccompanytx.com/portfolio.html">
+
+    <!-- hreflang (bilingual site) -->
+    <link rel="alternate" hreflang="en" href="https://vhccompanytx.com/portfolio.html">
+    <link rel="alternate" hreflang="es" href="https://vhccompanytx.com/portfolio-es.html">
+    <link rel="alternate" hreflang="x-default" href="https://vhccompanytx.com/portfolio.html">
+
     <link rel="stylesheet" href="brand-v2.css">
     <link rel="icon" type="image/svg+xml" href="brand/isotipo.svg">
     <!-- FontAwesome -->
@@ -624,7 +633,7 @@
         const chatbotSessionId = sessionStorage.getItem(chatbotSessionKey) || `vhc_${Math.random().toString(36).slice(2, 10)}`;
         const chatbotApiBase = window.VHC_CHATBOT_API_BASE || ((window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
             ? 'http://localhost:3000'
-            : 'https://vhccompanyservices.com/chatbot-api');
+            : 'https://vhccompanytx.com/chatbot-api');
         sessionStorage.setItem(chatbotSessionKey, chatbotSessionId);
 
         function toggleChat() {

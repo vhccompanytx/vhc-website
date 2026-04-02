@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vhccompanyservices.com/sitemap.xml
+Sitemap: https://vhccompanytx.com/sitemap.xml
