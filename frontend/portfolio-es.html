@@ -467,75 +467,124 @@
     </section>
 
     <!-- Portfolio Gallery Section -->
-    <section class="section-padding" style="background: url('brand/og_image.png') center/cover; position: relative;">
-        <!-- Clean Glassmorphism overlay -->
-        <div style="position: absolute; inset: 0; background: rgba(244, 246, 249, 0.96); backdrop-filter: blur(20px);"></div>
-        
-        <div class="container" style="position: relative; z-index: 2;">
-            <div class="portfolio-grid">
-                
-                <!-- Project 1 -->
-                <div class="project-card">
-                    <div class="project-img img-1">
-                        <span class="project-badge">Completado</span>
+    <section class="section-padding" style="background: var(--vhc-surface); position:relative;">
+        <div class="container" style="position:relative;z-index:2;">
+
+            <!-- Filtros -->
+            <div style="display:flex;flex-wrap:wrap;gap:.625rem;justify-content:center;margin-bottom:2.5rem;" role="tablist" aria-label="Filtros de proyectos">
+                <button class="pf-tab active" data-filter="all" onclick="pfFilter(this,'all')" style="padding:.5rem 1.25rem;border-radius:2rem;border:2px solid var(--vhc-navy);background:var(--vhc-navy);color:#fff;font-family:var(--font-display);font-weight:600;font-size:.85rem;cursor:pointer;transition:all .25s;">Todos los Proyectos</button>
+                <button class="pf-tab" data-filter="solar" onclick="pfFilter(this,'solar')" style="padding:.5rem 1.25rem;border-radius:2rem;border:2px solid var(--vhc-navy);background:transparent;color:var(--vhc-navy);font-family:var(--font-display);font-weight:600;font-size:.85rem;cursor:pointer;transition:all .25s;">☀️ Solar Completo</button>
+                <button class="pf-tab" data-filter="neovolta" onclick="pfFilter(this,'neovolta')" style="padding:.5rem 1.25rem;border-radius:2rem;border:2px solid var(--vhc-navy);background:transparent;color:var(--vhc-navy);font-family:var(--font-display);font-weight:600;font-size:.85rem;cursor:pointer;transition:all .25s;">🔋 NeoVolta</button>
+                <button class="pf-tab" data-filter="tesla" onclick="pfFilter(this,'tesla')" style="padding:.5rem 1.25rem;border-radius:2rem;border:2px solid var(--vhc-navy);background:transparent;color:var(--vhc-navy);font-family:var(--font-display);font-weight:600;font-size:.85rem;cursor:pointer;transition:all .25s;">⚡ Tesla Powerwall</button>
+                <button class="pf-tab" data-filter="enphase" onclick="pfFilter(this,'enphase')" style="padding:.5rem 1.25rem;border-radius:2rem;border:2px solid var(--vhc-navy);background:transparent;color:var(--vhc-navy);font-family:var(--font-display);font-weight:600;font-size:.85rem;cursor:pointer;transition:all .25s;">🏠 Enphase Storage</button>
+            </div>
+
+            <div id="pfGridEs" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;">
+
+                <!-- Proyecto 1 -->
+                <div class="pf-card" data-cat="solar" onclick="pfOpen(0)" style="cursor:pointer;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);transition:transform .3s,box-shadow .3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 36px rgba(0,0,0,0.14)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 24px rgba(0,0,0,0.08)'">
+                    <div style="height:220px;overflow:hidden;position:relative;">
+                        <img src="brand/WhatsApp Image 2026-03-31 at 10.41.51 PM.jpeg" alt="The Grande" style="width:100%;height:100%;object-fit:cover;transition:transform .4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
+                        <span style="position:absolute;top:.75rem;right:.75rem;background:var(--vhc-gold);color:var(--vhc-navy-deep);font-size:.7rem;font-weight:700;padding:.25rem .75rem;border-radius:2rem;text-transform:uppercase;letter-spacing:.05em;">Completado</span>
                     </div>
-                    <div class="project-info">
-                        <h3>Residencia Austin</h3>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Austin, TX 78704</div>
-                        <p style="color: var(--vhc-dark); font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.5;">Integración impecable de 24 paneles en techo con respaldo de batería, eliminando el 95% de la dependencia de la red.</p>
-                        <div class="project-stats">
-                            <div class="stat-item">
-                                <div class="stat-val">9.6 kW</div>
-                                <div class="stat-label">Tamaño del Sistema</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-val">Compensación</div>
-                                <div class="stat-label">102% Energía</div>
-                            </div>
+                    <div style="padding:1.25rem 1.5rem;">
+                        <div style="font-size:.75rem;color:var(--vhc-gold);text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:.25rem;">Sugar Land, TX · Solar Completo</div>
+                        <h3 style="font-family:var(--font-display);font-size:1.15rem;color:var(--vhc-navy-deep);margin:0 0 .5rem;">The Grande</h3>
+                        <p style="font-size:.875rem;color:var(--vhc-gray);margin:0 0 1rem;line-height:1.5;">Instalación de doble arreglo en propiedad grande vista desde el aire. 48 paneles premium, diseño dividido.</p>
+                        <div style="display:flex;gap:1rem;">
+                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">18.2 kW</div><div style="font-size:.7rem;color:var(--vhc-gray);">Sistema</div></div>
+                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">48</div><div style="font-size:.7rem;color:var(--vhc-gray);">Paneles</div></div>
+                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">2</div><div style="font-size:.7rem;color:var(--vhc-gray);">Fotos</div></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project 2 -->
-                <div class="project-card">
-                    <div class="project-img img-2">
-                        <span class="project-badge">Completado</span>
+                <!-- Proyecto 2 -->
+                <div class="pf-card" data-cat="solar" onclick="pfOpen(1)" style="cursor:pointer;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);transition:transform .3s,box-shadow .3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 36px rgba(0,0,0,0.14)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 24px rgba(0,0,0,0.08)'">
+                    <div style="height:220px;overflow:hidden;position:relative;">
+                        <img src="brand/WhatsApp Image 2026-03-31 at 10.46.20 PM.jpeg" alt="Solar residencial en Texas" style="width:100%;height:100%;object-fit:cover;transition:transform .4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
+                        <span style="position:absolute;top:.75rem;right:.75rem;background:var(--vhc-gold);color:var(--vhc-navy-deep);font-size:.7rem;font-weight:700;padding:.25rem .75rem;border-radius:2rem;text-transform:uppercase;letter-spacing:.05em;">Completado</span>
                     </div>
-                    <div class="project-info">
-                        <h3>Houston Custom</h3>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Houston, TX 77002</div>
-                        <p style="color: var(--vhc-dark); font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.5;">Arreglo solar orientado al sur optimizado para las demandas extremas de refrigeración en verano.</p>
-                        <div class="project-stats">
-                            <div class="stat-item">
-                                <div class="stat-val">12.5 kW</div>
-                                <div class="stat-label">Tamaño del Sistema</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-val">Compensación</div>
-                                <div class="stat-label">92% Energía</div>
-                            </div>
+                    <div style="padding:1.25rem 1.5rem;">
+                        <div style="font-size:.75rem;color:var(--vhc-gold);text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:.25rem;">Varias ubicaciones TX · Solar Completo</div>
+                        <h3 style="font-family:var(--font-display);font-size:1.15rem;color:var(--vhc-navy-deep);margin:0 0 .5rem;">Solar Residencial Texas</h3>
+                        <p style="font-size:.875rem;color:var(--vhc-gray);margin:0 0 1rem;line-height:1.5;">Galería de instalaciones completas en techos residenciales en el área de Houston con fotos aéreas de dron.</p>
+                        <div style="display:flex;gap:1rem;">
+                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">8–22 kW</div><div style="font-size:.7rem;color:var(--vhc-gray);">Rango</div></div>
+                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">5+</div><div style="font-size:.7rem;color:var(--vhc-gray);">Hogares</div></div>
+                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">5</div><div style="font-size:.7rem;color:var(--vhc-gray);">Fotos</div></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project 3 -->
-                <div class="project-card">
-                    <div class="project-img img-3">
-                        <span class="project-badge">En Progreso</span>
+                <!-- Proyecto 3 -->
+                <div class="pf-card" data-cat="enphase" onclick="pfOpen(2)" style="cursor:pointer;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);transition:transform .3s,box-shadow .3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 36px rgba(0,0,0,0.14)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 24px rgba(0,0,0,0.08)'">
+                    <div style="height:220px;overflow:hidden;position:relative;">
+                        <img src="brand/WhatsApp Image 2026-03-31 at 10.44.13 PM.jpeg" alt="Enphase exterior Katy" style="width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
+                        <span style="position:absolute;top:.75rem;right:.75rem;background:var(--vhc-gold);color:var(--vhc-navy-deep);font-size:.7rem;font-weight:700;padding:.25rem .75rem;border-radius:2rem;text-transform:uppercase;letter-spacing:.05em;">Completado</span>
                     </div>
-                    <div class="project-info">
-                        <h3>Plano Smart Home</h3>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Plano, TX 75023</div>
-                        <p style="color: var(--vhc-dark); font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.5;">Fase de ingeniería. Paneles premium totalmente negros con montaje al ras para una estética perfecta.</p>
-                        <div class="project-stats">
-                            <div class="stat-item">
-                                <div class="stat-val">8.2 kW</div>
-                                <div class="stat-label">Tamaño Esperado</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-val">Diseño</div>
-                                <div class="stat-label">Fase</div>
-                            </div>
+                    <div style="padding:1.25rem 1.5rem;">
+                        <div style="font-size:.75rem;color:var(--vhc-gold);text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:.25rem;">Katy, TX · Enphase Storage</div>
+                        <h3 style="font-family:var(--font-display);font-size:1.15rem;color:var(--vhc-navy-deep);margin:0 0 .5rem;">Batería Enphase IQ Exterior</h3>
+                        <p style="font-size:.875rem;color:var(--vhc-gray);margin:0 0 1rem;line-height:1.5;">Unidades Enphase IQ Battery 5P montadas en exterior con integración eléctrica completa. Terminado limpio.</p>
+                        <div style="display:flex;gap:1rem;">
+                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">Enphase IQ5P</div><div style="font-size:.7rem;color:var(--vhc-gray);">Modelo</div></div>
+                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">3</div><div style="font-size:.7rem;color:var(--vhc-gray);">Unidades</div></div>
+                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">3</div><div style="font-size:.7rem;color:var(--vhc-gray);">Fotos</div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 4 -->
+                <div class="pf-card" data-cat="neovolta" onclick="pfOpen(3)" style="cursor:pointer;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);transition:transform .3s,box-shadow .3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 36px rgba(0,0,0,0.14)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 24px rgba(0,0,0,0.08)'">
+                    <div style="height:220px;overflow:hidden;position:relative;">
+                        <img src="brand/WhatsApp Image 2026-03-31 at 11.09.21 PM.jpeg" alt="NeoVolta Powerhouse" style="width:100%;height:100%;object-fit:cover;transition:transform .4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
+                        <span style="position:absolute;top:.75rem;right:.75rem;background:var(--vhc-gold);color:var(--vhc-navy-deep);font-size:.7rem;font-weight:700;padding:.25rem .75rem;border-radius:2rem;text-transform:uppercase;letter-spacing:.05em;">Completado</span>
+                    </div>
+                    <div style="padding:1.25rem 1.5rem;">
+                        <div style="font-size:.75rem;color:var(--vhc-gold);text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:.25rem;">Houston, TX · NeoVolta Storage</div>
+                        <h3 style="font-family:var(--font-display);font-size:1.15rem;color:var(--vhc-navy-deep);margin:0 0 .5rem;">NeoVolta Powerhouse</h3>
+                        <p style="font-size:.875rem;color:var(--vhc-gray);margin:0 0 1rem;line-height:1.5;">Sistema de 4 baterías NeoVolta con doble inversor. Capacidad de respaldo total hasta 40 kWh.</p>
+                        <div style="display:flex;gap:1rem;">
+                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">40 kWh</div><div style="font-size:.7rem;color:var(--vhc-gray);">Capacidad</div></div>
+                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">4</div><div style="font-size:.7rem;color:var(--vhc-gray);">Baterías</div></div>
+                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">7</div><div style="font-size:.7rem;color:var(--vhc-gray);">Fotos</div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 5 -->
+                <div class="pf-card" data-cat="tesla" onclick="pfOpen(4)" style="cursor:pointer;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);transition:transform .3s,box-shadow .3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 36px rgba(0,0,0,0.14)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 24px rgba(0,0,0,0.08)'">
+                    <div style="height:220px;overflow:hidden;position:relative;">
+                        <img src="brand/WhatsApp Image 2026-03-31 at 11.11.42 PM.jpeg" alt="Tesla Powerwall + Cargador EV" style="width:100%;height:100%;object-fit:cover;transition:transform .4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
+                        <span style="position:absolute;top:.75rem;right:.75rem;background:var(--vhc-gold);color:var(--vhc-navy-deep);font-size:.7rem;font-weight:700;padding:.25rem .75rem;border-radius:2rem;text-transform:uppercase;letter-spacing:.05em;">Completado</span>
+                    </div>
+                    <div style="padding:1.25rem 1.5rem;">
+                        <div style="font-size:.75rem;color:var(--vhc-gold);text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:.25rem;">Austin, TX · Tesla Powerwall</div>
+                        <h3 style="font-family:var(--font-display);font-size:1.15rem;color:var(--vhc-navy-deep);margin:0 0 .5rem;">Tesla Powerwall 3 + Cargador EV</h3>
+                        <p style="font-size:.875rem;color:var(--vhc-gray);margin:0 0 1rem;line-height:1.5;">Doble Powerwall con cargador Nivel 2 integrado. Trabajo eléctrico premium en pared de metal rojo.</p>
+                        <div style="display:flex;gap:1rem;">
+                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">27 kWh</div><div style="font-size:.7rem;color:var(--vhc-gray);">Total</div></div>
+                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">2</div><div style="font-size:.7rem;color:var(--vhc-gray);">Powerwalls</div></div>
+                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">2</div><div style="font-size:.7rem;color:var(--vhc-gray);">Fotos</div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 6 -->
+                <div class="pf-card" data-cat="enphase" onclick="pfOpen(5)" style="cursor:pointer;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);transition:transform .3s,box-shadow .3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 36px rgba(0,0,0,0.14)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 24px rgba(0,0,0,0.08)'">
+                    <div style="height:220px;overflow:hidden;position:relative;">
+                        <img src="brand/WhatsApp Image 2026-03-31 at 11.13.27 PM.jpeg" alt="Enphase IQ Garaje" style="width:100%;height:100%;object-fit:cover;transition:transform .4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
+                        <span style="position:absolute;top:.75rem;right:.75rem;background:var(--vhc-gold);color:var(--vhc-navy-deep);font-size:.7rem;font-weight:700;padding:.25rem .75rem;border-radius:2rem;text-transform:uppercase;letter-spacing:.05em;">Completado</span>
+                    </div>
+                    <div style="padding:1.25rem 1.5rem;">
+                        <div style="font-size:.75rem;color:var(--vhc-gold);text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:.25rem;">The Woodlands, TX · Enphase Storage</div>
+                        <h3 style="font-family:var(--font-display);font-size:1.15rem;color:var(--vhc-navy-deep);margin:0 0 .5rem;">Enphase IQ 10T — Garaje</h3>
+                        <p style="font-size:.875rem;color:var(--vhc-gray);margin:0 0 1rem;line-height:1.5;">Instalación en garaje de baterías Enphase IQ 10T sobre repisa blanca. Acabado limpio y profesional.</p>
+                        <div style="display:flex;gap:1rem;">
+                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">Enphase IQ10T</div><div style="font-size:.7rem;color:var(--vhc-gray);">Modelo</div></div>
+                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">3</div><div style="font-size:.7rem;color:var(--vhc-gray);">Unidades</div></div>
+                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">5</div><div style="font-size:.7rem;color:var(--vhc-gray);">Fotos</div></div>
                         </div>
                     </div>
                 </div>
@@ -544,7 +593,70 @@
         </div>
     </section>
 
+    <!-- LIGHTBOX -->
+    <div id="pfLightboxEs" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:9999;flex-direction:column;align-items:center;justify-content:center;" onclick="pfLBCloseEs(event)">
+        <button onclick="document.getElementById('pfLightboxEs').style.display='none'" style="position:absolute;top:1.25rem;right:1.25rem;background:rgba(255,255,255,0.1);border:none;color:#fff;width:44px;height:44px;border-radius:50%;font-size:1.5rem;cursor:pointer;z-index:10;" aria-label="Cerrar">&times;</button>
+        <button onclick="pfLBNavEs(-1);event.stopPropagation();" style="position:absolute;left:1.25rem;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.12);border:none;color:#fff;width:48px;height:48px;border-radius:50%;font-size:1.5rem;cursor:pointer;z-index:10;" aria-label="Anterior">&#8592;</button>
+        <button onclick="pfLBNavEs(1);event.stopPropagation();" style="position:absolute;right:1.25rem;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.12);border:none;color:#fff;width:48px;height:48px;border-radius:50%;font-size:1.5rem;cursor:pointer;z-index:10;" aria-label="Siguiente">&#8594;</button>
+        <img id="pfLBImgEs" src="" alt="" style="max-width:90vw;max-height:80vh;object-fit:contain;border-radius:12px;box-shadow:0 8px 48px rgba(0,0,0,0.5);">
+        <div id="pfLBCaptionEs" style="color:#fff;margin-top:1rem;font-family:var(--font-display);font-size:1rem;text-align:center;max-width:600px;padding:0 1rem;"></div>
+        <div id="pfLBCounterEs" style="color:rgba(255,255,255,0.5);font-size:.8rem;margin-top:.4rem;"></div>
+    </div>
+
+    <script>
+    var pfProjectsEs = [
+        { name:'The Grande', loc:'Sugar Land, TX', photos:[
+            {src:'brand/WhatsApp Image 2026-03-31 at 10.41.51 PM.jpeg', cap:'Vista aérea — sistema de 48 paneles en doble arreglo'},
+            {src:'brand/WhatsApp Image 2026-03-31 at 10.41.51 PM.jpeg', cap:'Perspectiva aérea completa de la propiedad'}
+        ]},
+        { name:'Solar Residencial Texas', loc:'Varias ubicaciones TX', photos:[
+            {src:'brand/WhatsApp Image 2026-03-31 at 10.46.20 PM.jpeg', cap:'Dron aéreo — techo solar completo'},
+            {src:'brand/WhatsApp Image 2026-03-31 at 10.48.33 PM.jpeg', cap:'Vista terrestre del arreglo de paneles'},
+            {src:'brand/WhatsApp Image 2026-03-31 at 10.48.53 PM.jpeg', cap:'Detalle del montaje de paneles'},
+            {src:'brand/WhatsApp Image 2026-03-31 at 10.50.36 PM.jpeg', cap:'Equipo Enphase IQ8+ en exterior'},
+            {src:'brand/WhatsApp Image 2026-03-31 at 11.09.52 PM.jpeg', cap:'Instalación solar en progreso al atardecer'}
+        ]},
+        { name:'Batería Enphase IQ Exterior', loc:'Katy, TX', photos:[
+            {src:'brand/WhatsApp Image 2026-03-31 at 10.44.13 PM.jpeg', cap:'Enphase IQ Battery 5P — montaje exterior con equipo eléctrico'},
+            {src:'brand/WhatsApp Image 2026-03-31 at 10.44.21 PM.jpeg', cap:'Vista lateral de la instalación con piscina al fondo'},
+            {src:'brand/WhatsApp Image 2026-03-31 at 10.51.44 PM.jpeg', cap:'Inversor Enphase y panel eléctrico en pared exterior'}
+        ]},
+        { name:'NeoVolta Powerhouse', loc:'Houston, TX', photos:[
+            {src:'brand/WhatsApp Image 2026-03-31 at 11.09.21 PM.jpeg', cap:'4 baterías NeoVolta + doble inversor — vista completa'},
+            {src:'brand/WhatsApp Image 2026-03-31 at 11.01.45 PM.jpeg', cap:'Baterías NeoVolta en pared de garaje gris'},
+            {src:'brand/WhatsApp Image 2026-03-31 at 11.02.16 PM.jpeg', cap:'NeoVolta + inversor Enphase en siding beige'},
+            {src:'brand/WhatsApp Image 2026-03-31 at 11.04.53 PM.jpeg', cap:'Detalle de etiqueta NeoVolta y cableado'},
+            {src:'brand/WhatsApp Image 2026-03-31 at 11.05.28 PM.jpeg', cap:'Par NeoVolta con cargador EV'},
+            {src:'brand/WhatsApp Image 2026-03-31 at 11.05.37 PM.jpeg', cap:'Unidad NeoVolta en ángulo al atardecer'},
+            {src:'brand/WhatsApp Image 2026-03-31 at 11.05.55 PM.jpeg', cap:'Sistema NeoVolta completo — detalle de conexión eléctrica'}
+        ]},
+        { name:'Tesla Powerwall 3 + Cargador EV', loc:'Austin, TX', photos:[
+            {src:'brand/WhatsApp Image 2026-03-31 at 11.11.42 PM.jpeg', cap:'Tesla Powerwall 3 + cargador EV Nivel 2 en pared de metal rojo'},
+            {src:'brand/WhatsApp Image 2026-03-31 at 11.12.11 PM.jpeg', cap:'Tesla Powerwall en exterior de ladrillo con equipo HVAC Carrier'}
+        ]},
+        { name:'Enphase IQ 10T — Garaje', loc:'The Woodlands, TX', photos:[
+            {src:'brand/WhatsApp Image 2026-03-31 at 11.12.55 PM.jpeg', cap:'Batería Enphase IQ — panel abierto'},
+            {src:'brand/WhatsApp Image 2026-03-31 at 11.13.27 PM.jpeg', cap:'Tres unidades Enphase IQ 10T cerradas en repisa de garaje'},
+            {src:'brand/WhatsApp Image 2026-03-31 at 11.13.35 PM.jpeg', cap:'Vista frontal Enphase IQ 10T — garaje'},
+            {src:'brand/WhatsApp Image 2026-03-31 at 11.13.47 PM.jpeg', cap:'Trío de baterías Enphase — perfil en ángulo'},
+            {src:'brand/WhatsApp Image 2026-03-31 at 11.14.00 PM.jpeg', cap:'Instalación Enphase IQ garaje completa — inversor IQ8 visible'}
+        ]}
+    ];
+    var pfLBCurEs=0, pfLBProjectEs=0;
+    function pfOpen(idx){ pfLBProjectEs=idx; pfLBCurEs=0; pfLBShowEs(); document.getElementById('pfLightboxEs').style.display='flex'; }
+    function pfLBShowEs(){ var p=pfProjectsEs[pfLBProjectEs]; var ph=p.photos[pfLBCurEs]; document.getElementById('pfLBImgEs').src=ph.src; document.getElementById('pfLBImgEs').alt=ph.cap; document.getElementById('pfLBCaptionEs').textContent=p.name+' · '+p.loc; document.getElementById('pfLBCounterEs').textContent=(pfLBCurEs+1)+' / '+p.photos.length; }
+    function pfLBNavEs(d){ var p=pfProjectsEs[pfLBProjectEs]; pfLBCurEs=(pfLBCurEs+d+p.photos.length)%p.photos.length; pfLBShowEs(); }
+    function pfLBCloseEs(e){ if(e.target===document.getElementById('pfLightboxEs')) document.getElementById('pfLightboxEs').style.display='none'; }
+    document.addEventListener('keydown',function(e){ var lb=document.getElementById('pfLightboxEs'); if(lb.style.display==='flex'){ if(e.key==='ArrowRight') pfLBNavEs(1); if(e.key==='ArrowLeft') pfLBNavEs(-1); if(e.key==='Escape') lb.style.display='none'; }});
+    function pfFilter(btn,cat){
+        document.querySelectorAll('.pf-tab').forEach(function(b){ b.style.background='transparent'; b.style.color='var(--vhc-navy)'; });
+        btn.style.background='var(--vhc-navy)'; btn.style.color='#fff';
+        document.querySelectorAll('.pf-card').forEach(function(c){ c.style.display=(cat==='all'||c.dataset.cat===cat)?'block':'none'; });
+    }
+    </script>
+
     <!-- Footer -->
+
     <footer>
         <div class="container">
             <div class="footer-grid">
