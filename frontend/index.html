@@ -2103,10 +2103,10 @@
             </div>
 
             <!-- Carousel Wrapper -->
-            <div class="vhc-carousel-wrapper" style="position:relative;">
-                <div class="vhc-carousel" id="vhcCarousel" style="display:flex;gap:1.25rem;overflow:hidden;border-radius:20px;">
+            <div class="vhc-carousel-wrapper" style="position:relative;overflow:hidden;border-radius:20px;">
+                <div class="vhc-carousel" id="vhcCarousel" style="display:flex;will-change:transform;">
                     <!-- Slide 1 -->
-                    <div class="vhc-slide" style="min-width:100%;position:relative;border-radius:20px;overflow:hidden;height:480px;flex-shrink:0;">
+                    <div class="vhc-slide" style="min-width:100%;position:relative;overflow:hidden;height:480px;flex-shrink:0;">
                         <img src="brand/WhatsApp Image 2026-03-31 at 10.41.51 PM.jpeg" alt="Large residential solar installation - aerial view" style="width:100%;height:100%;object-fit:cover;display:block;">
                         <div style="position:absolute;bottom:0;left:0;right:0;padding:1.5rem 2rem;background:linear-gradient(transparent,rgba(10,18,41,0.85));color:#fff;">
                             <div style="font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--vhc-gold);font-weight:600;margin-bottom:.25rem;">Sugar Land, TX</div>
@@ -2194,18 +2194,18 @@
                 var slides=c.querySelectorAll('.vhc-slide');
                 var dotsEl=document.getElementById('vhcDots');
                 var cur=0, total=slides.length, timer;
-                // Build dots
+                c.style.transition='transform .5s cubic-bezier(.4,0,.2,1)';
+                // Build dots (IIFE to capture correct i)
                 slides.forEach(function(_,i){
                     var d=document.createElement('button');
                     d.style.cssText='width:8px;height:8px;border-radius:50%;border:none;cursor:pointer;transition:all .3s;background:'+(i===0?'var(--vhc-gold)':'rgba(10,18,41,0.2)');
                     d.setAttribute('aria-label','Slide '+(i+1));
-                    d.onclick=function(){goTo(i);};
+                    (function(idx){d.onclick=function(){goTo(idx);};})(i);
                     dotsEl.appendChild(d);
                 });
                 function goTo(n){
-                    cur=(n+total)%total;
+                    cur=(n%total+total)%total;
                     c.style.transform='translateX(-'+cur+'00%)';
-                    c.style.transition='transform .5s cubic-bezier(.4,0,.2,1)';
                     dotsEl.querySelectorAll('button').forEach(function(d,i){
                         d.style.background=i===cur?'var(--vhc-gold)':'rgba(10,18,41,0.2)';
                         d.style.width=i===cur?'22px':'8px';
@@ -2214,8 +2214,6 @@
                     timer=setInterval(function(){goTo(cur+1);},5000);
                 }
                 window.vhcSlide=function(d){goTo(cur+d);};
-                // Use flexbox scroll approach
-                c.style.transition='transform .5s cubic-bezier(.4,0,.2,1)';
                 timer=setInterval(function(){goTo(cur+1);},5000);
             })();
         </script>

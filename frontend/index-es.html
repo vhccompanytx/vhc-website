@@ -1466,8 +1466,8 @@
                 <p style="color:var(--vhc-gray);max-width:560px;margin:0 auto;">Cada proyecto es una casa real en Texas impulsada por energía limpia. Mira una muestra de nuestras últimas instalaciones.</p>
             </div>
 
-            <div class="vhc-carousel-wrapper" style="position:relative;">
-                <div class="vhc-carousel" id="vhcCarouselEs" style="display:flex;gap:1.25rem;overflow:hidden;border-radius:20px;">
+            <div class="vhc-carousel-wrapper" style="position:relative;overflow:hidden;border-radius:20px;">
+                <div class="vhc-carousel" id="vhcCarouselEs" style="display:flex;will-change:transform;">
                     <div class="vhc-slide" style="min-width:100%;position:relative;border-radius:20px;overflow:hidden;height:480px;flex-shrink:0;">
                         <img src="brand/WhatsApp Image 2026-03-31 at 10.41.51 PM.jpeg" alt="Instalación solar residencial grande - vista aérea" style="width:100%;height:100%;object-fit:cover;display:block;">
                         <div style="position:absolute;bottom:0;left:0;right:0;padding:1.5rem 2rem;background:linear-gradient(transparent,rgba(10,18,41,0.85));color:#fff;">
@@ -1541,17 +1541,17 @@
                 var slides=c.querySelectorAll('.vhc-slide');
                 var dotsEl=document.getElementById('vhcDotsEs');
                 var cur=0, total=slides.length, timer;
+                c.style.transition='transform .5s cubic-bezier(.4,0,.2,1)';
                 slides.forEach(function(_,i){
                     var d=document.createElement('button');
                     d.style.cssText='width:8px;height:8px;border-radius:50%;border:none;cursor:pointer;transition:all .3s;background:'+(i===0?'var(--vhc-gold)':'rgba(10,18,41,0.2)');
                     d.setAttribute('aria-label','Diapositiva '+(i+1));
-                    d.onclick=function(){goToEs(i);};
+                    (function(idx){d.onclick=function(){goToEs(idx);};})(i);
                     dotsEl.appendChild(d);
                 });
                 function goToEs(n){
-                    cur=(n+total)%total;
+                    cur=(n%total+total)%total;
                     c.style.transform='translateX(-'+cur+'00%)';
-                    c.style.transition='transform .5s cubic-bezier(.4,0,.2,1)';
                     dotsEl.querySelectorAll('button').forEach(function(d,i){
                         d.style.background=i===cur?'var(--vhc-gold)':'rgba(10,18,41,0.2)';
                         d.style.width=i===cur?'22px':'8px';
