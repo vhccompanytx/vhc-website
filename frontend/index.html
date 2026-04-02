@@ -623,20 +623,29 @@
 
         .service-card {
             padding: var(--space-10);
-            text-align: left;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .service-icon {
-            width: 64px;
-            height: 64px;
-            border-radius: var(--radius-md);
+            width: 80px;
+            height: 80px;
+            border-radius: var(--radius-lg);
             background: rgba(201, 160, 53, 0.1);
             color: var(--vhc-gold);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
-            margin-bottom: var(--space-6);
+            font-size: 32px;
+            margin: 0 auto var(--space-6) auto;
+            transition: all var(--duration) var(--ease-out);
+        }
+
+        .service-card:hover .service-icon {
+            background: rgba(201, 160, 53, 0.2);
+            transform: scale(1.1) rotate(5deg);
         }
 
         .service-card h3 {
