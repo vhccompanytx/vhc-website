@@ -311,7 +311,7 @@
 
     <!-- LIGHTBOX -->
     <div id="pfLightboxEs" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:9999;flex-direction:column;align-items:center;justify-content:center;" onclick="pfLBCloseEs(event)">
-        <button onclick="document.getElementById('pfLightboxEs').style.display='none'" style="position:absolute;top:1.25rem;right:1.25rem;background:rgba(255,255,255,0.1);border:none;color:#fff;width:44px;height:44px;border-radius:50%;font-size:1.5rem;cursor:pointer;z-index:100;" aria-label="Cerrar">&times;</button>
+        <button onclick="pfLBCloseActionEs();" style="position:absolute;top:1.25rem;right:1.25rem;background:rgba(255,255,255,0.1);border:none;color:#fff;width:44px;height:44px;border-radius:50%;font-size:1.5rem;cursor:pointer;z-index:100;" aria-label="Cerrar">&times;</button>
         
         <button onclick="pfLBNavEs(-1);event.stopPropagation();" class="pf-lb-nav" style="position:absolute;left:1.25rem;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.1);border:none;color:#fff;width:48px;height:48px;border-radius:50%;font-size:1.5rem;cursor:pointer;z-index:100;display:flex;align-items:center;justify-content:center;" aria-label="Anterior">&#8592;</button>
         <button onclick="pfLBNavEs(1);event.stopPropagation();" class="pf-lb-nav" style="position:absolute;right:1.25rem;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.1);border:none;color:#fff;width:48px;height:48px;border-radius:50%;font-size:1.5rem;cursor:pointer;z-index:100;display:flex;align-items:center;justify-content:center;" aria-label="Siguiente">&#8594;</button>
@@ -323,7 +323,7 @@
 
         <style>
             #pfLBTrackEs::-webkit-scrollbar { display: none; }
-            .pf-lb-img-wrap { flex: 0 0 100%; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; scroll-snap-align: center; }
+            .pf-lb-img-wrap { flex: 0 0 100%; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; scroll-snap-align: center; scroll-snap-stop: always; }
             .pf-lb-img { max-width: 90vw; max-height: 100%; object-fit: contain; border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
             @media (max-width: 767px) { .pf-lb-nav { display: none !important; } }
         </style>
@@ -467,6 +467,7 @@
             });
             track.scrollLeft = 0;
             document.getElementById('pfLightboxEs').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
             updateLBTextEs();
         }
 
@@ -479,9 +480,13 @@
             }
         }
 
+        function pfLBCloseActionEs(){
+            document.getElementById('pfLightboxEs').style.display='none';
+            document.body.style.overflow = '';
+        }
         function pfLBCloseEs(e){
             if(e.target===document.getElementById('pfLightboxEs') || e.target===document.getElementById('pfLBTrackEs')) {
-                document.getElementById('pfLightboxEs').style.display='none';
+                pfLBCloseActionEs();
             }
         }
 
@@ -522,7 +527,7 @@
             if(lb && lb.style.display==='flex'){
                 if(e.key==='ArrowRight') pfLBNavEs(1);
                 if(e.key==='ArrowLeft') pfLBNavEs(-1);
-                if(e.key==='Escape') lb.style.display='none';
+                if(e.key==='Escape') pfLBCloseActionEs();
             }
         });
 
