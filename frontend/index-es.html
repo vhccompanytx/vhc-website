@@ -1481,7 +1481,7 @@
     <!-- ===================== RECENT WORK CAROUSEL (ES) ===================== -->
     <style>
         .vhc-slide {
-            aspect-ratio: 4 / 3; /* Mobile: exact size as service cards and photo cards */
+            height: 240px; /* Mobile: Enforced height to prevent flexbox native stretch bug */
             border-radius: var(--radius-lg);
             overflow: hidden;
             box-shadow: var(--shadow-md);
