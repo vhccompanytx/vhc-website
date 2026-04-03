@@ -171,6 +171,36 @@
         @media (max-width: 900px) {
             .footer-grid { grid-template-columns: 1fr; }
         }
+
+        /* OptimizaciÃ³n de Filtros en MÃ³vil */
+        @media (max-width: 600px) {
+            .pf-tabs-container {
+                justify-content: flex-start !important;
+                overflow-x: auto;
+                white-space: nowrap;
+                padding-bottom: 1.5rem !important;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            .pf-tabs-container::-webkit-scrollbar { display: none; }
+            .pf-tab { flex: 0 0 auto; }
+            footer { padding-bottom: 6rem !important; }
+        }
+
+        /* OptimizaciÃ³n de Filtros en MÃ³vil */
+        @media (max-width: 600px) {
+            .pf-tabs-container {
+                justify-content: flex-start !important;
+                overflow-x: auto;
+                white-space: nowrap;
+                padding-bottom: 1.5rem !important;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            .pf-tabs-container::-webkit-scrollbar { display: none; }
+            .pf-tab { flex: 0 0 auto; }
+            footer { padding-bottom: 6rem !important; }
+        }
     </style>
 
     <!-- Schema.org -->
@@ -226,7 +256,7 @@
                 <a href="index-es.html#about">Nosotros</a>
                 <a href="index-es.html#services">Servicios</a>
                 <a href="index-es.html#process">Proceso</a>
-                <a href="index-es.html#proyectos-recientes" style="color:var(--vhc-gold);font-weight:700;">Proyectos</a>
+                <a href="index-es.html#proyectos-recientes">Proyectos</a>
                 <a href="portfolio-es.html" class="active">Portafolio</a>
                 <a href="index-es.html#contact" class="btn-primary" style="padding: 0.5rem 1.25rem;">Cotización</a>
                 <a href="portfolio.html" class="vhc-label" style="display:flex; align-items:center; gap:0.5rem; margin-left: 1rem;">
@@ -246,6 +276,10 @@
         <a href="index-es.html#process">Proceso</a>
         <a href="index-es.html#proyectos-recientes">Proyectos</a>
         <a href="portfolio-es.html" class="active">Portafolio</a>
+        <a href="portfolio.html" style="display:flex; align-items:center; gap:0.5rem; justify-content:center; color:var(--vhc-gold); font-weight:600; margin-top:0.5rem; padding:0.75rem 0; border-top:1px solid rgba(255,255,255,0.06);">
+            <i class="fas fa-globe"></i> EN - English
+        </a>
+        <a href="index-es.html#contact" class="btn-gold" style="text-align:center; border-radius: var(--radius-md); padding: 0.75rem 1.5rem; margin-top:1rem;">Cotización Gratis</a>
     </div>
 
     <!-- Hero -->
@@ -260,8 +294,8 @@
     <!-- Gallery -->
     <section class="section-padding" style="background: var(--vhc-surface); position:relative;">
         <div class="container" style="position:relative;z-index:2;">
-            <!-- Filtros (Posición neutral, se desplaza con el contenido) -->
-            <div style="padding:1rem 0 2rem;display:flex;flex-wrap:wrap;gap:.625rem;justify-content:center;margin-top:-1rem;" role="tablist">
+            <!-- Filtros (PosiciÃ³n neutral, se desplaza con el contenido) -->
+            <div class="pf-tabs-container" style="padding:1rem 0 2rem;display:flex;flex-wrap:wrap;gap:.625rem;justify-content:center;margin-top:-1rem;" role="tablist">
                 <button class="pf-tab active" data-filter="all" onclick="pfFilterEs(this,'all')" style="padding:.5rem 1.25rem;border-radius:2rem;border:2px solid var(--vhc-navy);background:var(--vhc-navy);color:#fff;font-family:var(--font-display);font-weight:600;font-size:.85rem;cursor:pointer;transition:all .25s;">Todos</button>
                 <button class="pf-tab" data-filter="solar" onclick="pfFilterEs(this,'solar')" style="padding:.5rem 1.25rem;border-radius:2rem;border:2px solid var(--vhc-navy);background:transparent;color:var(--vhc-navy);font-family:var(--font-display);font-weight:600;font-size:.85rem;cursor:pointer;transition:all .25s;">☀️ Solar Techo</button>
                 <button class="pf-tab" data-filter="neovolta" onclick="pfFilterEs(this,'neovolta')" style="padding:.5rem 1.25rem;border-radius:2rem;border:2px solid var(--vhc-navy);background:transparent;color:var(--vhc-navy);font-family:var(--font-display);font-weight:600;font-size:.85rem;cursor:pointer;transition:all .25s;">🔋 NeoVolta</button>
