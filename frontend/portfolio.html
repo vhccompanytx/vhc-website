@@ -682,25 +682,6 @@
                 grid-template-columns: 1fr;
             }
         }
-        @media (max-width: 767px) {
-            #pfGrid { 
-                display: flex !important; 
-                flex-wrap: nowrap;
-                gap: 1rem !important; 
-                overflow-x: auto; 
-                scroll-snap-type: x mandatory; 
-                scrollbar-width: none; 
-                -webkit-overflow-scrolling: touch; 
-                padding: 1.5rem 1.5rem 3.5rem 1.5rem !important; 
-                margin: -1.5rem -1.5rem -3.5rem -1.5rem !important; 
-                scroll-behavior: smooth; 
-            }
-            #pfGrid::-webkit-scrollbar { display: none; }
-            #pfGrid .pf-card { 
-                flex: 0 0 85vw !important; 
-                scroll-snap-align: center; 
-            }
-        }
     </style>
 </head>
 
@@ -995,13 +976,27 @@
     </section>
 
     <!-- LIGHTBOX -->
-    <div id="pfLightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:9999;flex-direction:column;align-items:center;justify-content:center;" onclick="pfLBClose(event)">
-        <button onclick="document.getElementById('pfLightbox').style.display='none'" style="position:absolute;top:1.25rem;right:1.25rem;background:rgba(255,255,255,0.1);border:none;color:#fff;width:44px;height:44px;border-radius:50%;font-size:1.5rem;cursor:pointer;z-index:10;" aria-label="Close">&times;</button>
-        <button onclick="pfLBNav(-1);event.stopPropagation();" style="position:absolute;left:1.25rem;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.12);border:none;color:#fff;width:48px;height:48px;border-radius:50%;font-size:1.5rem;cursor:pointer;z-index:10;" aria-label="Prev">&#8592;</button>
-        <button onclick="pfLBNav(1);event.stopPropagation();" style="position:absolute;right:1.25rem;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.12);border:none;color:#fff;width:48px;height:48px;border-radius:50%;font-size:1.5rem;cursor:pointer;z-index:10;" aria-label="Next">&#8594;</button>
-        <img id="pfLBImg" src="" alt="" style="max-width:90vw;max-height:80vh;object-fit:contain;border-radius:12px;box-shadow:0 8px 48px rgba(0,0,0,0.5);">
-        <div id="pfLBCaption" style="color:#fff;margin-top:1rem;font-family:var(--font-display);font-size:1rem;text-align:center;max-width:600px;padding:0 1rem;"></div>
-        <div id="pfLBCounter" style="color:rgba(255,255,255,0.5);font-size:.8rem;margin-top:.4rem;"></div>
+    <div id="pfLightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:9999;flex-direction:column;align-items:center;justify-content:center;" onclick="pfLBClose(event)">
+        <button onclick="document.getElementById('pfLightbox').style.display='none'" style="position:absolute;top:1.25rem;right:1.25rem;background:rgba(255,255,255,0.1);border:none;color:#fff;width:44px;height:44px;border-radius:50%;font-size:1.5rem;cursor:pointer;z-index:100;" aria-label="Close">&times;</button>
+        
+        <!-- Desktop Nav Arrows (Hidden on Mobile Swipe) -->
+        <button onclick="pfLBNav(-1);event.stopPropagation();" class="pf-lb-nav" style="position:absolute;left:1.25rem;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.1);border:none;color:#fff;width:48px;height:48px;border-radius:50%;font-size:1.5rem;cursor:pointer;z-index:100;display:flex;align-items:center;justify-content:center;" aria-label="Prev">&#8592;</button>
+        <button onclick="pfLBNav(1);event.stopPropagation();" class="pf-lb-nav" style="position:absolute;right:1.25rem;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.1);border:none;color:#fff;width:48px;height:48px;border-radius:50%;font-size:1.5rem;cursor:pointer;z-index:100;display:flex;align-items:center;justify-content:center;" aria-label="Next">&#8594;</button>
+
+        <!-- Carousel Track -->
+        <div id="pfLBTrack" style="display:flex;width:100%;height:70vh;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;scrollbar-color:transparent transparent;-webkit-overflow-scrolling:touch;align-items:center;">
+            <!-- Images populated by JS -->
+        </div>
+
+        <div id="pfLBCaption" style="color:#fff;margin-top:2rem;font-family:var(--font-display);font-size:1rem;text-align:center;max-width:600px;padding:0 1.5rem;font-weight:500;"></div>
+        <div id="pfLBCounter" style="color:var(--vhc-gold);font-weight:700;font-size:.85rem;margin-top:.6rem;letter-spacing:0.1em;"></div>
+
+        <style>
+            #pfLBTrack::-webkit-scrollbar { display: none; }
+            .pf-lb-img-wrap { flex: 0 0 100%; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; scroll-snap-align: center; }
+            .pf-lb-img { max-width: 90vw; max-height: 100%; object-fit: contain; border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+            @media (max-width: 767px) { .pf-lb-nav { display: none !important; } }
+        </style>
     </div>
 
     <script>
@@ -1062,15 +1057,76 @@
         ]}
     ];
     var pfLBCur=0,pfLBProject=0;
-    function pfOpen(idx){pfLBProject=idx;pfLBCur=0;pfLBShow();document.getElementById('pfLightbox').style.display='flex';}
-    function pfLBShow(){var p=pfProjects[pfLBProject];var ph=p.photos[pfLBCur];document.getElementById('pfLBImg').src=ph.src;document.getElementById('pfLBImg').alt=ph.cap;document.getElementById('pfLBCaption').textContent=p.name+' \u00b7 '+p.loc;document.getElementById('pfLBCounter').textContent=(pfLBCur+1)+' / '+p.photos.length;}
-    function pfLBNav(d){var p=pfProjects[pfLBProject];pfLBCur=(pfLBCur+d+p.photos.length)%p.photos.length;pfLBShow();}
-    function pfLBClose(e){if(e.target===document.getElementById('pfLightbox'))document.getElementById('pfLightbox').style.display='none';}
-    document.addEventListener('keydown',function(e){var lb=document.getElementById('pfLightbox');if(lb.style.display==='flex'){if(e.key==='ArrowRight')pfLBNav(1);if(e.key==='ArrowLeft')pfLBNav(-1);if(e.key==='Escape')lb.style.display='none';}});
+    var pfObserver = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+            if(entry.isIntersecting){
+                var idx = parseInt(entry.target.dataset.idx);
+                pfLBCur = idx;
+                updateLBText();
+            }
+        });
+    }, { threshold: 0.6 });
+
+    function updateLBText(){
+        var p = pfProjects[pfLBProject];
+        var ph = p.photos[pfLBCur];
+        document.getElementById('pfLBCaption').textContent = ph.cap;
+        document.getElementById('pfLBCounter').textContent = (pfLBCur+1) + " / " + p.photos.length;
+    }
+
+    function pfOpen(idx){
+        pfLBProject = idx;
+        pfLBCur = 0;
+        var track = document.getElementById('pfLBTrack');
+        track.innerHTML = '';
+        var p = pfProjects[idx];
+        p.photos.forEach(function(ph, i){
+            var wrap = document.createElement('div');
+            wrap.className = 'pf-lb-img-wrap';
+            wrap.dataset.idx = i;
+            wrap.innerHTML = '<img src="'+ph.src+'" alt="'+ph.cap+'" class="pf-lb-img">';
+            track.appendChild(wrap);
+            pfObserver.observe(wrap);
+        });
+        track.scrollLeft = 0;
+        document.getElementById('pfLightbox').style.display = 'flex';
+        updateLBText();
+    }
+
+    function pfLBNav(d){
+        var p = pfProjects[pfLBProject];
+        pfLBCur = (pfLBCur + d + p.photos.length) % p.photos.length;
+        var wraps = document.querySelectorAll('.pf-lb-img-wrap');
+        if(wraps[pfLBCur]){
+            wraps[pfLBCur].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+    }
+    function pfLBClose(e){
+        if(e.target===document.getElementById('pfLightbox') || e.target===document.getElementById('pfLBTrack')) {
+            document.getElementById('pfLightbox').style.display='none';
+        }
+    }
+    document.addEventListener('keydown',function(e){
+        var lb=document.getElementById('pfLightbox');
+        if(lb.style.display==='flex'){
+            if(e.key==='ArrowRight') pfLBNav(1);
+            if(e.key==='ArrowLeft') pfLBNav(-1);
+            if(e.key==='Escape') lb.style.display='none';
+        }
+    });
+
     function pfFilter(btn,cat){
-        document.querySelectorAll('.pf-tab').forEach(function(b){b.style.background='transparent';b.style.color='var(--vhc-navy)';});
-        btn.style.background='var(--vhc-navy)';btn.style.color='#fff';
-        document.querySelectorAll('.pf-card').forEach(function(c){c.style.display=(cat==='all'||c.dataset.cat===cat)?'block':'none';});
+        document.querySelectorAll('.pf-tab').forEach(function(b){
+            b.style.background='transparent';
+            b.style.color='var(--vhc-navy)';
+            b.classList.remove('active');
+        });
+        btn.style.background='var(--vhc-navy)';
+        btn.style.color='#fff';
+        btn.classList.add('active');
+        document.querySelectorAll('.pf-card').forEach(function(c){
+            c.style.display=(cat==='all'||c.dataset.cat===cat)?'block':'none';
+        });
     }
     </script>
 

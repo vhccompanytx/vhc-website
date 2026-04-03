@@ -165,25 +165,6 @@
         @media (max-width: 900px) {
             .footer-grid { grid-template-columns: 1fr; }
         }
-        @media (max-width: 767px) {
-            #pfGridEs { 
-                display: flex !important; 
-                flex-wrap: nowrap;
-                gap: 1rem !important; 
-                overflow-x: auto; 
-                scroll-snap-type: x mandatory; 
-                scrollbar-width: none; 
-                -webkit-overflow-scrolling: touch; 
-                padding: 1.5rem 1.5rem 3.5rem 1.5rem !important; 
-                margin: -1.5rem -1.5rem -3.5rem -1.5rem !important; 
-                scroll-behavior: smooth; 
-            }
-            #pfGridEs::-webkit-scrollbar { display: none; }
-            #pfGridEs .pf-card { 
-                flex: 0 0 85vw !important; 
-                scroll-snap-align: center; 
-            }
-        }
     </style>
 
     <!-- Schema.org -->
@@ -271,8 +252,8 @@
     </section>
 
     <!-- Gallery -->
-    <section class="section-padding">
-        <div class="container">
+    <section class="section-padding" style="background: var(--vhc-surface); position:relative;">
+        <div class="container" style="position:relative;z-index:2;">
             <!-- Filter Tabs (Sticky) -->
             <div style="position:sticky;top:66px;z-index:90;background:var(--vhc-surface);padding:1rem 0 2rem;display:flex;flex-wrap:wrap;gap:.625rem;justify-content:center;margin-top:-1rem;" role="tablist">
                 <button class="pf-tab active" data-filter="all" onclick="pfFilterEs(this,'all')" style="padding:.5rem 1.25rem;border-radius:2rem;border:2px solid var(--vhc-navy);background:var(--vhc-navy);color:#fff;font-family:var(--font-display);font-weight:600;font-size:.85rem;cursor:pointer;">Todos</button>
@@ -286,6 +267,26 @@
             </div>
         </div>
     </section>
+
+    <!-- LIGHTBOX -->
+    <div id="pfLightboxEs" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:9999;flex-direction:column;align-items:center;justify-content:center;" onclick="pfLBCloseEs(event)">
+        <button onclick="document.getElementById('pfLightboxEs').style.display='none'" style="position:absolute;top:1.25rem;right:1.25rem;background:rgba(255,255,255,0.1);border:none;color:#fff;width:44px;height:44px;border-radius:50%;font-size:1.5rem;cursor:pointer;z-index:100;" aria-label="Cerrar">&times;</button>
+        
+        <button onclick="pfLBNavEs(-1);event.stopPropagation();" class="pf-lb-nav" style="position:absolute;left:1.25rem;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.1);border:none;color:#fff;width:48px;height:48px;border-radius:50%;font-size:1.5rem;cursor:pointer;z-index:100;display:flex;align-items:center;justify-content:center;" aria-label="Anterior">&#8592;</button>
+        <button onclick="pfLBNavEs(1);event.stopPropagation();" class="pf-lb-nav" style="position:absolute;right:1.25rem;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.1);border:none;color:#fff;width:48px;height:48px;border-radius:50%;font-size:1.5rem;cursor:pointer;z-index:100;display:flex;align-items:center;justify-content:center;" aria-label="Siguiente">&#8594;</button>
+
+        <div id="pfLBTrackEs" style="display:flex;width:100%;height:70vh;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;scrollbar-color:transparent transparent;-webkit-overflow-scrolling:touch;align-items:center;"></div>
+
+        <div id="pfLBCaptionEs" style="color:#fff;margin-top:2rem;font-family:var(--font-display);font-size:1rem;text-align:center;max-width:600px;padding:0 1.5rem;font-weight:500;"></div>
+        <div id="pfLBCounterEs" style="color:var(--vhc-gold);font-weight:700;font-size:.85rem;margin-top:.6rem;letter-spacing:0.1em;"></div>
+
+        <style>
+            #pfLBTrackEs::-webkit-scrollbar { display: none; }
+            .pf-lb-img-wrap { flex: 0 0 100%; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; scroll-snap-align: center; }
+            .pf-lb-img { max-width: 90vw; max-height: 100%; object-fit: contain; border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+            @media (max-width: 767px) { .pf-lb-nav { display: none !important; } }
+        </style>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -335,21 +336,97 @@
 
         // Portfolio Logic
         const projects = [
-            { id: 0, cat: 'solar', title: 'The Grande', loc: 'Sugar Land, TX', size: '18.2 kW', img: 'brand/WhatsApp Image 2026-03-31 at 10.41.51 PM.jpeg' },
-            { id: 1, cat: 'solar', title: 'Residencial Texas', loc: 'Houston, TX', size: '12.0 kW', img: 'brand/WhatsApp Image 2026-03-31 at 11.06.44 PM.jpeg' }
+            { id: 0, cat: 'solar', title: 'The Grande', loc: 'Sugar Land, TX', size: '18.2 kW', desc: 'Instalación aérea de doble arreglo. 48 paneles premium en una gran propiedad residencial.', photos:[
+                {src:'brand/WhatsApp Image 2026-03-31 at 10.41.51 PM.jpeg', cap:'Vista aérea de instalación solar de 48 paneles'},
+                {src:'brand/WhatsApp Image 2026-03-31 at 10.42.06 PM.jpeg', cap:'Segundo ángulo aéreo — The Grande'}
+            ]},
+            { id: 1, cat: 'solar', title: 'Residencial Texas', loc: 'Houston Area, TX', size: '12.0 kW', desc: 'Arreglo completo sobre techo de teja gris durante el atardecer.', photos:[
+                {src:'brand/WhatsApp Image 2026-03-31 at 11.06.44 PM.jpeg', cap:'Arreglo de paneles al atardecer'},
+                {src:'brand/WhatsApp Image 2026-03-31 at 11.05.28 PM.jpeg', cap:'Detalle de fila de paneles'},
+                {src:'brand/WhatsApp Image 2026-03-31 at 10.46.20 PM.jpeg', cap:'Vista de dron — diseño residencial completo'},
+                {src:'brand/WhatsApp Image 2026-03-31 at 10.48.33 PM.jpeg', cap:'Vista desde el suelo del arreglo solar'},
+                {src:'brand/WhatsApp Image 2026-03-31 at 10.48.53 PM.jpeg', cap:'Detalle de herrajes de montaje'},
+                {src:'brand/WhatsApp Image 2026-03-31 at 11.09.52 PM.jpeg', cap:'Instalación solar — vista de patio trasero'}
+            ]},
+            { id: 2, cat: 'tesla', title: 'Tesla Powerwall — Austin', loc: 'Austin, TX', size: '2x 13.5 kWh', desc: 'Respaldo total con Tesla Powerwall y cargador EV en casa de metal.', photos:[
+                {src:'brand/tesla 3.jpg', cap:'3x Tesla Powerwall + Cargador EV Nivel 2'},
+                {src:'brand/tesla2.jpg', cap:'Dual Tesla Powerwall + Cargador EV'},
+                {src:'brand/WhatsApp Image 2026-03-31 at 11.12.55 PM.jpeg', cap:'Tesla Powerwall + Cargador + Protecciones'},
+                {src:'brand/tesla 5.jpg', cap:'Detalle de cableado Tesla Gateway'},
+                {src:'brand/tesla 4.jpg', cap:'Vista aérea neighborhood — paneles sobre techo rojo'}
+            ]},
+            { id: 3, cat: 'neovolta', title: 'NeoVolta Powerhouse', loc: 'Houston, TX', size: '40 kWh', desc: 'Sistema de gran capacidad para respaldo extendido.', photos:[
+                {src:'brand/WhatsApp Image 2026-03-31 at 11.05.55 PM.jpeg', cap:'4x Baterías NeoVolta + Inversores duales'},
+                {src:'brand/WhatsApp Image 2026-03-31 at 11.09.21 PM.jpeg', cap:'Sistema completo vista lateral'}
+            ]}
         ];
+
+        var pfLBCur=0,pfLBProject=0;
+        var pfObserver = new IntersectionObserver(function(entries){
+            entries.forEach(function(entry){
+                if(entry.isIntersecting){
+                    var idx = parseInt(entry.target.dataset.idx);
+                    pfLBCur = idx;
+                    updateLBTextEs();
+                }
+            });
+        }, { threshold: 0.6 });
+
+        function updateLBTextEs(){
+            var p = projects[pfLBProject];
+            var ph = p.photos[pfLBCur];
+            document.getElementById('pfLBCaptionEs').textContent = ph.cap;
+            document.getElementById('pfLBCounterEs').textContent = (pfLBCur+1) + " / " + p.photos.length;
+        }
+
+        function pfOpenEs(idx){
+            pfLBProject = idx;
+            pfLBCur = 0;
+            var track = document.getElementById('pfLBTrackEs');
+            track.innerHTML = '';
+            var p = projects[idx];
+            p.photos.forEach(function(ph, i){
+                var wrap = document.createElement('div');
+                wrap.className = 'pf-lb-img-wrap';
+                wrap.dataset.idx = i;
+                wrap.innerHTML = '<img src="'+ph.src+'" alt="'+ph.cap+'" class="pf-lb-img">';
+                track.appendChild(wrap);
+                pfObserver.observe(wrap);
+            });
+            track.scrollLeft = 0;
+            document.getElementById('pfLightboxEs').style.display = 'flex';
+            updateLBTextEs();
+        }
+
+        function pfLBNavEs(d){
+            var p = projects[pfLBProject];
+            pfLBCur = (pfLBCur + d + p.photos.length) % p.photos.length;
+            var wraps = document.querySelectorAll('#pfLBTrackEs .pf-lb-img-wrap');
+            if(wraps[pfLBCur]){
+                wraps[pfLBCur].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            }
+        }
+
+        function pfLBCloseEs(e){
+            if(e.target===document.getElementById('pfLightboxEs') || e.target===document.getElementById('pfLBTrackEs')) {
+                document.getElementById('pfLightboxEs').style.display='none';
+            }
+        }
 
         function renderProjects(filter = 'all') {
             const grid = document.getElementById('pfGridEs');
             grid.innerHTML = '';
             projects.filter(p => filter === 'all' || p.cat === filter).forEach(p => {
                 grid.innerHTML += `
-                    <div class="pf-card" data-cat="${p.cat}">
-                        <img src="${p.img}" alt="${p.title}" loading="lazy" style="width:100%;height:220px;object-fit:cover;">
+                    <div class="pf-card" data-cat="${p.cat}" onclick="pfOpenEs(${projects.indexOf(p)})">
+                        <div style="height:220px;overflow:hidden;position:relative;">
+                            <img src="${p.photos[0].src}" alt="${p.title}" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform .4s;">
+                            <span style="position:absolute;top:.75rem;right:.75rem;background:var(--vhc-gold);color:var(--vhc-navy-deep);font-size:.7rem;font-weight:700;padding:.25rem .75rem;border-radius:2rem;text-transform:uppercase;letter-spacing:.05em;">Completado</span>
+                        </div>
                         <div style="padding:1.5rem;">
-                            <div style="color:var(--vhc-gold);font-size:.75rem;font-weight:700;">${p.loc}</div>
+                            <div style="color:var(--vhc-gold);font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.25rem;">${p.loc}</div>
                             <h3>${p.title}</h3>
-                            <div style="font-weight:700;">${p.size}</div>
+                            <div style="font-weight:700;margin-top:.5rem;">${p.size}</div>
                         </div>
                     </div>
                 `;
@@ -367,6 +444,15 @@
             btn.style.color = '#fff';
             renderProjects(filter);
         }
+
+        document.addEventListener('keydown',function(e){
+            var lb=document.getElementById('pfLightboxEs');
+            if(lb && lb.style.display==='flex'){
+                if(e.key==='ArrowRight') pfLBNavEs(1);
+                if(e.key==='ArrowLeft') pfLBNavEs(-1);
+                if(e.key==='Escape') lb.style.display='none';
+            }
+        });
 
         renderProjects();
     </script>
