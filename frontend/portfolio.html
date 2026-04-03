@@ -73,6 +73,10 @@
 
         nav.scrolled {
             padding: var(--space-2) 0;
+            background: rgba(11, 19, 50, 0.65);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            box-shadow: 0 10px 30px rgba(5, 8, 20, 0.4);
         }
     </style>
 
@@ -772,8 +776,8 @@
     <section class="section-padding" style="background: var(--vhc-surface); position:relative;">
         <div class="container" style="position:relative;z-index:2;">
 
-            <!-- Filter Tabs (Sticky for better UX) -->
-            <div style="position:sticky;top:66px;z-index:90;background:var(--vhc-surface);padding:1rem 0 2rem;display:flex;flex-wrap:wrap;gap:.625rem;justify-content:center;margin-top:-1rem;" role="tablist" aria-label="Project filters">
+            <!-- Filter Tabs (Neutral position, scrolls away) -->
+            <div style="padding:1rem 0 2rem;display:flex;flex-wrap:wrap;gap:.625rem;justify-content:center;margin-top:-1rem;" role="tablist" aria-label="Project filters">
                 <button class="pf-tab active" data-filter="all" onclick="pfFilter(this,'all')" style="padding:.5rem 1.25rem;border-radius:2rem;border:2px solid var(--vhc-navy);background:var(--vhc-navy);color:#fff;font-family:var(--font-display);font-weight:600;font-size:.85rem;cursor:pointer;transition:all .25s;">All Projects</button>
                 <button class="pf-tab" data-filter="solar" onclick="pfFilter(this,'solar')" style="padding:.5rem 1.25rem;border-radius:2rem;border:2px solid var(--vhc-navy);background:transparent;color:var(--vhc-navy);font-family:var(--font-display);font-weight:600;font-size:.85rem;cursor:pointer;transition:all .25s;">☀️ Full Roof Solar</button>
                 <button class="pf-tab" data-filter="neovolta" onclick="pfFilter(this,'neovolta')" style="padding:.5rem 1.25rem;border-radius:2rem;border:2px solid var(--vhc-navy);background:transparent;color:var(--vhc-navy);font-family:var(--font-display);font-weight:600;font-size:.85rem;cursor:pointer;transition:all .25s;">🔋 NeoVolta</button>
