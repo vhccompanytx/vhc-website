@@ -360,7 +360,7 @@
                 <a href="#services">Servicios</a>
                 <a href="#how-it-works">Cómo Funciona</a>
                 <a href="#process">Proceso</a>
-                <a href="#proyectos-recientes" style="color:var(--vhc-gold);font-weight:700;">Proyectos</a>
+                <a href="#proyectos-recientes">Proyectos</a>
                 <a href="portfolio-es.html">Portafolio</a>
                 <a href="#contact" class="btn-primary" style="padding: 0.5rem 1.25rem;">Cotizar Ahora</a>
                 <a href="index.html" class="vhc-label"
@@ -525,13 +525,19 @@
                         d.style.width=i===cur?'22px':'8px';
                     });
                 }
-                var tx=0, dragging=false;
-                wrap.addEventListener('touchstart',function(e){ tx=e.touches[0].clientX; dragging=true; grid.style.transition='none'; },{ passive:true });
+                var tx=0, ty=0, dragging=false, isHorizontal=null;
+                wrap.addEventListener('touchstart',function(e){ 
+                    tx=e.touches[0].clientX; ty=e.touches[0].clientY; dragging=true; isHorizontal=null; grid.style.transition='none'; 
+                },{ passive:true });
                 wrap.addEventListener('touchmove',function(e){
                     if(!dragging) return;
                     var dx=e.touches[0].clientX-tx;
+                    var dy=e.touches[0].clientY-ty;
+                    if(isHorizontal === null){ isHorizontal = Math.abs(dx) > Math.abs(dy); }
+                    if(!isHorizontal){ dragging=false; return; }
+                    e.preventDefault();
                     grid.style.transform='translateX('+(-(cur*wrap.offsetWidth)+dx)+'px)';
-                },{ passive:true });
+                },{ passive:false });
                 wrap.addEventListener('touchend',function(e){
                     if(!dragging) return; dragging=false;
                     var dx=e.changedTouches[0].clientX-tx;
@@ -1676,17 +1682,21 @@
                 }
                 window.vhcSlideEs=function(d){goToEs(cur+d);};
                 // Touch / swipe support
-                var tx=0, dragging=false;
+                var tx=0, ty=0, dragging=false, isHorizontal=null;
                 el.addEventListener('touchstart',function(e){
-                    tx=e.touches[0].clientX; dragging=true;
+                    tx=e.touches[0].clientX; ty=e.touches[0].clientY; dragging=true; isHorizontal=null;
                     c.style.transition='none';
                     clearInterval(timer);
                 },{ passive:true });
                 el.addEventListener('touchmove',function(e){
                     if(!dragging) return;
                     var dx=e.touches[0].clientX-tx;
+                    var dy=e.touches[0].clientY-ty;
+                    if(isHorizontal === null){ isHorizontal = Math.abs(dx) > Math.abs(dy); }
+                    if(!isHorizontal){ dragging=false; return; }
+                    e.preventDefault();
                     c.style.transform='translateX('+(-(cur*el.offsetWidth)+dx)+'px)';
-                },{ passive:true });
+                },{ passive:false });
                 el.addEventListener('touchend',function(e){
                     if(!dragging) return; dragging=false;
                     var dx=e.changedTouches[0].clientX-tx;
