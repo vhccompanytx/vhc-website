@@ -253,6 +253,15 @@
     .section-header { text-align: center; margin-bottom: var(--space-16); }
     .section-header h2 { font-family: var(--font-display); font-size: var(--text-4xl); color: var(--vhc-navy-deep); margin-top: var(--space-2); }
     .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-8); }
+
+    /* ── Mobile Service Carousel ── */
+    @media (max-width: 767px) {
+        .services-grid { display: flex; gap: 0; will-change: transform; transition: transform .45s cubic-bezier(.4,0,.2,1); }
+        .service-card { flex-shrink: 0; }
+        .services-carousel-wrapper { overflow: hidden; border-radius: var(--radius-xl); position: relative; }
+        .svc-dots { display: flex !important; }
+    }
+    .svc-dots { display: none; justify-content: center; gap: .5rem; margin-top: 1rem; }
     .service-card { padding: var(--space-10); text-align: center; display: flex; flex-direction: column; align-items: center; }
     .service-icon { width: 80px; height: 80px; border-radius: var(--radius-lg); background: rgba(201,160,53,0.1); color: var(--vhc-gold); display: flex; align-items: center; justify-content: center; font-size: 32px; margin: 0 auto var(--space-6) auto; transition: all var(--duration) var(--ease-out); }
     .service-card:hover .service-icon { background: rgba(201, 160, 53, 0.2); transform: scale(1.1) rotate(5deg); }
@@ -447,7 +456,8 @@
                 <span class="vhc-label">NUESTRAS SOLUCIONES</span>
                 <h2>Todo lo que tu Hogar Necesita, en un Solo Lugar</h2>
             </div>
-            <div class="services-grid">
+            <div class="services-carousel-wrapper">
+            <div class="services-grid" id="svcGridEs">
                 <div class="glass-panel vcard-floating service-card">
                     <div class="service-icon"><i class="fas fa-solar-panel"></i></div>
                     <h3>Sistemas Solares </h3>
@@ -484,6 +494,54 @@
                     <p style="color: var(--vhc-dark);">Conserva el rendimiento máximo de tu inversión. Realizamos inspecciones programadas, limpieza de paneles, diagnóstico de inversores y actualizaciones para que tu sistema funcione al 100% durante toda su garantía de 25 años.</p>
                 </div>
             </div>
+            </div>
+            <div class="svc-dots" id="svcDotsEs"></div>
+            <script>
+            (function(){
+                if(window.innerWidth > 767) return;
+                var wrap = document.querySelector('.services-carousel-wrapper');
+                var grid = document.getElementById('svcGridEs');
+                var cards = grid.querySelectorAll('.service-card');
+                var dotsEl = document.getElementById('svcDotsEs');
+                var cur = 0, total = cards.length;
+                function pinCards(){
+                    var w = wrap.offsetWidth;
+                    cards.forEach(function(c){ c.style.width=w+'px'; c.style.minWidth=w+'px'; });
+                }
+                pinCards();
+                window.addEventListener('resize', function(){ if(window.innerWidth<=767){ pinCards(); svcGoToEs(cur); } });
+                cards.forEach(function(_,i){
+                    var d = document.createElement('button');
+                    d.style.cssText='width:8px;height:8px;border-radius:50%;border:none;cursor:pointer;transition:all .3s;background:'+(i===0?'var(--vhc-gold)':'rgba(10,18,41,0.2)');
+                    d.setAttribute('aria-label','Servicio '+(i+1));
+                    (function(idx){d.onclick=function(){svcGoToEs(idx);};})(i);
+                    dotsEl.appendChild(d);
+                });
+                function svcGoToEs(n){
+                    cur=(n%total+total)%total;
+                    grid.style.transform='translateX(-'+(cur*wrap.offsetWidth)+'px)';
+                    dotsEl.querySelectorAll('button').forEach(function(d,i){
+                        d.style.background=i===cur?'var(--vhc-gold)':'rgba(10,18,41,0.2)';
+                        d.style.width=i===cur?'22px':'8px';
+                    });
+                }
+                var tx=0, dragging=false;
+                wrap.addEventListener('touchstart',function(e){ tx=e.touches[0].clientX; dragging=true; grid.style.transition='none'; },{ passive:true });
+                wrap.addEventListener('touchmove',function(e){
+                    if(!dragging) return;
+                    var dx=e.touches[0].clientX-tx;
+                    grid.style.transform='translateX('+(-(cur*wrap.offsetWidth)+dx)+'px)';
+                },{ passive:true });
+                wrap.addEventListener('touchend',function(e){
+                    if(!dragging) return; dragging=false;
+                    var dx=e.changedTouches[0].clientX-tx;
+                    grid.style.transition='transform .45s cubic-bezier(.4,0,.2,1)';
+                    if(dx < -(wrap.offsetWidth*0.25)) svcGoToEs(cur+1);
+                    else if(dx > (wrap.offsetWidth*0.25)) svcGoToEs(cur-1);
+                    else svcGoToEs(cur);
+                });
+            })();
+            </script>
         </div>
     </section>
 
@@ -1569,8 +1627,12 @@
                         </div>
                     </div>
                 </div>
-                <button onclick="vhcSlideEs(-1)" aria-label="Proyecto Anterior" style="position:absolute;top:50%;left:1rem;transform:translateY(-50%);background:rgba(10,18,41,0.7);border:none;color:#fff;width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:1.25rem;display:flex;align-items:center;justify-content:center;z-index:10;backdrop-filter:blur(8px);transition:background .2s;" onmouseover="this.style.background='rgba(226,187,87,0.9)'" onmouseout="this.style.background='rgba(10,18,41,0.7)'">&#8592;</button>
-                <button onclick="vhcSlideEs(1)" aria-label="Siguiente Proyecto" style="position:absolute;top:50%;right:1rem;transform:translateY(-50%);background:rgba(10,18,41,0.7);border:none;color:#fff;width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:1.25rem;display:flex;align-items:center;justify-content:center;z-index:10;backdrop-filter:blur(8px);transition:background .2s;" onmouseover="this.style.background='rgba(226,187,87,0.9)'" onmouseout="this.style.background='rgba(10,18,41,0.7)'">&#8594;</button>
+                <div id="vhcSwipeHintEs" style="position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:.4rem;color:rgba(255,255,255,0.85);font-size:.8rem;font-family:var(--font-display);font-weight:500;letter-spacing:.06em;pointer-events:none;z-index:10;transition:opacity 1s ease;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="opacity:.9"><polyline points="15 18 9 12 15 6"/></svg>
+                    <span>DESLIZAR</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="opacity:.9"><polyline points="9 18 15 12 9 6"/></svg>
+                </div>
+                <script>setTimeout(function(){var h=document.getElementById('vhcSwipeHintEs');if(h)h.style.opacity='0';},3000);</script>
             </div>
             <div id="vhcDotsEs" style="display:flex;justify-content:center;gap:.5rem;margin-top:1.25rem;"></div>
             <div style="text-align:center;margin-top:2rem;">
