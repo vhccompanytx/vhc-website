@@ -2134,7 +2134,7 @@
 
             <!-- Carousel Wrapper -->
             <div class="vhc-carousel-wrapper" style="position:relative;overflow:hidden;border-radius:20px;max-width:1140px;margin:0 auto;box-shadow: 0 15px 35px rgba(0,0,0,0.08);">
-                <div class="vhc-carousel" id="vhcCarousel" style="display:flex;width:100%;will-change:transform;">
+                <div class="vhc-carousel" id="vhcCarousel" style="display:flex;will-change:transform;">
                     <!-- Slide 1 -->
                     <div class="vhc-slide" style="min-width:100%;position:relative;flex-shrink:0;">
                         <img src="brand/WhatsApp Image 2026-03-31 at 10.41.51 PM.jpeg" alt="Large residential solar installation - aerial view" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
@@ -2225,6 +2225,14 @@
                 var slides=c.querySelectorAll('.vhc-slide');
                 var dotsEl=document.getElementById('vhcDots');
                 var cur=0, total=slides.length, timer;
+                var el=w||c;
+                // Pin each slide to exact wrapper pixel width to fix % ambiguity
+                function initSlides(){
+                    var sw=el.offsetWidth;
+                    slides.forEach(function(s){ s.style.width=sw+'px'; s.style.minWidth=sw+'px'; s.style.flexShrink='0'; });
+                }
+                initSlides();
+                window.addEventListener('resize', initSlides);
                 c.style.transition='transform .5s cubic-bezier(.4,0,.2,1)';
                 // Build dots
                 slides.forEach(function(_,i){
@@ -2236,7 +2244,7 @@
                 });
                 function goTo(n){
                     cur=(n%total+total)%total;
-                    c.style.transform='translateX(-'+cur+'00%)';
+                    c.style.transform='translateX(-'+(cur*el.offsetWidth)+'px)';
                     dotsEl.querySelectorAll('button').forEach(function(d,i){
                         d.style.background=i===cur?'var(--vhc-gold)':'rgba(10,18,41,0.2)';
                         d.style.width=i===cur?'22px':'8px';
@@ -2247,7 +2255,6 @@
                 window.vhcSlide=function(d){goTo(cur+d);};
                 // Touch / swipe support
                 var tx=0, dragging=false;
-                var el=w||c;
                 el.addEventListener('touchstart',function(e){
                     tx=e.touches[0].clientX; dragging=true;
                     c.style.transition='none';
@@ -2256,9 +2263,7 @@
                 el.addEventListener('touchmove',function(e){
                     if(!dragging) return;
                     var dx=e.touches[0].clientX-tx;
-                    var base=-(cur*100);
-                    var pct=base+(dx/el.offsetWidth*100);
-                    c.style.transform='translateX('+pct+'%)';
+                    c.style.transform='translateX('+(-(cur*el.offsetWidth)+dx)+'px)';
                 },{ passive:true });
                 el.addEventListener('touchend',function(e){
                     if(!dragging) return; dragging=false;
