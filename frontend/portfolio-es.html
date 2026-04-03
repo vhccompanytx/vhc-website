@@ -1,101 +1,97 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio Solar en Estados Unidos y Texas | VHC Company Services | Proyectos</title>
-    <meta name="description" content="Explora nuestras recientes instalaciones solares residenciales en Texas y todo Estados Unidos. Ingeniería de alta eficiencia y calidad por VHC Company Services.">
+    <title>Portafolio Solar en USA y Texas | VHC Company Services | Proyectos</title>
+    <meta name="description"
+        content="Explora nuestras instalaciones solares residenciales recientes. Ingeniería de alta calidad por VHC Company Services en Texas.">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Portafolio de Instalaciones VHC | Texas y USA">
+    <meta property="og:description"
+        content="Explora nuestras instalaciones solares residenciales recientes. Ingeniería de alta calidad por VHC Company Services.">
+    <meta property="og:image" content="https://vhccompanytx.com/brand/og_image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="VHC Company Services - Ingeniería Solar Premium">
+    <meta property="og:url" content="https://vhccompanytx.com/portfolio-es.html">
+    <meta property="og:site_name" content="VHC Company Services">
+    <meta property="og:locale" content="es_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Portafolio de Instalaciones VHC | Texas y USA">
+    <meta name="twitter:description"
+        content="Explora nuestras instalaciones solares residenciales recientes en Texas y todo Estados Unidos.">
+    <meta name="twitter:image" content="https://vhccompanytx.com/brand/og_image.png">
 
     <!-- Canonical -->
     <link rel="canonical" href="https://vhccompanytx.com/portfolio-es.html">
 
-    <!-- hreflang (bilingual site) -->
+    <!-- hreflang -->
     <link rel="alternate" hreflang="en" href="https://vhccompanytx.com/portfolio.html">
     <link rel="alternate" hreflang="es" href="https://vhccompanytx.com/portfolio-es.html">
-    <link rel="alternate" hreflang="x-default" href="https://vhccompanytx.com/portfolio.html">
 
     <link rel="stylesheet" href="brand-v2.css">
     <link rel="icon" type="image/svg+xml" href="brand/isotipo.svg">
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
-        /* Estilos generales */
+        /* Estilos Generales */
         body { margin: 0; padding: 0; overflow-x: hidden; background: var(--vhc-surface); }
         .section-padding { padding: var(--space-20) 0; }
         .container { max-width: var(--container-xl); margin: 0 auto; padding: 0 var(--space-6); width: 100%; }
-        
-        /* Navbar (Dark Theme Always on Portfolio) */
+
+        /* Navbar */
         nav {
             position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
             padding: var(--space-4) 0;
             background: rgba(11, 19, 50, 0.95);
-            backdrop-filter: blur(24px); border-bottom: 1px solid rgba(255,255,255,0.05);
+            backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             box-shadow: var(--shadow-glass);
             transition: all var(--duration) var(--ease-out);
         }
         nav.scrolled { padding: var(--space-2) 0; }
         .nav-inner { display: flex; justify-content: space-between; align-items: center; }
-        .nav-logo {
-            display: block; position: relative; height: 38px; overflow: hidden;
-        }
-        .nav-logo img {
-            height: 64px; position: relative; top: -5px;
-            filter: brightness(0) invert(1); transition: opacity var(--duration);
-        }
+        .nav-logo { display: block; position: relative; height: 38px; overflow: hidden; }
+        .nav-logo img { height: 64px; position: relative; top: -5px; filter: brightness(0) invert(1); transition: opacity var(--duration); }
         .nav-logo:hover img { opacity: 0.8; }
+
         .nav-links { display: flex; gap: var(--space-6); align-items: center; }
-        .nav-links a { 
-            color: rgba(255,255,255,0.8); font-family: var(--font-display); 
-            font-weight: var(--fw-medium); font-size: var(--text-sm);
-        }
+        .nav-links a { color: rgba(255, 255, 255, 0.8); font-family: var(--font-display); font-weight: var(--fw-medium); font-size: var(--text-sm); }
         .nav-links a:hover, .nav-links a.active { color: var(--vhc-gold-light); }
 
-        /* Menú Móvil Hamburger */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            padding: 8px;
-            background: none;
-            border: none;
-        }
-        .hamburger span {
-            display: block;
-            width: 24px;
-            height: 2px;
-            background: rgba(255,255,255,0.8);
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
+        /* Hamburger */
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; }
+        .hamburger span { display: block; width: 24px; height: 2px; background: rgba(255, 255, 255, 0.8); border-radius: 2px; transition: all 0.3s ease; }
         .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
         .hamburger.open span:nth-child(2) { opacity: 0; }
         .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
         .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 72px;
+            display: none; position: fixed; 
+            top: 70px; /* Aligned with navbar height to eliminate gap */
             left: 0; right: 0;
-            background: rgba(11, 19, 50, 0.97);
-            backdrop-filter: blur(24px);
-            padding: 1.5rem;
-            z-index: 999;
-            flex-direction: column;
-            gap: 1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            background: rgba(11, 19, 50, 0.85); /* Matched navbar glassmorphism */
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            padding: 1.5rem; z-index: 999; flex-direction: column; gap: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            transition: top var(--duration) var(--ease-out), background var(--duration);
+        }
+
+        /* Eliminate gap when navbar is in scrolled state */
+        nav.scrolled + .mobile-menu {
+            top: 54px;
+            background: rgba(11, 19, 50, 0.75);
         }
         .mobile-menu.open { display: flex; }
-        .mobile-menu a {
-            color: rgba(255,255,255,0.85);
-            font-family: var(--font-display);
-            font-size: var(--text-base);
-            font-weight: var(--fw-medium);
-            padding: 0.75rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-            transition: color 0.2s;
-        }
+        .mobile-menu a { color: rgba(255, 255, 255, 0.85); font-family: var(--font-display); font-size: var(--text-base); font-weight: var(--fw-medium); padding: 0.75rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.06); transition: color 0.2s; }
         .mobile-menu a:last-child { border-bottom: none; }
         .mobile-menu a:hover { color: var(--vhc-gold-light); }
 
@@ -104,321 +100,113 @@
             .hamburger { display: flex; }
         }
 
-        /* Botones flotantes */
+        /* Botones Flotantes */
         @keyframes pulse-wa {
             0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
             70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
-        .float-wa {
-            position: fixed; bottom: 30px; left: 30px; z-index: 1000;
-            background: #25D366; color: white;
-            width: 60px; height: 60px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 32px; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: pulse-wa 2.5s infinite;
-        }
+        .float-wa { position: fixed; bottom: 30px; left: 30px; z-index: 1000; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); animation: pulse-wa 2.5s infinite; }
         .float-wa:hover { animation: none; transform: scale(1.15) translateY(-5px); box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6); }
 
-        .float-chat {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1000;
-            background: var(--vhc-navy);
-            color: var(--vhc-pure-white);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            box-shadow: var(--shadow-md);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            outline: none;
-        }
+        .float-chat { position: fixed; bottom: 30px; right: 30px; z-index: 1000; background: var(--vhc-navy); color: var(--vhc-pure-white); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: var(--shadow-md); transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; border: 1px solid rgba(255, 255, 255, 0.1); outline: none; }
+        .float-chat:hover { transform: scale(1.15) translateY(-5px); background: var(--vhc-gold); color: var(--vhc-navy-deep); box-shadow: 0 8px 25px rgba(201, 160, 53, 0.5); }
 
-        .float-chat:hover {
-            transform: scale(1.15) translateY(-5px);
-            background: var(--vhc-gold);
-            color: var(--vhc-navy-deep);
-            box-shadow: 0 8px 25px rgba(201, 160, 53, 0.5);
-        }
-
-        /* Chat Window Styles */
-        .chat-window {
-            position: fixed;
-            bottom: 100px;
-            right: 30px;
-            z-index: 1001;
-            width: 380px;
-            height: 500px;
-            display: none;
-            flex-direction: column;
-            background: rgba(11, 19, 50, 0.85);
-            backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-glass);
-            overflow: hidden;
-            animation: chat-popup 0.4s var(--ease-out);
-        }
-
-        .chat-window.open {
-            display: flex;
-        }
-
-        @keyframes chat-popup {
-            from {
-                opacity: 0;
-                transform: translateY(20px) scale(0.95);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        .chat-header {
-            padding: var(--space-4) var(--space-6);
-            background: rgba(255, 255, 255, 0.05);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .chat-header-info {
-            display: flex;
-            align-items: center;
-            gap: var(--space-3);
-        }
-
-        .chat-header-info img {
-            width: 32px;
-            height: 32px;
-            filter: drop-shadow(0 0 5px var(--vhc-gold));
-        }
-
-        .chat-header-title {
-            color: var(--vhc-pure-white);
-            font-weight: var(--fw-bold);
-            font-size: var(--text-base);
-        }
-
-        .chat-close {
-            background: none;
-            border: none;
-            color: rgba(255, 255, 255, 0.6);
-            cursor: pointer;
-            font-size: 20px;
-            transition: color 0.2s;
-        }
-
-        .chat-close:hover {
-            color: var(--vhc-gold);
-        }
-
-        .chat-messages {
-            flex: 1;
-            padding: var(--space-6);
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-3);
-            scrollbar-width: thin;
-            scrollbar-color: var(--vhc-gold-dark) transparent;
-        }
-
-        .chat-messages::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .chat-messages::-webkit-scrollbar-thumb {
-            background: var(--vhc-gold-dark);
-            border-radius: 4px;
-        }
-
-        .msg {
-            max-width: 80%;
-            padding: var(--space-3) var(--space-4);
-            border-radius: var(--radius-md);
-            font-size: var(--text-sm);
-            line-height: 1.5;
-        }
-
-        .msg-bot {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--vhc-pure-white);
-            align-self: flex-start;
-            border-bottom-left-radius: 2px;
-        }
-
-        .msg-user {
-            background: var(--grad-gold);
-            color: var(--vhc-navy-deep);
-            align-self: flex-end;
-            border-bottom-right-radius: 2px;
-            font-weight: var(--fw-medium);
-        }
-
-        .chat-input {
-            padding: var(--space-4);
-            background: rgba(0, 0, 0, 0.2);
-            display: flex;
-            gap: var(--space-2);
-            align-items: center;
-        }
-
-        .chat-input input {
-            flex: 1;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: var(--radius-full);
-            padding: 0.6rem 1.2rem;
-            color: white;
-            outline: none;
-            font-family: var(--font-body);
-            font-size: var(--text-sm);
-        }
-
-        .chat-input input:focus {
-            border-color: var(--vhc-gold);
-        }
-
-        .chat-send {
-            background: var(--vhc-gold);
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            color: var(--vhc-navy-deep);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.2s;
-        }
-
-        .chat-send:hover {
-            transform: scale(1.1);
-            filter: brightness(1.1);
-        }
+        /* Ventana de Chat */
+        .chat-window { position: fixed; bottom: 100px; right: 30px; z-index: 1001; width: 380px; height: 500px; display: none; flex-direction: column; background: rgba(11, 19, 50, 0.85); backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-lg); box-shadow: var(--shadow-glass); overflow: hidden; animation: chat-popup 0.4s var(--ease-out); }
+        .chat-window.open { display: flex; }
+        @keyframes chat-popup { from { opacity: 0; transform: translateY(20px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        .chat-header { padding: var(--space-4) var(--space-6); background: rgba(255, 255, 255, 0.05); border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; align-items: center; }
+        .chat-header-info { display: flex; align-items: center; gap: var(--space-3); }
+        .chat-header-info img { width: 32px; height: 32px; filter: drop-shadow(0 0 5px var(--vhc-gold)); }
+        .chat-header-title { color: var(--vhc-pure-white); font-weight: var(--fw-bold); font-size: var(--text-base); }
+        .chat-close { background: none; border: none; color: rgba(255, 255, 255, 0.6); cursor: pointer; font-size: 20px; transition: color 0.2s; }
+        .chat-close:hover { color: var(--vhc-gold); }
+        .chat-messages { flex: 1; padding: var(--space-6); overflow-y: auto; display: flex; flex-direction: column; gap: var(--space-3); scrollbar-width: thin; scrollbar-color: var(--vhc-gold-dark) transparent; }
+        .chat-messages::-webkit-scrollbar { width: 4px; }
+        .chat-messages::-webkit-scrollbar-thumb { background: var(--vhc-gold-dark); border-radius: 4px; }
+        .msg { max-width: 80%; padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); font-size: var(--text-sm); line-height: 1.5; }
+        .msg-bot { background: rgba(255, 255, 255, 0.1); color: var(--vhc-pure-white); align-self: flex-start; border-bottom-left-radius: 2px; }
+        .msg-user { background: var(--grad-gold); color: var(--vhc-navy-deep); align-self: flex-end; border-bottom-right-radius: 2px; font-weight: var(--fw-medium); }
+        .chat-input { padding: var(--space-4); background: rgba(0, 0, 0, 0.2); display: flex; gap: var(--space-2); align-items: center; }
+        .chat-input input { flex: 1; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-full); padding: 0.6rem 1.2rem; color: white; outline: none; font-family: var(--font-body); font-size: var(--text-sm); }
+        .chat-input input:focus { border-color: var(--vhc-gold); }
+        .chat-send { background: var(--vhc-gold); border: none; width: 40px; height: 40px; border-radius: 50%; color: var(--vhc-navy-deep); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.2s; }
+        .chat-send:hover { transform: scale(1.1); filter: brightness(1.1); }
 
         @media (max-width: 480px) {
-            .chat-window {
-                width: calc(100vw - 40px);
-                height: calc(100vh - 150px);
-                right: 20px;
-                bottom: 90px;
-            }
+            .chat-window { width: calc(100vw - 40px); height: calc(100vh - 150px); right: 20px; bottom: 90px; }
         }
 
         /* Portfolio Hero */
-        .portfolio-hero {
-            background: var(--grad-hero);
-            padding: calc(var(--space-20) + 80px) 0 var(--space-16) 0;
-            color: var(--vhc-pure-white); text-align: center;
-        }
-        .portfolio-hero h1 {
-            font-family: var(--font-display); font-size: var(--text-4xl);
-            font-weight: var(--fw-extrabold); margin-bottom: var(--space-4);
-        }
-        .portfolio-hero p { max-width: 600px; margin: 0 auto; color: rgba(255,255,255,0.7); }
+        .portfolio-hero { background: var(--grad-hero); padding: calc(var(--space-20) + 80px) 0 var(--space-16) 0; color: var(--vhc-pure-white); text-align: center; }
+        .portfolio-hero h1 { font-family: var(--font-display); font-size: var(--text-4xl); font-weight: var(--fw-extrabold); margin-bottom: var(--space-4); }
+        .portfolio-hero p { max-width: 600px; margin: 0 auto; color: rgba(255, 255, 255, 0.7); }
 
         /* Portfolio Grid */
-        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: var(--space-8); }
-        
-        .project-card {
-            background: var(--vhc-pure-white); border-radius: var(--radius-lg);
-            overflow: hidden; box-shadow: var(--shadow-sm);
-            transition: transform var(--duration), box-shadow var(--duration);
-        }
-        .project-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
-        
-        .project-img {
-            width: 100%; height: 240px; background: #e0e4ef;
-            background-size: cover; background-position: center;
-            position: relative;
-        }
-        .img-1 { background-image: url('hero.jpg'); background-position: center 65%; }
-        .img-2 { background-image: url('https://images.unsplash.com/photo-1548611716-e3d1ac2b86c2?q=80&w=800&auto=format&fit=crop'); }
-        .img-3 { background-image: url('https://images.unsplash.com/photo-1627964402324-a74591f89dd7?q=80&w=800&auto=format&fit=crop'); }
-
-        .project-badge {
-            position: absolute; top: var(--space-4); right: var(--space-4);
-            background: var(--vhc-gold); color: var(--vhc-navy-deep);
-            padding: 4px 12px; border-radius: 4px; font-weight: var(--fw-bold); font-size: var(--text-xs);
-        }
-
-        .project-info { padding: var(--space-6); border: 1px solid var(--vhc-border); border-top: none; border-radius: 0 0 var(--radius-lg) var(--radius-lg); }
-        .project-info h3 { color: var(--vhc-navy-deep); font-size: var(--text-2xl); margin-bottom: var(--space-2); }
-        .project-info .location { color: var(--vhc-mid-gray); font-size: var(--text-sm); margin-bottom: var(--space-4); display: flex; align-items: center; gap: 8px; }
-        
-        .project-stats { display: flex; gap: var(--space-4); margin-bottom: var(--space-4); padding-top: var(--space-4); border-top: 1px solid var(--vhc-border); }
-        .stat-item { flex: 1; }
-        .stat-val { font-family: var(--font-mono); font-size: var(--text-xl); font-weight: var(--fw-bold); color: var(--vhc-navy); }
-        .stat-label { font-size: var(--text-xs); color: var(--vhc-mid-gray); text-transform: uppercase; letter-spacing: 0.05em; }
+        .pf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+        .pf-card { cursor: pointer; background: #fff; border-radius: 18px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.08); transition: transform .3s, box-shadow .3s; }
+        .pf-card:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(0,0,0,0.14); }
 
         /* Footer */
-        footer { background: var(--vhc-black); color: rgba(255,255,255,0.6); padding: var(--space-12) 0 var(--space-6) 0; }
+        footer { background: var(--vhc-black); color: rgba(255, 255, 255, 0.6); padding: var(--space-12) 0 var(--space-6) 0; }
         .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: var(--space-8); margin-bottom: var(--space-12); }
         .footer-logo img { height: 40px; margin-bottom: var(--space-4); filter: brightness(0) invert(1); }
         .footer-links h4 { color: var(--vhc-pure-white); font-family: var(--font-display); margin-bottom: var(--space-4); }
-        .footer-links ul { list-style: none; }
+        .footer-links ul { list-style: none; padding: 0; margin: 0; }
         .footer-links li { margin-bottom: var(--space-2); }
-        .footer-links a { transition: color var(--duration); }
+        .footer-links a { color: inherit; text-decoration: none; transition: color var(--duration); }
         .footer-links a:hover { color: var(--vhc-gold); }
         .social-icons { display: flex; gap: var(--space-4); margin-top: var(--space-6); }
-        .social-icons a { 
-            width: 40px; height: 40px; border-radius: 50%;
-            display: inline-flex; align-items: center; justify-content: center;
-            background: rgba(255,255,255,0.1); color: var(--vhc-pure-white);
-            transition: all var(--duration);
-        }
+        .social-icons a { width: 40px; height: 40px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.1); color: var(--vhc-pure-white); transition: all var(--duration); }
         .social-icons a:hover { background: var(--vhc-gold); color: var(--vhc-navy-deep); transform: translateY(-3px); }
-        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: var(--space-6); text-align: center; font-size: var(--text-sm); }
+        .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: var(--space-6); text-align: center; font-size: var(--text-sm); }
 
         @media (max-width: 900px) {
             .footer-grid { grid-template-columns: 1fr; }
-            .nav-links { display: none; }
-            .portfolio-grid { grid-template-columns: 1fr; }
         }
     </style>
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SolarBusiness",
+      "name": "VHC Company Services",
+      "description": "Portafolio solar residencial en Texas. Instalaciones de NeoVolta, Tesla Powerwall y Enphase.",
+      "url": "https://vhccompanytx.com/portfolio-es.html",
+      "address": { "@type": "PostalAddress", "addressRegion": "TX", "addressCountry": "US" }
+    }
+    </script>
 </head>
+
 <body>
 
-    <!-- Botón flotante WhatsApp -->
-    <a href="https://wa.me/13464937541" target="_blank" class="float-wa" title="Contáctanos vía WhatsApp">
+    <!-- WhatsApp -->
+    <a href="https://wa.me/13464937541" target="_blank" class="float-wa" title="WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- Chatbot Floating Button -->
-    <button id="chatbot-toggle" class="float-chat" title="Chat con Asistente de IA" aria-label="Abrir Chatbot de IA">
+    <!-- Chatbot -->
+    <button id="chatbot-toggle" class="float-chat" title="Chat Assistant">
         <i class="fas fa-comments"></i>
     </button>
 
-    <!-- Chat Window Container -->
+    <!-- Chat Window -->
     <div id="chat-window" class="chat-window">
         <div class="chat-header">
             <div class="chat-header-info">
-                <img src="brand/isotipo.svg" alt="Mascota VHC">
-                <span class="chat-header-title">VHC Solar Assistant</span>
+                <img src="brand/isotipo.svg" alt="VHC">
+                <span class="chat-header-title">Asistente VHC</span>
             </div>
             <button class="chat-close" id="chat-close">&times;</button>
         </div>
         <div id="chat-messages" class="chat-messages">
-            <div class="msg msg-bot">Hola. Soy el asistente de VHC. Puedo ayudarte con preguntas y ponerte en contacto con nuestro equipo para instalación solar, baterías de respaldo, cargadores EV y servicios eléctricos residenciales en Texas.</div>
+            <div class="msg msg-bot">Hola. Soy el asistente de VHC. ¿En qué puedo ayudarte hoy?</div>
         </div>
         <div class="chat-input text-center">
             <input type="text" id="chat-input" placeholder="Escribe tu mensaje...">
-            <button class="chat-send" id="chat-send" aria-label="Enviar Mensaje"><i
-                    class="fas fa-paper-plane"></i></button>
+            <button class="chat-send" id="chat-send"><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
 
@@ -426,7 +214,7 @@
     <nav id="navbar">
         <div class="container nav-inner">
             <a href="index-es.html" class="nav-logo">
-                <img src="brand/logo-white.png" alt="Logo VHC Company Services">
+                <img src="brand/logo-white.png" alt="VHC Logo">
             </a>
             <div class="nav-links">
                 <a href="index-es.html#about">Nosotros</a>
@@ -435,482 +223,133 @@
                 <a href="index-es.html#proyectos-recientes" style="color:var(--vhc-gold);font-weight:700;">Proyectos</a>
                 <a href="portfolio-es.html" class="active">Portafolio</a>
                 <a href="index-es.html#contact" class="btn-primary" style="padding: 0.5rem 1.25rem;">Cotización</a>
-                <a href="portfolio.html" class="vhc-label" style="display:flex; align-items:center; gap:0.5rem; margin-left: 1rem;" title="Switch to English" hreflang="en">
+                <a href="portfolio.html" class="vhc-label" style="display:flex; align-items:center; gap:0.5rem; margin-left: 1rem;">
                     <i class="fas fa-globe"></i> EN
                 </a>
             </div>
-            <!-- Botón Hamburger -->
-            <button class="hamburger" id="hamburger-btn" aria-label="Abrir menú" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
+            <button class="hamburger" id="hamburger-btn">
+                <span></span><span></span><span></span>
             </button>
         </div>
     </nav>
 
     <!-- Menú Móvil -->
-    <div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Navegación móvil">
+    <div class="mobile-menu" id="mobile-menu">
         <a href="index-es.html#about">Nosotros</a>
         <a href="index-es.html#services">Servicios</a>
         <a href="index-es.html#process">Proceso</a>
         <a href="index-es.html#proyectos-recientes">Proyectos</a>
         <a href="portfolio-es.html" class="active">Portafolio</a>
-        <a href="index-es.html#contact" class="btn-gold" style="text-align:center; border-radius: var(--radius-md); padding: 0.75rem 1.5rem;">Cotización</a>
-        <a href="portfolio.html" style="font-size: var(--text-sm); color: var(--vhc-gold-light);">&#x1F310; English Version</a>
     </div>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="portfolio-hero">
         <div class="container">
             <div class="vhc-label" style="color: var(--vhc-gold-light); margin-bottom: 2rem;">INSTALACIONES VHC</div>
-            <h1>Nuestro Portafolio Solar en Texas</h1>
-            <p>Explora algunos de nuestros proyectos de ingeniería residencial recientes. Cada hogar recibe soluciones solares a medida diseñadas para el clima de Texas.</p>
+            <h1>Portafolio Solar en Texas</h1>
+            <p>Explora nuestras instalaciones recientes de ingeniería solar residencial.</p>
         </div>
     </section>
 
-    <!-- Portfolio Gallery Section -->
-    <section class="section-padding" style="background: var(--vhc-surface); position:relative;">
-        <div class="container" style="position:relative;z-index:2;">
-
-            <!-- Filtros -->
-            <div style="display:flex;flex-wrap:wrap;gap:.625rem;justify-content:center;margin-bottom:2.5rem;" role="tablist" aria-label="Filtros de proyectos">
-                <button class="pf-tab active" data-filter="all" onclick="pfFilter(this,'all')" style="padding:.5rem 1.25rem;border-radius:2rem;border:2px solid var(--vhc-navy);background:var(--vhc-navy);color:#fff;font-family:var(--font-display);font-weight:600;font-size:.85rem;cursor:pointer;transition:all .25s;">Todos los Proyectos</button>
-                <button class="pf-tab" data-filter="solar" onclick="pfFilter(this,'solar')" style="padding:.5rem 1.25rem;border-radius:2rem;border:2px solid var(--vhc-navy);background:transparent;color:var(--vhc-navy);font-family:var(--font-display);font-weight:600;font-size:.85rem;cursor:pointer;transition:all .25s;">☀️ Solar Completo</button>
-                <button class="pf-tab" data-filter="neovolta" onclick="pfFilter(this,'neovolta')" style="padding:.5rem 1.25rem;border-radius:2rem;border:2px solid var(--vhc-navy);background:transparent;color:var(--vhc-navy);font-family:var(--font-display);font-weight:600;font-size:.85rem;cursor:pointer;transition:all .25s;">🔋 NeoVolta</button>
-                <button class="pf-tab" data-filter="tesla" onclick="pfFilter(this,'tesla')" style="padding:.5rem 1.25rem;border-radius:2rem;border:2px solid var(--vhc-navy);background:transparent;color:var(--vhc-navy);font-family:var(--font-display);font-weight:600;font-size:.85rem;cursor:pointer;transition:all .25s;">⚡ Tesla Powerwall</button>
-                <button class="pf-tab" data-filter="enphase" onclick="pfFilter(this,'enphase')" style="padding:.5rem 1.25rem;border-radius:2rem;border:2px solid var(--vhc-navy);background:transparent;color:var(--vhc-navy);font-family:var(--font-display);font-weight:600;font-size:.85rem;cursor:pointer;transition:all .25s;">🏠 Enphase Storage</button>
+    <!-- Gallery -->
+    <section class="section-padding">
+        <div class="container">
+            <!-- Filter Tabs (Sticky) -->
+            <div style="position:sticky;top:66px;z-index:90;background:var(--vhc-surface);padding:1rem 0 2rem;display:flex;flex-wrap:wrap;gap:.625rem;justify-content:center;margin-top:-1rem;" role="tablist">
+                <button class="pf-tab active" data-filter="all" onclick="pfFilterEs(this,'all')" style="padding:.5rem 1.25rem;border-radius:2rem;border:2px solid var(--vhc-navy);background:var(--vhc-navy);color:#fff;font-family:var(--font-display);font-weight:600;font-size:.85rem;cursor:pointer;">Todos</button>
+                <button class="pf-tab" data-filter="solar" onclick="pfFilterEs(this,'solar')" style="padding:.5rem 1.25rem;border-radius:2rem;border:2px solid var(--vhc-navy);background:transparent;color:var(--vhc-navy);font-family:var(--font-display);font-weight:600;font-size:.85rem;cursor:pointer;">☀️ Solar Techo</button>
+                <button class="pf-tab" data-filter="neovolta" onclick="pfFilterEs(this,'neovolta')" style="padding:.5rem 1.25rem;border-radius:2rem;border:2px solid var(--vhc-navy);background:transparent;color:var(--vhc-navy);font-family:var(--font-display);font-weight:600;font-size:.85rem;cursor:pointer;">🔋 NeoVolta</button>
+                <button class="pf-tab" data-filter="tesla" onclick="pfFilterEs(this,'tesla')" style="padding:.5rem 1.25rem;border-radius:2rem;border:2px solid var(--vhc-navy);background:transparent;color:var(--vhc-navy);font-family:var(--font-display);font-weight:600;font-size:.85rem;cursor:pointer;">⚡ Tesla</button>
             </div>
 
-            <div id="pfGridEs" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;">
-
-                <!-- 0: La Grande -->
-                <div class="pf-card" data-cat="solar" onclick="pfOpenEs(0)" style="cursor:pointer;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);transition:transform .3s,box-shadow .3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 36px rgba(0,0,0,0.14)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 24px rgba(0,0,0,0.08)'">
-                    <div style="height:220px;overflow:hidden;position:relative;">
-                        <img src="brand/WhatsApp Image 2026-03-31 at 10.41.51 PM.jpeg" alt="La Grande" style="width:100%;height:100%;object-fit:cover;transition:transform .4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
-                        <span style="position:absolute;top:.75rem;right:.75rem;background:var(--vhc-gold);color:var(--vhc-navy-deep);font-size:.7rem;font-weight:700;padding:.25rem .75rem;border-radius:2rem;text-transform:uppercase;letter-spacing:.05em;">Completado</span>
-                    </div>
-                    <div style="padding:1.25rem 1.5rem;">
-                        <div style="font-size:.75rem;color:var(--vhc-gold);text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:.25rem;">Sugar Land, TX &middot; Solar Completo</div>
-                        <h3 style="font-family:var(--font-display);font-size:1.15rem;color:var(--vhc-navy-deep);margin:0 0 .5rem;">La Grande</h3>
-                        <p style="font-size:.875rem;color:var(--vhc-gray);margin:0 0 1rem;line-height:1.5;">Instalaci&#243;n a&#233;rea de doble arreglo. 48 paneles premium en una gran propiedad residencial.</p>
-                        <div style="display:flex;gap:1rem;">
-                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">18.2 kW</div><div style="font-size:.7rem;color:var(--vhc-gray);">Sistema</div></div>
-                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">2</div><div style="font-size:.7rem;color:var(--vhc-gray);">Fotos</div></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 1: Solar Residencial Texas -->
-                <div class="pf-card" data-cat="solar" onclick="pfOpenEs(1)" style="cursor:pointer;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);transition:transform .3s,box-shadow .3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 36px rgba(0,0,0,0.14)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 24px rgba(0,0,0,0.08)'">
-                    <div style="height:220px;overflow:hidden;position:relative;">
-                        <img src="brand/WhatsApp Image 2026-03-31 at 11.06.44 PM.jpeg" alt="Solar residencial Texas" style="width:100%;height:100%;object-fit:cover;transition:transform .4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
-                        <span style="position:absolute;top:.75rem;right:.75rem;background:var(--vhc-gold);color:var(--vhc-navy-deep);font-size:.7rem;font-weight:700;padding:.25rem .75rem;border-radius:2rem;text-transform:uppercase;letter-spacing:.05em;">Completado</span>
-                    </div>
-                    <div style="padding:1.25rem 1.5rem;">
-                        <div style="font-size:.75rem;color:var(--vhc-gold);text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:.25rem;">&#193;rea Houston, TX &middot; Solar Completo</div>
-                        <h3 style="font-family:var(--font-display);font-size:1.15rem;color:var(--vhc-navy-deep);margin:0 0 .5rem;">Solar Residencial Texas</h3>
-                        <p style="font-size:.875rem;color:var(--vhc-gray);margin:0 0 1rem;line-height:1.5;">Instalaciones completas en el &#225;rea de Houston — fotograf&#237;a a&#233;rea y en atardecer.</p>
-                        <div style="display:flex;gap:1rem;">
-                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">8&#8211;22 kW</div><div style="font-size:.7rem;color:var(--vhc-gray);">Rango</div></div>
-                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">6</div><div style="font-size:.7rem;color:var(--vhc-gray);">Fotos</div></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 2: Enphase IQ Exterior Katy -->
-                <div class="pf-card" data-cat="enphase" onclick="pfOpenEs(2)" style="cursor:pointer;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);transition:transform .3s,box-shadow .3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 36px rgba(0,0,0,0.14)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 24px rgba(0,0,0,0.08)'">
-                    <div style="height:220px;overflow:hidden;position:relative;">
-                        <img src="brand/WhatsApp Image 2026-03-31 at 10.44.13 PM.jpeg" alt="Enphase IQ exterior" style="width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
-                        <span style="position:absolute;top:.75rem;right:.75rem;background:var(--vhc-gold);color:var(--vhc-navy-deep);font-size:.7rem;font-weight:700;padding:.25rem .75rem;border-radius:2rem;text-transform:uppercase;letter-spacing:.05em;">Completado</span>
-                    </div>
-                    <div style="padding:1.25rem 1.5rem;">
-                        <div style="font-size:.75rem;color:var(--vhc-gold);text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:.25rem;">Katy, TX &middot; Almacenamiento Enphase</div>
-                        <h3 style="font-family:var(--font-display);font-size:1.15rem;color:var(--vhc-navy-deep);margin:0 0 .5rem;">Enphase IQ &#8212; Casa de Ladrillo</h3>
-                        <p style="font-size:.875rem;color:var(--vhc-gray);margin:0 0 1rem;line-height:1.5;">Bater&#237;as Enphase IQ 5P en exterior con dos inversores integrados en pared de ladrillo.</p>
-                        <div style="display:flex;gap:1rem;">
-                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">Enphase IQ5P</div><div style="font-size:.7rem;color:var(--vhc-gray);">Bater&#237;a</div></div>
-                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">3</div><div style="font-size:.7rem;color:var(--vhc-gray);">Fotos</div></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 3: Enphase IQ Garaje -->
-                <div class="pf-card" data-cat="enphase" onclick="pfOpenEs(3)" style="cursor:pointer;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);transition:transform .3s,box-shadow .3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 36px rgba(0,0,0,0.14)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 24px rgba(0,0,0,0.08)'">
-                    <div style="height:220px;overflow:hidden;position:relative;">
-                        <img src="brand/WhatsApp Image 2026-03-31 at 11.13.27 PM.jpeg" alt="Enphase IQ garaje" style="width:100%;height:100%;object-fit:cover;transition:transform .4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
-                        <span style="position:absolute;top:.75rem;right:.75rem;background:var(--vhc-gold);color:var(--vhc-navy-deep);font-size:.7rem;font-weight:700;padding:.25rem .75rem;border-radius:2rem;text-transform:uppercase;letter-spacing:.05em;">Completado</span>
-                    </div>
-                    <div style="padding:1.25rem 1.5rem;">
-                        <div style="font-size:.75rem;color:var(--vhc-gold);text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:.25rem;">The Woodlands, TX &middot; Almacenamiento Enphase</div>
-                        <h3 style="font-family:var(--font-display);font-size:1.15rem;color:var(--vhc-navy-deep);margin:0 0 .5rem;">Enphase IQ 10T &#8212; Instalaci&#243;n en Garaje</h3>
-                        <p style="font-size:.875rem;color:var(--vhc-gray);margin:0 0 1rem;line-height:1.5;">3 bater&#237;as Enphase IQ 10T instaladas en repisa blanca de garaje. Acabado limpio y profesional.</p>
-                        <div style="display:flex;gap:1rem;">
-                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">Enphase IQ10T</div><div style="font-size:.7rem;color:var(--vhc-gray);">Modelo</div></div>
-                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">4</div><div style="font-size:.7rem;color:var(--vhc-gray);">Fotos</div></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 4: NeoVolta Casa Blanca -->
-                <div class="pf-card" data-cat="neovolta" onclick="pfOpenEs(4)" style="cursor:pointer;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);transition:transform .3s,box-shadow .3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 36px rgba(0,0,0,0.14)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 24px rgba(0,0,0,0.08)'">
-                    <div style="height:220px;overflow:hidden;position:relative;">
-                        <img src="brand/WhatsApp Image 2026-03-31 at 11.01.45 PM.jpeg" alt="NeoVolta casa blanca" style="width:100%;height:100%;object-fit:cover;transition:transform .4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
-                        <span style="position:absolute;top:.75rem;right:.75rem;background:var(--vhc-gold);color:var(--vhc-navy-deep);font-size:.7rem;font-weight:700;padding:.25rem .75rem;border-radius:2rem;text-transform:uppercase;letter-spacing:.05em;">Completado</span>
-                    </div>
-                    <div style="padding:1.25rem 1.5rem;">
-                        <div style="font-size:.75rem;color:var(--vhc-gold);text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:.25rem;">Houston, TX &middot; NeoVolta</div>
-                        <h3 style="font-family:var(--font-display);font-size:1.15rem;color:var(--vhc-navy-deep);margin:0 0 .5rem;">NeoVolta &#8212; Casa Revestimiento Blanco</h3>
-                        <p style="font-size:.875rem;color:var(--vhc-gray);margin:0 0 1rem;line-height:1.5;">Sistema de 3 bater&#237;as NeoVolta con inversor en revestimiento blanco. Combo solar + almacenamiento.</p>
-                        <div style="display:flex;gap:1rem;">
-                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">3&#215;NeoVolta</div><div style="font-size:.7rem;color:var(--vhc-gray);">Bater&#237;as</div></div>
-                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">2</div><div style="font-size:.7rem;color:var(--vhc-gray);">Fotos</div></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 5: NeoVolta Casa Ladrillo -->
-                <div class="pf-card" data-cat="neovolta" onclick="pfOpenEs(5)" style="cursor:pointer;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);transition:transform .3s,box-shadow .3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 36px rgba(0,0,0,0.14)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 24px rgba(0,0,0,0.08)'">
-                    <div style="height:220px;overflow:hidden;position:relative;">
-                        <img src="brand/WhatsApp Image 2026-03-31 at 11.04.53 PM.jpeg" alt="NeoVolta casa ladrillo" style="width:100%;height:100%;object-fit:cover;transition:transform .4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
-                        <span style="position:absolute;top:.75rem;right:.75rem;background:var(--vhc-gold);color:var(--vhc-navy-deep);font-size:.7rem;font-weight:700;padding:.25rem .75rem;border-radius:2rem;text-transform:uppercase;letter-spacing:.05em;">Completado</span>
-                    </div>
-                    <div style="padding:1.25rem 1.5rem;">
-                        <div style="font-size:.75rem;color:var(--vhc-gold);text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:.25rem;">Katy, TX &middot; NeoVolta</div>
-                        <h3 style="font-family:var(--font-display);font-size:1.15rem;color:var(--vhc-navy-deep);margin:0 0 .5rem;">NeoVolta &#8212; Casa de Ladrillo</h3>
-                        <p style="font-size:.875rem;color:var(--vhc-gray);margin:0 0 1rem;line-height:1.5;">Doble inversor NeoVolta con 4 unidades de almacenamiento en pared de ladrillo claro. Solar en techo.</p>
-                        <div style="display:flex;gap:1rem;">
-                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">2&#215;Inversor</div><div style="font-size:.7rem;color:var(--vhc-gray);">NeoVolta</div></div>
-                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">2</div><div style="font-size:.7rem;color:var(--vhc-gray);">Fotos</div></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 6: NeoVolta Casa Azul -->
-                <div class="pf-card" data-cat="neovolta" onclick="pfOpenEs(6)" style="cursor:pointer;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);transition:transform .3s,box-shadow .3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 36px rgba(0,0,0,0.14)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 24px rgba(0,0,0,0.08)'">
-                    <div style="height:220px;overflow:hidden;position:relative;">
-                        <img src="brand/WhatsApp Image 2026-03-31 at 11.08.06 PM.jpeg" alt="NeoVolta casa azul" style="width:100%;height:100%;object-fit:cover;transition:transform .4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
-                        <span style="position:absolute;top:.75rem;right:.75rem;background:var(--vhc-gold);color:var(--vhc-navy-deep);font-size:.7rem;font-weight:700;padding:.25rem .75rem;border-radius:2rem;text-transform:uppercase;letter-spacing:.05em;">Completado</span>
-                    </div>
-                    <div style="padding:1.25rem 1.5rem;">
-                        <div style="font-size:.75rem;color:var(--vhc-gold);text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:.25rem;">Sugar Land, TX &middot; NeoVolta</div>
-                        <h3 style="font-family:var(--font-display);font-size:1.15rem;color:var(--vhc-navy-deep);margin:0 0 .5rem;">NeoVolta &#8212; Casa Revestimiento Azul</h3>
-                        <p style="font-size:.875rem;color:var(--vhc-gray);margin:0 0 1rem;line-height:1.5;">Inversor NeoVolta con banco de 3 bater&#237;as en casa de revestimiento azul. Solar completo en techo.</p>
-                        <div style="display:flex;gap:1rem;">
-                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">3&#215;NeoVolta</div><div style="font-size:.7rem;color:var(--vhc-gray);">Bater&#237;as</div></div>
-                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">3</div><div style="font-size:.7rem;color:var(--vhc-gray);">Fotos</div></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 7: NeoVolta Powerhouse -->
-                <div class="pf-card" data-cat="neovolta" onclick="pfOpenEs(7)" style="cursor:pointer;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);transition:transform .3s,box-shadow .3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 36px rgba(0,0,0,0.14)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 24px rgba(0,0,0,0.08)'">
-                    <div style="height:220px;overflow:hidden;position:relative;">
-                        <img src="brand/WhatsApp Image 2026-03-31 at 11.05.55 PM.jpeg" alt="NeoVolta Powerhouse" style="width:100%;height:100%;object-fit:cover;transition:transform .4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
-                        <span style="position:absolute;top:.75rem;right:.75rem;background:var(--vhc-gold);color:var(--vhc-navy-deep);font-size:.7rem;font-weight:700;padding:.25rem .75rem;border-radius:2rem;text-transform:uppercase;letter-spacing:.05em;">Completado</span>
-                    </div>
-                    <div style="padding:1.25rem 1.5rem;">
-                        <div style="font-size:.75rem;color:var(--vhc-gold);text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:.25rem;">Houston, TX &middot; NeoVolta</div>
-                        <h3 style="font-family:var(--font-display);font-size:1.15rem;color:var(--vhc-navy-deep);margin:0 0 .5rem;">NeoVolta Powerhouse</h3>
-                        <p style="font-size:.875rem;color:var(--vhc-gray);margin:0 0 1rem;line-height:1.5;">4 bater&#237;as NeoVolta con doble inversor en exterior gris &#8212; el sistema m&#225;s grande de nuestro portafolio.</p>
-                        <div style="display:flex;gap:1rem;">
-                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">40 kWh</div><div style="font-size:.7rem;color:var(--vhc-gray);">Capacidad</div></div>
-                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">2</div><div style="font-size:.7rem;color:var(--vhc-gray);">Fotos</div></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 8: Tesla Casa Metal + EV -->
-                <div class="pf-card" data-cat="tesla" onclick="pfOpenEs(8)" style="cursor:pointer;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);transition:transform .3s,box-shadow .3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 36px rgba(0,0,0,0.14)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 24px rgba(0,0,0,0.08)'">
-                    <div style="height:220px;overflow:hidden;position:relative;">
-                        <img src="brand/tesla 3.jpg" alt="Tesla casa metal" style="width:100%;height:100%;object-fit:cover;transition:transform .4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
-                        <span style="position:absolute;top:.75rem;right:.75rem;background:var(--vhc-gold);color:var(--vhc-navy-deep);font-size:.7rem;font-weight:700;padding:.25rem .75rem;border-radius:2rem;text-transform:uppercase;letter-spacing:.05em;">Completado</span>
-                    </div>
-                    <div style="padding:1.25rem 1.5rem;">
-                        <div style="font-size:.75rem;color:var(--vhc-gold);text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:.25rem;">Austin, TX &middot; Tesla Powerwall</div>
-                        <h3 style="font-family:var(--font-display);font-size:1.15rem;color:var(--vhc-navy-deep);margin:0 0 .5rem;">Tesla Powerwall &#8212; Casa Metal + EV</h3>
-                        <p style="font-size:.875rem;color:var(--vhc-gray);margin:0 0 1rem;line-height:1.5;">Doble Tesla Powerwall con cargador EV Nivel 2 en casa de metal corrugado rojo. Instalaci&#243;n premium.</p>
-                        <div style="display:flex;gap:1rem;">
-                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">27 kWh</div><div style="font-size:.7rem;color:var(--vhc-gray);">Almacen.</div></div>
-                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">2</div><div style="font-size:.7rem;color:var(--vhc-gray);">Fotos</div></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 9: Tesla Casa Ladrillo -->
-                <div class="pf-card" data-cat="tesla" onclick="pfOpenEs(9)" style="cursor:pointer;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);transition:transform .3s,box-shadow .3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 36px rgba(0,0,0,0.14)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 24px rgba(0,0,0,0.08)'">
-                    <div style="height:220px;overflow:hidden;position:relative;">
-                        <img src="brand/WhatsApp Image 2026-03-31 at 11.12.11 PM.jpeg" alt="Tesla casa ladrillo" style="width:100%;height:100%;object-fit:cover;transition:transform .4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
-                        <span style="position:absolute;top:.75rem;right:.75rem;background:var(--vhc-gold);color:var(--vhc-navy-deep);font-size:.7rem;font-weight:700;padding:.25rem .75rem;border-radius:2rem;text-transform:uppercase;letter-spacing:.05em;">Completado</span>
-                    </div>
-                    <div style="padding:1.25rem 1.5rem;">
-                        <div style="font-size:.75rem;color:var(--vhc-gold);text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:.25rem;">Houston, TX &middot; Tesla Powerwall</div>
-                        <h3 style="font-family:var(--font-display);font-size:1.15rem;color:var(--vhc-navy-deep);margin:0 0 .5rem;">Tesla Powerwall &#8212; Casa de Ladrillo</h3>
-                        <p style="font-size:.875rem;color:var(--vhc-gray);margin:0 0 1rem;line-height:1.5;">Tesla Powerwall en exterior de ladrillo rojo, complementando sistema HVAC Carrier.</p>
-                        <div style="display:flex;gap:1rem;">
-                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">13.5 kWh</div><div style="font-size:.7rem;color:var(--vhc-gray);">Almacen.</div></div>
-                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">1</div><div style="font-size:.7rem;color:var(--vhc-gray);">Foto</div></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 10: Tesla Casa con Piscina -->
-                <div class="pf-card" data-cat="tesla" onclick="pfOpenEs(10)" style="cursor:pointer;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);transition:transform .3s,box-shadow .3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 36px rgba(0,0,0,0.14)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 24px rgba(0,0,0,0.08)'">
-                    <div style="height:220px;overflow:hidden;position:relative;">
-                        <img src="brand/WhatsApp Image 2026-03-31 at 11.11.21 PM.jpeg" alt="Tesla casa con piscina" style="width:100%;height:100%;object-fit:cover;transition:transform .4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
-                        <span style="position:absolute;top:.75rem;right:.75rem;background:var(--vhc-navy);color:#fff;font-size:.7rem;font-weight:700;padding:.25rem .75rem;border-radius:2rem;text-transform:uppercase;letter-spacing:.05em;">M&#225;s Fotos Pronto</span>
-                    </div>
-                    <div style="padding:1.25rem 1.5rem;">
-                        <div style="font-size:.75rem;color:var(--vhc-gold);text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:.25rem;">Houston, TX &middot; Tesla Powerwall</div>
-                        <h3 style="font-family:var(--font-display);font-size:1.15rem;color:var(--vhc-navy-deep);margin:0 0 .5rem;">Tesla Powerwall &#8212; Casa con Piscina</h3>
-                        <p style="font-size:.875rem;color:var(--vhc-gray);margin:0 0 1rem;line-height:1.5;">Tesla Powerwall en casa verde con acceso a piscina. Pr&#243;ximamente m&#225;s fotos de este proyecto.</p>
-                        <div style="display:flex;gap:1rem;">
-                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">13.5 kWh</div><div style="font-size:.7rem;color:var(--vhc-gray);">Almacen.</div></div>
-                            <div style="text-align:center;"><div style="font-weight:700;color:var(--vhc-navy-deep);font-size:1rem;">1</div><div style="font-size:.7rem;color:var(--vhc-gray);">Foto</div></div>
-                        </div>
-                    </div>
-                </div>
-
-            </div><!-- /pfGridEs -->
+            <div id="pfGridEs" class="pf-grid">
+                <!-- Proyectos se cargan vía JS -->
+            </div>
         </div>
     </section>
 
-    <!-- LIGHTBOX -->
-    <div id="pfLightboxEs" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:9999;flex-direction:column;align-items:center;justify-content:center;" onclick="pfLBCloseEs(event)">
-        <button onclick="document.getElementById('pfLightboxEs').style.display='none'" style="position:absolute;top:1.25rem;right:1.25rem;background:rgba(255,255,255,0.1);border:none;color:#fff;width:44px;height:44px;border-radius:50%;font-size:1.5rem;cursor:pointer;z-index:10;" aria-label="Cerrar">&times;</button>
-        <button onclick="pfLBNavEs(-1);event.stopPropagation();" style="position:absolute;left:1.25rem;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.12);border:none;color:#fff;width:48px;height:48px;border-radius:50%;font-size:1.5rem;cursor:pointer;z-index:10;" aria-label="Anterior">&#8592;</button>
-        <button onclick="pfLBNavEs(1);event.stopPropagation();" style="position:absolute;right:1.25rem;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.12);border:none;color:#fff;width:48px;height:48px;border-radius:50%;font-size:1.5rem;cursor:pointer;z-index:10;" aria-label="Siguiente">&#8594;</button>
-        <img id="pfLBImgEs" src="" alt="" style="max-width:90vw;max-height:80vh;object-fit:contain;border-radius:12px;box-shadow:0 8px 48px rgba(0,0,0,0.5);">
-        <div id="pfLBCaptionEs" style="color:#fff;margin-top:1rem;font-family:var(--font-display);font-size:1rem;text-align:center;max-width:600px;padding:0 1rem;"></div>
-        <div id="pfLBCounterEs" style="color:rgba(255,255,255,0.5);font-size:.8rem;margin-top:.4rem;"></div>
-    </div>
-
-    <script>
-    var pfProjectsEs = [
-        {name:'La Grande',loc:'Sugar Land, TX',photos:[
-            {src:'brand/WhatsApp Image 2026-03-31 at 10.41.51 PM.jpeg',cap:'Vista a\u00e9rea de instalaci\u00f3n de doble arreglo de 48 paneles'},
-            {src:'brand/WhatsApp Image 2026-03-31 at 10.42.06 PM.jpeg',cap:'Segundo \u00e1ngulo a\u00e9reo \u2014 La Grande'}
-        ]},
-        {name:'Solar Residencial Texas',loc:'\u00c1rea Houston, TX',photos:[
-            {src:'brand/WhatsApp Image 2026-03-31 at 11.06.44 PM.jpeg',cap:'Arreglo completo al atardecer dorado \u2014 techo gris'},
-            {src:'brand/WhatsApp Image 2026-03-31 at 11.05.28 PM.jpeg',cap:'Vista de cerca de fila de paneles en techo caf\u00e9'},
-            {src:'brand/WhatsApp Image 2026-03-31 at 10.46.20 PM.jpeg',cap:'Vista a\u00e9rea con dron \u2014 dise\u00f1o completo en techo'},
-            {src:'brand/WhatsApp Image 2026-03-31 at 10.48.33 PM.jpeg',cap:'Vista desde el suelo del arreglo de paneles'},
-            {src:'brand/WhatsApp Image 2026-03-31 at 10.48.53 PM.jpeg',cap:'Detalle del sistema de montaje de paneles'},
-            {src:'brand/WhatsApp Image 2026-03-31 at 11.09.52 PM.jpeg',cap:'Instalaci\u00f3n solar \u2014 vista trasera al atardecer'}
-        ]},
-        {name:'Enphase IQ \u2014 Casa de Ladrillo',loc:'Katy, TX',photos:[
-            {src:'brand/WhatsApp Image 2026-03-31 at 10.44.13 PM.jpeg',cap:'Bater\u00eda Enphase IQ 5P \u2014 montaje exterior en pared'},
-            {src:'brand/WhatsApp Image 2026-03-31 at 10.44.21 PM.jpeg',cap:'\u00c1ngulo lateral \u2014 instalaci\u00f3n Enphase con piscina visible'},
-            {src:'brand/WhatsApp Image 2026-03-31 at 11.02.16 PM.jpeg',cap:'Doble inversor Enphase en pared de ladrillo \u2014 vista completa'}
-        ]},
-        {name:'Enphase IQ 10T \u2014 Garaje',loc:'The Woodlands, TX',photos:[
-            {src:'brand/WhatsApp Image 2026-03-31 at 11.13.27 PM.jpeg',cap:'Tres unidades Enphase IQ 10T en repisa blanca de garaje'},
-            {src:'brand/WhatsApp Image 2026-03-31 at 11.13.35 PM.jpeg',cap:'Vista frontal Enphase IQ 10T \u2014 garaje'},
-            {src:'brand/WhatsApp Image 2026-03-31 at 11.13.47 PM.jpeg',cap:'Tr\u00edo de bater\u00edas Enphase IQ \u2014 perfil angular'},
-            {src:'brand/WhatsApp Image 2026-03-31 at 11.14.00 PM.jpeg',cap:'Instalaci\u00f3n completa en garaje \u2014 inversor IQ8 visible'}
-        ]},
-        {name:'NeoVolta \u2014 Casa Revestimiento Blanco',loc:'Houston, TX',photos:[
-            {src:'brand/WhatsApp Image 2026-03-31 at 11.01.45 PM.jpeg',cap:'3x bater\u00edas NeoVolta + inversor + combinador solar Enphase \u2014 revestimiento blanco'},
-            {src:'brand/WhatsApp Image 2026-03-31 at 10.50.36 PM.jpeg',cap:'Vista del techo \u2014 casa revestimiento blanco'}
-        ]},
-        {name:'NeoVolta \u2014 Casa de Ladrillo',loc:'Katy, TX',photos:[
-            {src:'brand/WhatsApp Image 2026-03-31 at 11.04.53 PM.jpeg',cap:'Doble inversor NeoVolta + 4 unidades en pared de ladrillo claro'},
-            {src:'brand/WhatsApp Image 2026-03-31 at 10.42.35 PM.jpeg',cap:'Vista del techo solar \u2014 casa ladrillo'}
-        ]},
-        {name:'NeoVolta \u2014 Casa Revestimiento Azul',loc:'Sugar Land, TX',photos:[
-            {src:'brand/WhatsApp Image 2026-03-31 at 11.08.06 PM.jpeg',cap:'Inversor NeoVolta + banco de 3 bater\u00edas en revestimiento azul'},
-            {src:'brand/WhatsApp Image 2026-03-31 at 11.05.37 PM.jpeg',cap:'Fila de bater\u00edas NeoVolta \u2014 vista frontal, casa azul'},
-            {src:'brand/WhatsApp Image 2026-03-31 at 10.56.29 PM.jpeg',cap:'Vista a\u00e9rea solar \u2014 techo casa revestimiento azul'}
-        ]},
-        {name:'NeoVolta Powerhouse',loc:'Houston, TX',photos:[
-            {src:'brand/WhatsApp Image 2026-03-31 at 11.05.55 PM.jpeg',cap:'4x bater\u00edas NeoVolta + doble inversor \u2014 exterior gris'},
-            {src:'brand/WhatsApp Image 2026-03-31 at 11.09.21 PM.jpeg',cap:'Sistema Powerhouse completo \u2014 \u00e1ngulo trasero'}
-        ]},
-        {name:'Tesla Powerwall \u2014 Casa Metal + EV',loc:'Austin, TX',photos:[
-            {src:'brand/tesla 3.jpg',cap:'3x Tesla Powerwall + cargador EV Nivel 2 \u2014 metal corrugado rojo'},
-            {src:'brand/tesla2.jpg',cap:'Doble Tesla Powerwall + cargador EV, trabajo de conduit'},
-            {src:'brand/WhatsApp Image 2026-03-31 at 11.12.55 PM.jpeg',cap:'Tesla Powerwall (logo T) + cargador EV + postes de seguridad \u2014 completado'},
-            {src:'brand/tesla 5.jpg',cap:'Tesla Gateway + desconectadores Eaton \u2014 detalle de cableado'},
-            {src:'brand/testa project1.jpg',cap:'Instalaci\u00f3n de conduit el\u00e9ctrico \u2014 pared lateral cerca de HVAC'},
-            {src:'brand/tesla 4.jpg',cap:'Vista a\u00e9rea del vecindario \u2014 paneles solares en casa de metal rojo'}
-        ]},
-        {name:'Tesla Powerwall \u2014 Casa de Ladrillo',loc:'Houston, TX',photos:[
-            {src:'brand/WhatsApp Image 2026-03-31 at 11.12.11 PM.jpeg',cap:'Tesla Powerwall en exterior de ladrillo rojo + HVAC Carrier'}
-        ]},
-        {name:'Tesla Powerwall \u2014 Casa con Piscina',loc:'Houston, TX',photos:[
-            {src:'brand/WhatsApp Image 2026-03-31 at 11.11.21 PM.jpeg',cap:'Instalaci\u00f3n Tesla Powerwall \u2014 casa verde con piscina'}
-        ]}
-    ];
-    var pfLBCurEs=0,pfLBProjectEs=0;
-    function pfOpenEs(idx){pfLBProjectEs=idx;pfLBCurEs=0;pfLBShowEs();document.getElementById('pfLightboxEs').style.display='flex';}
-    function pfLBShowEs(){var p=pfProjectsEs[pfLBProjectEs];var ph=p.photos[pfLBCurEs];document.getElementById('pfLBImgEs').src=ph.src;document.getElementById('pfLBImgEs').alt=ph.cap;document.getElementById('pfLBCaptionEs').textContent=p.name+' \u00b7 '+p.loc;document.getElementById('pfLBCounterEs').textContent=(pfLBCurEs+1)+' / '+p.photos.length;}
-    function pfLBNavEs(d){var p=pfProjectsEs[pfLBProjectEs];pfLBCurEs=(pfLBCurEs+d+p.photos.length)%p.photos.length;pfLBShowEs();}
-    function pfLBCloseEs(e){if(e.target===document.getElementById('pfLightboxEs'))document.getElementById('pfLightboxEs').style.display='none';}
-    document.addEventListener('keydown',function(e){var lb=document.getElementById('pfLightboxEs');if(lb&&lb.style.display==='flex'){if(e.key==='ArrowRight')pfLBNavEs(1);if(e.key==='ArrowLeft')pfLBNavEs(-1);if(e.key==='Escape')lb.style.display='none';}});
-    function pfFilterEs(btn,cat){
-        document.querySelectorAll('.pf-tab').forEach(function(b){b.style.background='transparent';b.style.color='var(--vhc-navy)';});
-        btn.style.background='var(--vhc-navy)';btn.style.color='#fff';
-        document.querySelectorAll('.pf-card').forEach(function(c){c.style.display=(cat==='all'||c.dataset.cat===cat)?'block':'none';});
-    }
-    </script>
-
     <!-- Footer -->
-
     <footer>
         <div class="container">
             <div class="footer-grid">
-                <div>
-                    <a href="index-es.html" class="footer-logo"><img src="brand/logo-white.png" alt="VHC Company Services. nstaladores Solares en Texas" loading="lazy"></a>
-                    <p style="max-width: 300px; line-height: 1.6;">Instaladores solares con licencia en Texas especializados en sistemas residenciales, respaldo con batería y soluciones sostenibles.</p>
-                    <div class="social-icons">
-                        <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                    </div>
+                <div class="footer-logo">
+                    <img src="brand/logo-white.png" alt="VHC">
+                    <p>Ingeniería solar y eléctrica de alta calidad en Texas.</p>
                 </div>
-                
                 <div class="footer-links">
-                    <h4>Compañía</h4>
+                    <h4>Enlaces</h4>
                     <ul>
                         <li><a href="index-es.html#about">Nosotros</a></li>
-                        <li><a href="portfolio-es.html">Portafolio Solar</a></li>
-                        <li><a href="https://g.page/r/REPLACE-WITH-GOOGLE-REVIEW-LINK/review" target="_blank" rel="noopener">D&eacute;janos una Rese&ntilde;a &#x2605;</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-links">
-                    <h4>Contacto</h4>
-                    <ul>
-                        <li><a href="mailto:sales@vhccompanytx.com">sales@vhccompanytx.com</a></li>
-                        <li><a href="tel:+13464937541">+1 (346) 493-7541</a></li>
-                        <li>Texas, EEUU</li>
+                        <li><a href="portfolio-es.html">Portafolio</a></li>
                     </ul>
                 </div>
             </div>
-            
             <div class="footer-bottom">
-                &copy; 2026 VHC Company Services. Licencia Solar Texas #[INSERTAR]. Todos los derechos reservados.
+                &copy; 2026 VHC Company Services. Todos los derechos reservados.
             </div>
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script>
-        // Force scroll to top on refresh
-        if (history.scrollRestoration) {
-            history.scrollRestoration = 'manual';
-        }
-        window.scrollTo(0, 0);
-
+        // Navbar scroll
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
-            if(window.scrollY > 50) nav.classList.add('scrolled');
+            if (window.scrollY > 50) nav.classList.add('scrolled');
             else nav.classList.remove('scrolled');
         });
 
-        // Hamburger Menu
-        const hamburgerBtn = document.getElementById('hamburger-btn');
+        // Mobile menu
+        const hamburger = document.getElementById('hamburger-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-        if (hamburgerBtn && mobileMenu) {
-            hamburgerBtn.addEventListener('click', () => {
-                hamburgerBtn.classList.toggle('open');
-                mobileMenu.classList.toggle('open');
-                hamburgerBtn.setAttribute('aria-expanded', mobileMenu.classList.contains('open'));
-            });
-            mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    hamburgerBtn.classList.remove('open');
-                    mobileMenu.classList.remove('open');
-                    hamburgerBtn.setAttribute('aria-expanded', 'false');
-                });
-            });
-            document.addEventListener('click', (e) => {
-                if (!hamburgerBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
-                    hamburgerBtn.classList.remove('open');
-                    mobileMenu.classList.remove('open');
-                }
-            });
-        }
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            mobileMenu.classList.toggle('open');
+        });
 
-        // Chatbot Logic
+        // Chatbot (Mock)
         const chatToggle = document.getElementById('chatbot-toggle');
-        const chatClose = document.getElementById('chat-close');
         const chatWindow = document.getElementById('chat-window');
-        const chatInput = document.getElementById('chat-input');
-        const chatSend = document.getElementById('chat-send');
-        const chatMessages = document.getElementById('chat-messages');
-        const chatbotSessionKey = 'vhc-chat-session-es';
-        const chatbotSessionId = sessionStorage.getItem(chatbotSessionKey) || `vhc_${Math.random().toString(36).slice(2, 10)}`;
-        const chatbotApiBase = window.VHC_CHATBOT_API_BASE || ((window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-            ? 'http://localhost:3000'
-            : 'https://vhccompanytx.com/chatbot-api');
-        sessionStorage.setItem(chatbotSessionKey, chatbotSessionId);
+        const chatClose = document.getElementById('chat-close');
+        chatToggle.addEventListener('click', () => chatWindow.classList.toggle('open'));
+        chatClose.addEventListener('click', () => chatWindow.classList.remove('open'));
 
-        function toggleChat() {
-            chatWindow.classList.toggle('open');
-            if (chatWindow.classList.contains('open')) {
-                chatInput.focus();
-            }
-        }
+        // Portfolio Logic
+        const projects = [
+            { id: 0, cat: 'solar', title: 'The Grande', loc: 'Sugar Land, TX', size: '18.2 kW', img: 'brand/WhatsApp Image 2026-03-31 at 10.41.51 PM.jpeg' },
+            { id: 1, cat: 'solar', title: 'Residencial Texas', loc: 'Houston, TX', size: '12.0 kW', img: 'brand/WhatsApp Image 2026-03-31 at 11.06.44 PM.jpeg' }
+        ];
 
-        if (chatToggle) chatToggle.addEventListener('click', toggleChat);
-        if (chatClose) chatClose.addEventListener('click', toggleChat);
-
-        function addMessage(text, isBot = false) {
-            const msgDiv = document.createElement('div');
-            msgDiv.className = `msg msg-${isBot ? 'bot' : 'user'}`;
-            msgDiv.textContent = text;
-            chatMessages.appendChild(msgDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-            return msgDiv;
-        }
-
-        async function handleChat() {
-            const text = chatInput.value.trim();
-            if (!text) return;
-
-            addMessage(text, false);
-            chatInput.value = '';
-            chatInput.disabled = true;
-            chatSend.disabled = true;
-
-            const thinkingMsg = addMessage('El asistente esta pensando...', true);
-
-            try {
-                const response = await fetch(`${chatbotApiBase}/chat`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        message: text,
-                        sessionId: chatbotSessionId,
-                        lang: 'es'
-                    })
-                });
-
-                const data = await response.json();
-                thinkingMsg.remove();
-
-                if (!response.ok || data.error) {
-                    throw new Error(data.error || 'No fue posible conectar con el asistente.');
-                }
-
-                addMessage(data.reply, true);
-            } catch (err) {
-                console.error("Chat error:", err);
-                thinkingMsg.remove();
-                addMessage("No puedo conectarme con el asistente en este momento. Intenta de nuevo en unos minutos o llamanos al (346) 493-7541.", true);
-            } finally {
-                chatInput.disabled = false;
-                chatSend.disabled = false;
-                chatInput.focus();
-            }
-        }
-
-        if (chatSend) chatSend.addEventListener('click', handleChat);
-        if (chatInput) {
-            chatInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') handleChat();
+        function renderProjects(filter = 'all') {
+            const grid = document.getElementById('pfGridEs');
+            grid.innerHTML = '';
+            projects.filter(p => filter === 'all' || p.cat === filter).forEach(p => {
+                grid.innerHTML += `
+                    <div class="pf-card" data-cat="${p.cat}">
+                        <img src="${p.img}" alt="${p.title}" loading="lazy" style="width:100%;height:220px;object-fit:cover;">
+                        <div style="padding:1.5rem;">
+                            <div style="color:var(--vhc-gold);font-size:.75rem;font-weight:700;">${p.loc}</div>
+                            <h3>${p.title}</h3>
+                            <div style="font-weight:700;">${p.size}</div>
+                        </div>
+                    </div>
+                `;
             });
         }
+
+        function pfFilterEs(btn, filter) {
+            document.querySelectorAll('.pf-tab').forEach(b => {
+                b.classList.remove('active');
+                b.style.background = 'transparent';
+                b.style.color = 'var(--vhc-navy)';
+            });
+            btn.classList.add('active');
+            btn.style.background = 'var(--vhc-navy)';
+            btn.style.color = '#fff';
+            renderProjects(filter);
+        }
+
+        renderProjects();
     </script>
 </body>
 </html>
-

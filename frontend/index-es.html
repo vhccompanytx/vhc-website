@@ -24,24 +24,23 @@
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Reduce Tu Factura Eléctrica Hasta un 80% | VHC Company Services">
+    <meta property="og:title" content="Maximiza la Eficiencia Energética de Tu Hogar | VHC Company Services">
     <meta property="og:description"
         content="Instaladores solares con licencia en Texas. Evaluación gratis, gestionamos permisos y garantía de 25 años.">
-    <meta property="og:image" content="https://vhccompanytx.com/hero.jpg">
+    <meta property="og:image" content="https://vhccompanytx.com/brand/og_image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt"
-        content="Instalación de paneles solares residenciales por VHC Company Services">
-    <meta property="og:url" content="https://vhccompanytx.com/">
+    <meta property="og:image:alt" content="VHC Company Services - Ingeniería Solar Premium">
+    <meta property="og:url" content="https://vhccompanytx.com/index-es.html">
     <meta property="og:site_name" content="VHC Company Services">
     <meta property="og:locale" content="es_US">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Reduce Tu Factura Eléctrica Hasta un 80% | VHC Company Services">
+    <meta name="twitter:title" content="Maximiza la Eficiencia Energética de Tu Hogar | VHC Company Services">
     <meta name="twitter:description"
         content="Instaladores solares con licencia en Texas. Evaluación gratis, gestionamos permisos y garantía de 25 años.">
-    <meta name="twitter:image" content="https://vhccompanytx.com/hero.jpg">
+    <meta name="twitter:image" content="https://vhccompanytx.com/brand/og_image.png">
 
     <!-- Schema.org: LocalBusiness + ElectricalContractor -->
     <script type="application/ld+json">
@@ -139,7 +138,27 @@
     .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-    .mobile-menu { display: none; position: fixed; top: 72px; left: 0; right: 0; background: rgba(11, 19, 50, 0.97); backdrop-filter: blur(24px); padding: 1.5rem; z-index: 999; flex-direction: column; gap: 1rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .mobile-menu { 
+        display: none; 
+        position: fixed; 
+        top: 70px; /* Aligned with navbar height to eliminate gap */
+        left: 0; 
+        right: 0; 
+        background: rgba(11, 19, 50, 0.85); /* Matched navbar glassmorphism */
+        backdrop-filter: blur(32px);
+        -webkit-backdrop-filter: blur(32px);
+        padding: 1.5rem; 
+        z-index: 999; 
+        flex-direction: column; 
+        gap: 1rem; 
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08); 
+        transition: top var(--duration) var(--ease-out), background var(--duration);
+    }
+    /* Eliminate gap when navbar is in scrolled state */
+    nav.scrolled + .mobile-menu {
+        top: 54px;
+        background: rgba(11, 19, 50, 0.75);
+    }
     .mobile-menu.open { display: flex; }
     .mobile-menu a { color: rgba(255,255,255,0.85); font-family: var(--font-display); font-size: var(--text-base); font-weight: var(--fw-medium); padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); transition: color 0.2s; }
     .mobile-menu a:last-child { border-bottom: none; }
@@ -371,7 +390,7 @@
         <div class="container hero-content">
             <div class="vhc-label" style="color: var(--vhc-gold-light); margin-bottom: 2rem;">VHC COMPANY SERVICES · SOLAR & ELÉCTRICO EN TEXAS</div>
             <h1 class="hero-title">Un Solo Equipo. <span>Cada Necesidad Eléctrica de Tu Casa.</span></h1>
-            <p class="hero-desc">Desde paneles solares y baterías de respaldo hasta cargadores EV y trabajos eléctricos residenciales. Nuestro equipo licenciado en Texas maneja todo de inicio a fin. La mayoría de propietarios reduce su factura entre 60 y 80%.</p>
+            <p class="hero-desc">Desde paneles solares y baterías de respaldo hasta cargadores EV y trabajos eléctricos residenciales. Nuestro equipo licenciado en Texas maneja todo de inicio a fin para tu independencia energética.</p>
             <div class="hero-buttons">
                 <a href="#contact" class="btn-gold">Solicitar Evaluación de Sitio Gratis</a>
                 <a href="portfolio-es.html" class="btn-ghost-dark">Ver Nuestro Trabajo</a>
@@ -1462,13 +1481,25 @@
     <!-- ===================== RECENT WORK CAROUSEL (ES) ===================== -->
     <style>
         .vhc-slide {
-            aspect-ratio: 4 / 3;
+            aspect-ratio: 1 / 1; /* Mobile: Matches the visual weight of service cards */
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(0,0,0,0.05);
+            background: var(--vhc-surface);
         }
         @media (min-width: 768px) {
             .vhc-slide {
                 aspect-ratio: auto;
                 height: 640px !important; /* Cap vertical a 640px para impact */
             }
+        }
+        /* Premium Fade-In Transition */
+        .vhc-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.8s ease-in-out;
         }
     </style>
     <section id="proyectos-recientes" class="section-padding" style="background: var(--vhc-light); overflow:hidden;">
@@ -1482,64 +1513,64 @@
             <div class="vhc-carousel-wrapper" style="position:relative;overflow:hidden;border-radius:20px;max-width:1140px;margin:0 auto;box-shadow: 0 15px 35px rgba(0,0,0,0.08);">
                 <div class="vhc-carousel" id="vhcCarouselEs" style="display:flex;will-change:transform;">
                     <div class="vhc-slide" style="min-width:100%;position:relative;overflow:hidden;flex-shrink:0;">
-                        <img src="brand/WhatsApp Image 2026-03-31 at 10.41.51 PM.jpeg" alt="Instalación solar residencial grande - vista aérea" style="width:100%;height:100% !important;object-fit:cover !important;display:block;">
+                        <img src="brand/WhatsApp Image 2026-03-31 at 10.41.51 PM.jpeg" alt="Gran instalación solar residencial en Sugar Land" loading="lazy" style="width:100%;height:100% !important;object-fit:cover !important;display:block;">
                         <div style="position:absolute;bottom:0;left:0;right:0;padding:1.5rem 2rem;background:linear-gradient(transparent,rgba(10,18,41,0.85));color:#fff;">
                             <div style="font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--vhc-gold);font-weight:600;margin-bottom:.25rem;">Sugar Land, TX</div>
                             <div style="font-family:var(--font-display);font-size:1.25rem;font-weight:700;">The Grande — Sistema de 48 Paneles, 18.2 kW</div>
                         </div>
                     </div>
                     <div class="vhc-slide" style="min-width:100%;position:relative;overflow:hidden;flex-shrink:0;">
-                        <img src="brand/WhatsApp Image 2026-03-31 at 10.46.20 PM.jpeg" alt="Paneles solares en techo residencial vista aérea" style="width:100%;height:100% !important;object-fit:cover !important;display:block;">
+                        <img src="brand/WhatsApp Image 2026-03-31 at 10.46.20 PM.jpeg" alt="Paneles solares en techo residencial vista aérea" loading="lazy" style="width:100%;height:100% !important;object-fit:cover !important;display:block;">
                         <div style="position:absolute;bottom:0;left:0;right:0;padding:1.5rem 2rem;background:linear-gradient(transparent,rgba(10,18,41,0.85));color:#fff;">
                             <div style="font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--vhc-gold);font-weight:600;margin-bottom:.25rem;">Katy, TX</div>
                             <div style="font-family:var(--font-display);font-size:1.25rem;font-weight:700;">Techo Completo — 22 Paneles + Enphase</div>
                         </div>
                     </div>
                     <div class="vhc-slide" style="min-width:100%;position:relative;overflow:hidden;flex-shrink:0;">
-                        <img src="brand/WhatsApp Image 2026-03-31 at 10.44.13 PM.jpeg" alt="Instalación de batería Enphase" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
+                        <img src="brand/WhatsApp Image 2026-03-31 at 10.44.13 PM.jpeg" alt="Instalación de batería Enphase" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
                         <div style="position:absolute;bottom:0;left:0;right:0;padding:1.5rem 2rem;background:linear-gradient(transparent,rgba(10,18,41,0.85));color:#fff;">
                             <div style="font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--vhc-gold);font-weight:600;margin-bottom:.25rem;">Houston, TX</div>
                             <div style="font-family:var(--font-display);font-size:1.25rem;font-weight:700;">Enphase IQ Battery 5P — Sistema de Respaldo x3</div>
                         </div>
                     </div>
                     <div class="vhc-slide" style="min-width:100%;position:relative;overflow:hidden;flex-shrink:0;">
-                        <img src="brand/WhatsApp Image 2026-03-31 at 11.02.16 PM.jpeg" alt="Paneles solares en techo con luz dorada" style="width:100%;height:100% !important;object-fit:cover !important;display:block;">
+                        <img src="brand/WhatsApp Image 2026-03-31 at 11.02.16 PM.jpeg" alt="Paneles solares en techo con luz dorada" loading="lazy" style="width:100%;height:100% !important;object-fit:cover !important;display:block;">
                         <div style="position:absolute;bottom:0;left:0;right:0;padding:1.5rem 2rem;background:linear-gradient(transparent,rgba(10,18,41,0.85));color:#fff;">
                             <div style="font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--vhc-gold);font-weight:600;margin-bottom:.25rem;">Austin, TX</div>
                             <div style="font-family:var(--font-display);font-size:1.25rem;font-weight:700;">Solar Completo — 20 Paneles Negros, 8 kW</div>
                         </div>
                     </div>
                     <div class="vhc-slide" style="min-width:100%;position:relative;overflow:hidden;flex-shrink:0;">
-                        <img src="brand/WhatsApp Image 2026-03-31 at 11.01.45 PM.jpeg" alt="Sistema NeoVolta de almacenamiento" style="width:100%;height:100% !important;object-fit:cover !important;display:block;">
+                        <img src="brand/WhatsApp Image 2026-03-31 at 11.01.45 PM.jpeg" alt="Sistema NeoVolta de almacenamiento" loading="lazy" style="width:100%;height:100% !important;object-fit:cover !important;display:block;">
                         <div style="position:absolute;bottom:0;left:0;right:0;padding:1.5rem 2rem;background:linear-gradient(transparent,rgba(10,18,41,0.85));color:#fff;">
                             <div style="font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--vhc-gold);font-weight:600;margin-bottom:.25rem;">Houston, TX</div>
                             <div style="font-family:var(--font-display);font-size:1.25rem;font-weight:700;">Baterías NeoVolta — Sistema de 40 kWh</div>
                         </div>
                     </div>
                     <div class="vhc-slide" style="min-width:100%;position:relative;overflow:hidden;flex-shrink:0;">
-                        <img src="brand/WhatsApp Image 2026-03-31 at 11.11.42 PM.jpeg" alt="Tesla Powerwall y cargador EV instalados" style="width:100%;height:100% !important;object-fit:cover !important;display:block;">
+                        <img src="brand/WhatsApp Image 2026-03-31 at 11.11.42 PM.jpeg" alt="Tesla Powerwall y cargador EV instalados" loading="lazy" style="width:100%;height:100% !important;object-fit:cover !important;display:block;">
                         <div style="position:absolute;bottom:0;left:0;right:0;padding:1.5rem 2rem;background:linear-gradient(transparent,rgba(10,18,41,0.85));color:#fff;">
                             <div style="font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--vhc-gold);font-weight:600;margin-bottom:.25rem;">Austin, TX</div>
                             <div style="font-family:var(--font-display);font-size:1.25rem;font-weight:700;">Tesla Powerwall 3 + Cargador EV — 2×13.5 kWh</div>
                         </div>
                     </div>
                     <div class="vhc-slide" style="min-width:100%;position:relative;overflow:hidden;flex-shrink:0;">
-                        <img src="brand/WhatsApp Image 2026-03-31 at 11.13.35 PM.jpeg" alt="Baterías Enphase IQ en garaje" style="width:100%;height:100% !important;object-fit:cover !important;display:block;">
+                        <img src="brand/WhatsApp Image 2026-03-31 at 11.13.35 PM.jpeg" alt="Baterías Enphase IQ en garaje" loading="lazy" style="width:100%;height:100% !important;object-fit:cover !important;display:block;">
                         <div style="position:absolute;bottom:0;left:0;right:0;padding:1.5rem 2rem;background:linear-gradient(transparent,rgba(10,18,41,0.85));color:#fff;">
                             <div style="font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--vhc-gold);font-weight:600;margin-bottom:.25rem;">The Woodlands, TX</div>
                             <div style="font-family:var(--font-display);font-size:1.25rem;font-weight:700;">Enphase IQ 10T — Instalación en Garaje</div>
                         </div>
                     </div>
                     <div class="vhc-slide" style="min-width:100%;position:relative;overflow:hidden;flex-shrink:0;">
-                        <img src="brand/WhatsApp Image 2026-03-31 at 11.09.52 PM.jpeg" alt="Día de instalación solar en techo" style="width:100%;height:100% !important;object-fit:cover !important;display:block;">
+                        <img src="brand/WhatsApp Image 2026-03-31 at 11.09.52 PM.jpeg" alt="Día de instalación solar en techo" loading="lazy" style="width:100%;height:100% !important;object-fit:cover !important;display:block;">
                         <div style="position:absolute;bottom:0;left:0;right:0;padding:1.5rem 2rem;background:linear-gradient(transparent,rgba(10,18,41,0.85));color:#fff;">
                             <div style="font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--vhc-gold);font-weight:600;margin-bottom:.25rem;">Pearland, TX</div>
                             <div style="font-family:var(--font-display);font-size:1.25rem;font-weight:700;">Solar Residencial — Día de Instalación</div>
                         </div>
                     </div>
                 </div>
-                <button onclick="vhcSlideEs(-1)" aria-label="Anterior" style="position:absolute;top:50%;left:1rem;transform:translateY(-50%);background:rgba(10,18,41,0.7);border:none;color:#fff;width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:1.25rem;display:flex;align-items:center;justify-content:center;z-index:10;backdrop-filter:blur(8px);transition:background .2s;" onmouseover="this.style.background='rgba(226,187,87,0.9)'" onmouseout="this.style.background='rgba(10,18,41,0.7)'">&#8592;</button>
-                <button onclick="vhcSlideEs(1)" aria-label="Siguiente" style="position:absolute;top:50%;right:1rem;transform:translateY(-50%);background:rgba(10,18,41,0.7);border:none;color:#fff;width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:1.25rem;display:flex;align-items:center;justify-content:center;z-index:10;backdrop-filter:blur(8px);transition:background .2s;" onmouseover="this.style.background='rgba(226,187,87,0.9)'" onmouseout="this.style.background='rgba(10,18,41,0.7)'">&#8594;</button>
+                <button onclick="vhcSlideEs(-1)" aria-label="Proyecto Anterior" style="position:absolute;top:50%;left:1rem;transform:translateY(-50%);background:rgba(10,18,41,0.7);border:none;color:#fff;width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:1.25rem;display:flex;align-items:center;justify-content:center;z-index:10;backdrop-filter:blur(8px);transition:background .2s;" onmouseover="this.style.background='rgba(226,187,87,0.9)'" onmouseout="this.style.background='rgba(10,18,41,0.7)'">&#8592;</button>
+                <button onclick="vhcSlideEs(1)" aria-label="Siguiente Proyecto" style="position:absolute;top:50%;right:1rem;transform:translateY(-50%);background:rgba(10,18,41,0.7);border:none;color:#fff;width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:1.25rem;display:flex;align-items:center;justify-content:center;z-index:10;backdrop-filter:blur(8px);transition:background .2s;" onmouseover="this.style.background='rgba(226,187,87,0.9)'" onmouseout="this.style.background='rgba(10,18,41,0.7)'">&#8594;</button>
             </div>
             <div id="vhcDotsEs" style="display:flex;justify-content:center;gap:.5rem;margin-top:1.25rem;"></div>
             <div style="text-align:center;margin-top:2rem;">

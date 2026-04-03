@@ -8,6 +8,26 @@
     <meta name="description"
         content="Explore our recent residential solar installations across Texas and the United States. High-efficiency engineering and quality workmanship by VHC Company Services.">
 
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="VHC Solar Installation Portfolio | Texas & USA">
+    <meta property="og:description"
+        content="View our high-performance residential solar and battery backup installations. Engineering excellence by VHC Company Services.">
+    <meta property="og:image" content="https://vhccompanytx.com/brand/og_image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="VHC Company Services - Premium Solar Installations">
+    <meta property="og:url" content="https://vhccompanytx.com/portfolio.html">
+    <meta property="og:site_name" content="VHC Company Services">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="VHC Solar Installation Portfolio | Texas & USA">
+    <meta name="twitter:description"
+        content="Explore our recent residential solar installations across Texas and the United States.">
+    <meta name="twitter:image" content="https://vhccompanytx.com/brand/og_image.png">
+
     <!-- Canonical -->
     <link rel="canonical" href="https://vhccompanytx.com/portfolio.html">
 
@@ -49,16 +69,37 @@
             right: 0;
             z-index: 1000;
             padding: var(--space-4) 0;
-            background: rgba(11, 19, 50, 0.95);
-            backdrop-filter: blur(24px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: var(--shadow-glass);
-            transition: all var(--duration) var(--ease-out);
         }
 
         nav.scrolled {
             padding: var(--space-2) 0;
         }
+    </style>
+
+    <!-- Schema.org: Solar Installer Portfolio -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SolarBusiness",
+      "name": "VHC Company Services",
+      "description": "Texas-licensed residential solar portfolio featuring NeoVolta, Tesla Powerwall, and Enphase storage installations.",
+      "url": "https://vhccompanytx.com/portfolio.html",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "TX",
+        "addressCountry": "US"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Solar Installation Gallery",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Residential Solar Panels" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Battery Backup Storage" } }
+        ]
+      }
+    }
+    </script>
+</head>
 
         .nav-inner {
             display: flex;
@@ -138,16 +179,24 @@
         .mobile-menu {
             display: none;
             position: fixed;
-            top: 72px;
+            top: 70px; /* Aligned with navbar height to eliminate gap */
             left: 0;
             right: 0;
-            background: rgba(11, 19, 50, 0.97);
-            backdrop-filter: blur(24px);
+            background: rgba(11, 19, 50, 0.85); /* Matched navbar glassmorphism */
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
             padding: 1.5rem;
             z-index: 999;
             flex-direction: column;
             gap: 1rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            transition: top var(--duration) var(--ease-out), background var(--duration);
+        }
+
+        /* Eliminate gap when navbar is in scrolled state */
+        nav.scrolled + .mobile-menu {
+            top: 54px;
+            background: rgba(11, 19, 50, 0.75);
         }
 
         .mobile-menu.open {
@@ -723,8 +772,8 @@
     <section class="section-padding" style="background: var(--vhc-surface); position:relative;">
         <div class="container" style="position:relative;z-index:2;">
 
-            <!-- Filter Tabs -->
-            <div style="display:flex;flex-wrap:wrap;gap:.625rem;justify-content:center;margin-bottom:2.5rem;" role="tablist" aria-label="Project filters">
+            <!-- Filter Tabs (Sticky for better UX) -->
+            <div style="position:sticky;top:66px;z-index:90;background:var(--vhc-surface);padding:1rem 0 2rem;display:flex;flex-wrap:wrap;gap:.625rem;justify-content:center;margin-top:-1rem;" role="tablist" aria-label="Project filters">
                 <button class="pf-tab active" data-filter="all" onclick="pfFilter(this,'all')" style="padding:.5rem 1.25rem;border-radius:2rem;border:2px solid var(--vhc-navy);background:var(--vhc-navy);color:#fff;font-family:var(--font-display);font-weight:600;font-size:.85rem;cursor:pointer;transition:all .25s;">All Projects</button>
                 <button class="pf-tab" data-filter="solar" onclick="pfFilter(this,'solar')" style="padding:.5rem 1.25rem;border-radius:2rem;border:2px solid var(--vhc-navy);background:transparent;color:var(--vhc-navy);font-family:var(--font-display);font-weight:600;font-size:.85rem;cursor:pointer;transition:all .25s;">☀️ Full Roof Solar</button>
                 <button class="pf-tab" data-filter="neovolta" onclick="pfFilter(this,'neovolta')" style="padding:.5rem 1.25rem;border-radius:2rem;border:2px solid var(--vhc-navy);background:transparent;color:var(--vhc-navy);font-family:var(--font-display);font-weight:600;font-size:.85rem;cursor:pointer;transition:all .25s;">🔋 NeoVolta</button>
@@ -738,7 +787,7 @@
                 <!-- 0: The Grande -->
                 <div class="pf-card" data-cat="solar" onclick="pfOpen(0)" style="cursor:pointer;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);transition:transform .3s,box-shadow .3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 36px rgba(0,0,0,0.14)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 24px rgba(0,0,0,0.08)'">
                     <div style="height:220px;overflow:hidden;position:relative;">
-                        <img src="brand/WhatsApp Image 2026-03-31 at 10.41.51 PM.jpeg" alt="The Grande" style="width:100%;height:100%;object-fit:cover;transition:transform .4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
+                        <img src="brand/WhatsApp Image 2026-03-31 at 10.41.51 PM.jpeg" alt="The Grande" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform .4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''">
                         <span style="position:absolute;top:.75rem;right:.75rem;background:var(--vhc-gold);color:var(--vhc-navy-deep);font-size:.7rem;font-weight:700;padding:.25rem .75rem;border-radius:2rem;text-transform:uppercase;letter-spacing:.05em;">Completed</span>
                     </div>
                     <div style="padding:1.25rem 1.5rem;">
