@@ -633,18 +633,20 @@
         @media (max-width: 767px) {
             .services-grid {
                 display: flex;
-                gap: 0;
-                will-change: transform;
-                transition: transform .45s cubic-bezier(.4,0,.2,1);
+                gap: 1rem;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                scrollbar-width: none;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 1rem;
+                scroll-behavior: smooth;
             }
+            .services-grid::-webkit-scrollbar { display: none; }
             .service-card {
-                flex-shrink: 0;
-                /* width is set by JS */
+                flex: 0 0 85vw;
+                scroll-snap-align: center;
             }
-            /* Wrapper clips overflow */
             .services-carousel-wrapper {
-                overflow: hidden;
-                border-radius: var(--radius-xl);
                 position: relative;
             }
             .svc-dots {
@@ -1145,56 +1147,32 @@
             <script>
             (function(){
                 if(window.innerWidth > 767) return;
-                var wrap = document.querySelector('.services-carousel-wrapper');
                 var grid = document.getElementById('svcGrid');
                 var cards = grid.querySelectorAll('.service-card');
                 var dotsEl = document.getElementById('svcDots');
-                var cur = 0, total = cards.length;
-                function pinCards(){
-                    var w = wrap.offsetWidth;
-                    cards.forEach(function(c){ c.style.width=w+'px'; c.style.minWidth=w+'px'; });
-                }
-                pinCards();
-                window.addEventListener('resize', function(){ if(window.innerWidth<=767){ pinCards(); svcGoTo(cur); } });
-                // Build dots
-                cards.forEach(function(_,i){
+                
+                cards.forEach(function(c, i){
                     var d = document.createElement('button');
                     d.style.cssText='width:8px;height:8px;border-radius:50%;border:none;cursor:pointer;transition:all .3s;background:'+(i===0?'var(--vhc-gold)':'rgba(10,18,41,0.2)');
                     d.setAttribute('aria-label','Service '+(i+1));
-                    (function(idx){d.onclick=function(){svcGoTo(idx);};})(i);
+                    d.onclick = function(){ c.scrollIntoView({behavior: 'smooth', inline: 'center', block: 'nearest'}); };
                     dotsEl.appendChild(d);
                 });
-                function svcGoTo(n){
-                    cur=(n%total+total)%total;
-                    grid.style.transform='translateX(-'+(cur*wrap.offsetWidth)+'px)';
-                    dotsEl.querySelectorAll('button').forEach(function(d,i){
-                        d.style.background=i===cur?'var(--vhc-gold)':'rgba(10,18,41,0.2)';
-                        d.style.width=i===cur?'22px':'8px';
+
+                var dots = dotsEl.querySelectorAll('button');
+                var observer = new IntersectionObserver(function(entries){
+                    entries.forEach(function(entry){
+                        if(entry.isIntersecting){
+                            var i = Array.prototype.indexOf.call(cards, entry.target);
+                            dots.forEach(function(d, idx){
+                                d.style.background = idx===i ? 'var(--vhc-gold)' : 'rgba(10,18,41,0.2)';
+                                d.style.width = idx===i ? '22px' : '8px';
+                            });
+                        }
                     });
-                }
-                // Touch
-                // Touch
-                var tx=0, ty=0, dragging=false, isHorizontal=null;
-                wrap.addEventListener('touchstart',function(e){ 
-                    tx=e.touches[0].clientX; ty=e.touches[0].clientY; dragging=true; isHorizontal=null; grid.style.transition='none'; 
-                },{ passive:true });
-                wrap.addEventListener('touchmove',function(e){
-                    if(!dragging) return;
-                    var dx=e.touches[0].clientX-tx;
-                    var dy=e.touches[0].clientY-ty;
-                    if(isHorizontal === null){ isHorizontal = Math.abs(dx) > Math.abs(dy); }
-                    if(!isHorizontal){ dragging=false; return; }
-                    e.preventDefault();
-                    grid.style.transform='translateX('+(-(cur*wrap.offsetWidth)+dx)+'px)';
-                },{ passive:false });
-                wrap.addEventListener('touchend',function(e){
-                    if(!dragging) return; dragging=false;
-                    var dx=e.changedTouches[0].clientX-tx;
-                    grid.style.transition='transform .45s cubic-bezier(.4,0,.2,1)';
-                    if(dx < -(wrap.offsetWidth*0.25)) svcGoTo(cur+1);
-                    else if(dx > (wrap.offsetWidth*0.25)) svcGoTo(cur-1);
-                    else svcGoTo(cur);
-                });
+                }, { root: grid, threshold: 0.6 });
+                
+                cards.forEach(function(c){ observer.observe(c); });
             })();
             </script>
         </div>
