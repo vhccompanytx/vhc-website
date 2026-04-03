@@ -264,6 +264,32 @@
         .svc-dots { display: flex !important; }
     }
     .svc-dots { display: none; justify-content: center; gap: .5rem; margin-top: 1rem; }
+
+    /* Carousel Nav Arrows (Desktop Only) */
+    .vhc-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 10;
+        transition: all 0.3s ease;
+        opacity: 0;
+    }
+    .vhc-carousel-wrapper:hover .vhc-nav { opacity: 1; }
+    .vhc-nav:hover { background: var(--vhc-gold); color: var(--vhc-navy-deep); transform: translateY(-50%) scale(1.1); }
+    .vhc-nav-prev { left: 1.5rem; }
+    .vhc-nav-next { right: 1.5rem; }
+    @media (max-width: 767px) { .vhc-nav { display: none; } }
     .service-card { padding: var(--space-10); text-align: center; display: flex; flex-direction: column; align-items: center; }
     .service-icon { width: 80px; height: 80px; border-radius: var(--radius-lg); background: rgba(201,160,53,0.1); color: var(--vhc-gold); display: flex; align-items: center; justify-content: center; font-size: 32px; margin: 0 auto var(--space-6) auto; transition: all var(--duration) var(--ease-out); }
     .service-card:hover .service-icon { background: rgba(201, 160, 53, 0.2); transform: scale(1.1) rotate(5deg); }
@@ -1556,6 +1582,10 @@
             </div>
 
             <div class="vhc-carousel-wrapper" style="position:relative;overflow:hidden;border-radius:20px;max-width:1140px;margin:0 auto;box-shadow: 0 15px 35px rgba(0,0,0,0.08);">
+                <!-- Navigation Arrows -->
+                <button class="vhc-nav vhc-nav-prev" onclick="vhcSlideEs(-1)" aria-label="Anterior Proyecto"><i class="fas fa-chevron-left"></i></button>
+                <button class="vhc-nav vhc-nav-next" onclick="vhcSlideEs(1)" aria-label="Siguiente Proyecto"><i class="fas fa-chevron-right"></i></button>
+
                 <div class="vhc-carousel" id="vhcCarouselEs" style="display:flex;will-change:transform;">
                     <div class="vhc-slide" style="min-width:100%;position:relative;overflow:hidden;flex-shrink:0;">
                         <img src="brand/WhatsApp Image 2026-03-31 at 10.41.51 PM.jpeg" alt="Gran instalación solar residencial en Sugar Land" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
