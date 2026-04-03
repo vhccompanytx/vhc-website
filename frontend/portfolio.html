@@ -99,7 +99,7 @@
       }
     }
     </script>
-</head>
+    <style>
 
         .nav-inner {
             display: flex;
@@ -680,6 +680,25 @@
 
             .portfolio-grid {
                 grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 767px) {
+            #pfGrid { 
+                display: flex !important; 
+                flex-wrap: nowrap;
+                gap: 1rem !important; 
+                overflow-x: auto; 
+                scroll-snap-type: x mandatory; 
+                scrollbar-width: none; 
+                -webkit-overflow-scrolling: touch; 
+                padding: 1.5rem 1.5rem 3.5rem 1.5rem !important; 
+                margin: -1.5rem -1.5rem -3.5rem -1.5rem !important; 
+                scroll-behavior: smooth; 
+            }
+            #pfGrid::-webkit-scrollbar { display: none; }
+            #pfGrid .pf-card { 
+                flex: 0 0 85vw !important; 
+                scroll-snap-align: center; 
             }
         }
     </style>
