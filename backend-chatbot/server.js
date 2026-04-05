@@ -66,6 +66,7 @@ function getSession(id) {
       conflict: null,
       emailUpdated: false,
       emailRejected: false,
+      offTopicCount: 0,
       lastActivity: Date.now(),
       lang: DEFAULT_LANG,
     });
@@ -99,6 +100,17 @@ const NOT_A_NAME_RE = /\b(city|state|street|avenue|road|project|installation|quo
 const BLOCK_PROJECT_RE = /\b(plumbing|hvac|air conditioning|ac|heater|leak|water|pipe|plomeria|plomero|aire acondicionado|calefaccion|fuga|agua|tuberia)\b/i;
 const TECH_RE = /\b(voltage|amps?|ampacity|kw|kva|breaker|panel|inverter|battery|solar|roof|permit|electrical|wire|cable|ground|generator|voltaje|amperios|tension|tensión|tablero|inversor|bater[ií]a|solar|el[eé]ctrico|cable|generador)\b/i;
 const UPDATE_RE = /\b(update|change|correct|correction|that'?s not right|actualizar|cambiar|me equivoqu[eé]|corregir|correcci[oó]n|no es)\b/i;
+// Topics clearly related to VHC services — used to detect off-topic queries
+const VHC_TOPIC_RE = /\b(solar|panel|battery|backup|electric|ev|charger|energy|roof|permit|inverter|install|service|quote|grid|power|watt|kwh|maintenance|inspection|texas|houston|home|house|residential|commercial|vhc|generador|bater[ií]a|el[eé]ctrico|instalaci[oó]n|energ[ií]a|techo|precio|cotizaci[oó]n|servicio)\b/i;
+
+function isOffTopicQuery(text) {
+  if (VHC_TOPIC_RE.test(text)) return false;           // clearly VHC-related
+  if (text.split(/\s+/).length <= 2) return false;     // too short to be a real inquiry
+  return (
+    /[?]/.test(text) ||                               // ends with question mark
+    /^(what|how|when|who|where|why|tell me|do you know|can you tell|cu[aá]nto|c[oó]mo|cu[aá]ndo|qui[eé]n|d[oó]nde|por qu[eé]|qu[eé] es|sabes|me puedes decir)\b/i.test(text)
+  );
+}
 
 function cleanPhone(raw) {
   const digits = String(raw || "").replace(/\D/g, "");
@@ -411,6 +423,16 @@ function buildPrompt(data, session) {
     lang === "es"
       ? "CIERRE PREMATURO: Si el usuario intenta despedirse pero faltan datos, dile amablemente que aun necesitas esa informacion (como telefono o correo) para enviar su solicitud, y vuelvesela a pedir. Si se niega rotundamente, despídete y no sigas preguntando."
       : "PREMATURE CLOSING: If the user tries to end the conversation but details are missing, politely explain that you still need that information to submit their request, and ask again. Stop asking only if they explicitly refuse to provide it.";
+
+  const offTopicRule =
+    lang === "es"
+      ? session.offTopicCount >= 2
+        ? 'LIMITE GENERAL ACTIVO: ya respondiste 2 preguntas generales no relacionadas con VHC. Si el usuario hace otra pregunta no relacionada con solar, baterías, eléctrico o servicios de VHC, responde exactamente: "Solo puedo ayudarte con nuestros servicios de solar y electricidad en Texas. ¿Tienes alguna consulta al respecto?"'
+        : `Puedes responder hasta ${2 - session.offTopicCount} pregunta(s) general(es) no relacionada(s) con VHC. Cada respuesta debe ser extremadamente breve (máximo 100 caracteres) y siempre redirigir al usuario hacia los servicios de VHC.`
+      : session.offTopicCount >= 2
+        ? 'GENERAL LIMIT ACTIVE: you already answered 2 off-topic questions. If the user asks anything else unrelated to solar, batteries, electrical, or VHC services, reply exactly: "I can only help with our solar and electrical services in Texas. Do you have any questions about those?"'
+        : `You may answer up to ${2 - session.offTopicCount} more general off-topic question(s). Keep each answer extremely brief (max 100 characters) and always redirect the user back to VHC services.`;
+
   if (session.emailRejected) {
     return lang === "es"
       ? `Eres el asistente de ${BRAND}. El usuario acaba de intentar proporcionar su correo electrónico pero el formato no es válido—parece que falta "@" o el dominio (ej: nombre@gmail.com). Díselo amablemente y pídele que lo vuelva a escribir correctamente. Máximo 2 líneas.`
@@ -438,7 +460,8 @@ COMPORTAMIENTO:
 ${rejectionRule}
 ${outOfScopeRule}
 ${priceRule}
-${techRule}`
+${techRule}
+${offTopicRule}`
       : `You are the virtual assistant for ${BRAND}. You help Texas customers with residential solar installation, battery backup systems, EV chargers, solar site evaluations, and residential electrical services.
 
 BEHAVIOR:
@@ -452,7 +475,8 @@ BEHAVIOR:
 ${rejectionRule}
 ${outOfScopeRule}
 ${priceRule}
-${techRule}`;
+${techRule}
+${offTopicRule}`;
   }
 
   const confirmed = Object.entries(data)
@@ -470,14 +494,16 @@ Agradece, confirma que un asesor de VHC dara seguimiento y mantente en maximo 2 
 ${rejectionRule}
 ${outOfScopeRule}
 ${priceRule}
-${techRule}`
+${techRule}
+${offTopicRule}`
       : `You are the assistant for ${BRAND}. The lead is complete.
 Confirmed details: ${confirmed}.
 Thank the user, confirm that a VHC specialist will follow up, and stay within 2 lines.
 ${rejectionRule}
 ${outOfScopeRule}
 ${priceRule}
-${techRule}`;
+${techRule}
+${offTopicRule}`;
   }
 
   const strictRule =
@@ -500,7 +526,8 @@ ${rejectionRule}
 ${outOfScopeRule}
 ${priceRule}
 ${techRule}
-${strictRule}`
+${strictRule}
+${offTopicRule}`
     : `You are the assistant for ${BRAND}. Customer type: ${data.tipo}.
 YOU ALREADY HAVE: ${confirmed || "no details yet"}.
 ONLY ASK FOR: "${missing}".
@@ -515,7 +542,8 @@ ${rejectionRule}
 ${outOfScopeRule}
 ${priceRule}
 ${techRule}
-${strictRule}`;
+${strictRule}
+${offTopicRule}`;
 }
 
 function buildRows(data, lang) {
@@ -730,6 +758,11 @@ app.post("/chat", async (req, res) => {
 
   if (TECH_RE.test(trimmed) && trimmed.includes("?") && session.techQuestions < 2) {
     session.techQuestions += 1;
+  }
+
+  // Track general off-topic inquiries (e.g. astronomy, sports, general trivia)
+  if (isOffTopicQuery(trimmed) && session.offTopicCount < 99) {
+    session.offTopicCount += 1;
   }
 
   const messages = [
