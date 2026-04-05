@@ -1,4 +1,4 @@
-﻿import express from "express";
+import express from "express";
 import cors from "cors";
 import OpenAI from "openai";
 import dotenv from "dotenv";
@@ -10,6 +10,17 @@ dotenv.config();
 const app = express();
 app.use(cors({ origin: "*" }));
 app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send(`
+    <div style="font-family: sans-serif; text-align: center; padding: 50px;">
+      <h1 style="color: #0b1332;">VHC Chatbot System</h1>
+      <p style="color: #666;">Status: <span style="color: #2D7A4F; font-weight: bold;">ACTIVE</span></p>
+      <hr style="max-width: 300px; border: 0; border-top: 1px solid #eee; margin: 20px auto;">
+      <p style="font-size: 0.8em; color: #999;">© ${new Date().getFullYear()} VHC Company Services</p>
+    </div>
+  `);
+});
 
 const BRAND = "VHC Company Services";
 const DEFAULT_LANG = "en";
