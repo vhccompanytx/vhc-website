@@ -537,6 +537,45 @@
             }
         }
 
+        /* Toast Notification (Premium Glassmorphism) */
+        .vhc-toast {
+            position: fixed;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            z-index: 1100;
+            background: rgba(11, 19, 50, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            transition: transform 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+            pointer-events: none;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .vhc-toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+        .vhc-toast i {
+            color: #2D7A4F;
+            font-size: 18px;
+            background: rgba(45, 122, 79, 0.1);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        @media (max-width: 480px) {
+            .vhc-toast { width: 90%; top: 20px; font-size: 0.85rem; padding: 10px 16px; }
+        }
+
         /* Hero Section */
         .hero-section {
             position: relative;
@@ -3137,6 +3176,10 @@
                 }
 
                 addMessage(data.reply, true);
+
+                if (data.meta && data.meta.leadJustSent) {
+                    showToast("Lead successfully sent to VHC engineering team!");
+                }
             } catch (err) {
                 console.error("Chat error:", err);
                 thinkingMsg.remove();
@@ -3146,6 +3189,22 @@
                 chatSend.disabled = false;
                 chatInput.focus();
             }
+        }
+
+        function showToast(text) {
+            let toast = document.getElementById('vhc-toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'vhc-toast';
+                toast.className = 'vhc-toast';
+                toast.innerHTML = `<i class="fas fa-check-circle"></i> <span>${text}</span>`;
+                document.body.appendChild(toast);
+            } else {
+                toast.querySelector('span').textContent = text;
+            }
+            
+            setTimeout(() => toast.classList.add('show'), 100);
+            setTimeout(() => toast.classList.remove('show'), 5000);
         }
 
         if (chatSend) chatSend.addEventListener('click', handleChat);

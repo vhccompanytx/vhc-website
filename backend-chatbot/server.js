@@ -90,9 +90,10 @@ const LOCATION_RE = /\b(texas|tx|houston|katy|cypress|spring|the woodlands|pearl
 const TYPE_HOME_RE = /\b(home|house|residential|residence|townhome|condo|apartment|casa|hogar|residencial|vivienda|apartamento)\b/i;
 const TYPE_BIZ_RE = /\b(business|commercial|office|retail|warehouse|restaurant|shop|store|clinic|school|church|industrial|negocio|comercial|empresa|oficina|bodega|restaurante|local|industrial)\b/i;
 const PROJECT_RE = /\b(solar|panel(?:es)?|battery|backup|generator|ev charger|charger|electrical|breaker|main panel|subpanel|rewire|troubleshoot|inspection|permit|roof|roofing|inverter|powerwall|instalaci[oó]n|panel(?:es)? solares|bater[ií]a|respaldo|cargador ev|cargador|el[eé]ctrico|tablero|interruptor|medidor|inversor|generador|revisi[oó]n|mantenimiento|reparar|instalar)\b/i;
-const NAME_TRIGGER_RE = /(?:(?:my name is|i am|i'm|call me|me llamo|soy|mi nombre es)\s+)([A-Za-zÀ-ÿ][A-Za-zÀ-ÿ'\-]{1,}(?:\s+[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ'\-]{1,}){0,2})/i;
+const NAME_TRIGGER_RE = /(?:(?:my name is|i am|i'm|call me|me llamo|soy|mi nombre es|nombre es)\s+)([A-Za-zÀ-ÿ][A-Za-zÀ-ÿ'\-]{1,}(?:\s+[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ'\-]{1,}){0,2})/i;
 const NAME_BLOCK_RE = /^(no|yes|si|ok|okay|hola|hello|gracias|thanks|quiero|necesito|i|we|our|para|for|de|la|el|san|santa|texas|houston|katy|cypress|spring)$/i;
 const NOT_A_NAME_RE = /\b(city|state|street|avenue|road|project|installation|quote|estimate|service|servicio|proyecto|instalaci[oó]n|cotizaci[oó]n|texas|houston|business|negocio|empresa)\b/i;
+const BLOCK_PROJECT_RE = /\b(plumbing|hvac|air conditioning|ac|heater|leak|water|pipe|plomeria|plomero|aire acondicionado|calefaccion|fuga|agua|tuberia)\b/i;
 const TECH_RE = /\b(voltage|amps?|ampacity|kw|kva|breaker|panel|inverter|battery|solar|roof|permit|electrical|wire|cable|ground|generator|voltaje|amperios|tension|tensión|tablero|inversor|bater[ií]a|solar|el[eé]ctrico|cable|generador)\b/i;
 const UPDATE_RE = /\b(update|change|correct|correction|that'?s not right|actualizar|cambiar|me equivoqu[eé]|corregir|correcci[oó]n|no es)\b/i;
 
@@ -150,6 +151,8 @@ function getLabels(lang) {
       customerNote: (phone) => `Te contactaremos al ${phone} o a este mismo correo.`,
       contactLabel: "Consultas",
       companyLine: "Instalacion solar y servicios electricos en Texas",
+      language: "Idioma",
+      languageVal: "🇲🇽 Español",
     };
   }
 
@@ -174,6 +177,8 @@ function getLabels(lang) {
     customerNote: (phone) => `We will contact you at ${phone} or by replying to this email.`,
     contactLabel: "Questions",
     companyLine: "Texas solar installation and electrical services",
+    language: "Language",
+    languageVal: "🇺🇸 English",
   };
 }
 function lastAsked(history) {
@@ -232,7 +237,7 @@ function extractData(message, session) {
     data.ubicacion = raw.slice(0, 120);
   }
 
-  if (!data.proyecto && PROJECT_RE.test(raw)) {
+  if (!data.proyecto && PROJECT_RE.test(raw) && !BLOCK_PROJECT_RE.test(raw)) {
     data.proyecto = raw.split(".")[0].slice(0, 220);
   }
 
@@ -247,16 +252,17 @@ function extractData(message, session) {
   }
 
   if (asked === "nombre" && !data.nombre) {
-    const words = raw.split(/\s+/).filter(Boolean);
+    let cleanName = raw.replace(/^(yeah|yes|yep|sure|ok|okay|si|sí|claro|exacto|por supuesto|hola|hello|hi|good morning|buenos dias|buenas tardes|me llamo|mi nombre es|soy|nombre es|i am|i'm|my name is|call me is|it is|it's|is)[,\-\s.:]+/i, "").trim();
+    const words = cleanName.split(/\s+/).filter(Boolean);
     if (
       words.length >= 1 &&
       words.length <= 4 &&
-      /^[A-Za-zÀ-ÿ'\-\s]+$/.test(raw) &&
+      /^[A-Za-zÀ-ÿ'\-\s]+$/.test(cleanName) &&
       !NAME_BLOCK_RE.test(words[0]) &&
-      !NOT_A_NAME_RE.test(lowered) &&
-      !LOCATION_RE.test(lowered)
+      !NOT_A_NAME_RE.test(cleanName.toLowerCase()) &&
+      !LOCATION_RE.test(cleanName.toLowerCase())
     ) {
-      data.nombre = capitalizeWords(raw);
+      data.nombre = capitalizeWords(cleanName);
     }
   }
 
@@ -287,7 +293,9 @@ function extractData(message, session) {
   }
 
   if (asked === "proyecto" && !data.proyecto && raw.length >= 3) {
-    data.proyecto = raw.slice(0, 220);
+    if (PROJECT_RE.test(raw) && !BLOCK_PROJECT_RE.test(raw)) {
+      data.proyecto = raw.slice(0, 220);
+    }
   }
 
   if (asked === "fecha" && !data.fecha && raw.length >= 2) {
@@ -302,7 +310,9 @@ function extractData(message, session) {
       TENSION_RE.test(raw) ||
       (LOCATION_RE.test(raw) && raw.split(/\s+/).length <= 4);
     if (!looksLikeContact && raw.split(/\s+/).length >= 3) {
-      data.proyecto = raw.slice(0, 220);
+      if (PROJECT_RE.test(raw) && !BLOCK_PROJECT_RE.test(raw)) {
+        data.proyecto = raw.slice(0, 220);
+      }
     }
   }
 }
@@ -378,8 +388,8 @@ function buildPrompt(data, session) {
 
   const outOfScopeRule =
     lang === "es"
-      ? "FUERA DE ALCANCE: solo atiendes servicios de VHC Company Services relacionados con instalacion solar residencial, sistemas de respaldo con bateria, cargadores EV, evaluaciones solares y servicios electricos residenciales en Texas. Si el usuario pide algo fuera de eso, rechazalo con amabilidad y redirige."
-      : "OUT OF SCOPE: you only handle VHC Company Services requests related to residential solar installation, battery backup systems, EV chargers, solar evaluations, and residential electrical services in Texas. If the user asks for something else, politely decline and redirect.";
+      ? "FUERA DE ALCANCE: solo atiendes servicios de VHC Company Services relacionados con instalacion solar residencial, sistemas de respaldo con bateria, cargadores EV, evaluaciones solares y servicios electricos residenciales en Texas. Si el usuario pide algo fuera de eso (ej: plomería, HVAC), dile amablemente que no ofrecemos ese servicio y pregúntale directamente si le interesa recibir información sobre nuestros paneles solares o servicios eléctricos."
+      : "OUT OF SCOPE: you only handle VHC Company Services requests related to residential solar installation, battery backup systems, EV chargers, solar evaluations, and residential electrical services in Texas. If the user asks for something else (e.g. plumbing, HVAC), politely decline and explicitly ask if they would be interested in learning about our solar panel or electrical services instead.";
 
   const rejectionRule =
     lang === "es"
@@ -498,6 +508,7 @@ function buildRows(data, lang) {
     data.capacidad && [labels.capacity, data.capacidad],
     data.tension && [labels.voltage, data.tension],
     data.fecha && [labels.date, data.fecha],
+    [labels.language, labels.languageVal],
   ].filter(Boolean);
 }
 
@@ -527,14 +538,24 @@ async function sendLeadEmail(data, history) {
     to: DEFAULT_LEAD_EMAIL,
     replyTo: DEFAULT_REPLY_TO_EMAIL,
     subject: `${labels.internalLead}: ${data.nombre || "Unknown"} | ${BRAND}`,
-    html: `<!DOCTYPE html><html><body style="font-family:system-ui,sans-serif;max-width:700px;margin:auto">
-      <h2 style="background:#0b1332;color:#fff;padding:18px 22px;margin:0;border-radius:12px 12px 0 0">${labels.internalLead} | ${BRAND}</h2>
-      <div style="border:1px solid #d9e0ef;border-top:none;padding:22px;border-radius:0 0 12px 12px">
-        <p style="margin-top:0;color:#5b6478">${labels.companyLine}</p>
-        <table style="border-collapse:collapse;width:100%;font-size:14px">${rows}</table>
-        <h3 style="margin:24px 0 12px;color:#0b1332">${labels.internalConversation}</h3>
-        <table style="border-collapse:collapse;width:100%;font-size:13px">${transcript}</table>
-        <p style="font-size:11px;color:#7f8798;margin-top:16px">${labels.internalGenerated}</p>
+    html: `<!DOCTYPE html><html><body style="font-family:system-ui,-apple-system,sans-serif;max-width:700px;margin:auto;background-color:#f9fafb;padding:20px">
+      <div style="background-color:#ffffff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px 0 rgba(0,0,0,0.1)">
+        <h2 style="background:#0b1332;color:#fff;padding:20px 24px;margin:0;font-size:20px;font-weight:600">${labels.internalLead}</h2>
+        <div style="padding:24px">
+          <p style="margin-top:0;color:#6b7280;font-size:14px;margin-bottom:20px">${labels.companyLine}</p>
+          <table style="border-collapse:collapse;width:100%;font-size:14px;border:1px solid #e5e7eb">
+            ${rows}
+          </table>
+          
+          <h3 style="margin:32px 0 16px;color:#111827;font-size:16px;font-weight:600;border-bottom:2px solid #f3f4f6;padding-bottom:8px">${labels.internalConversation}</h3>
+          <div style="background:#fdfdfd;border:1px solid #f3f4f6;border-radius:8px;overflow:hidden">
+            <table style="border-collapse:collapse;width:100%;font-size:13px">
+              ${transcript}
+            </table>
+          </div>
+          
+          <p style="font-size:11px;color:#9ca3af;margin-top:24px;text-align:center">${labels.internalGenerated}</p>
+        </div>
       </div>
     </body></html>`,
   });
