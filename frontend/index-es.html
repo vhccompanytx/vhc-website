@@ -49,7 +49,7 @@
     "@type": ["SolarBusiness", "ElectricalContractor", "LocalBusiness"],
     "name": "VHC Company Services",
     "url": "https://vhccompanytx.com",
-    "telephone": "+13464937541",
+    "telephone": "+13468481465",
     "email": "sales@vhccompanytx.com",
     "description": "Expertos en ingeniería solar en Texas ofreciendo sistemas de paneles residenciales y respaldo por batería para hogares en todo Estados Unidos.",
     "image": "https://vhccompanytx.com/hero.jpg",
@@ -94,7 +94,9 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="brand-v2.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.1/build/css/intlTelInput.css">
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.1/build/js/intlTelInput.min.js"></script>
 
     <style>
     /* General Layout */
@@ -105,6 +107,30 @@
         background-size: 28px 28px;
         background-attachment: fixed;
     }
+    
+    .form-control:invalid:not(:focus):not(:placeholder-shown) {
+        border-color: #B03A2E;
+    }
+
+    /* intl-tel-input integration */
+    .iti { width: 100%; display: block; }
+    .iti__flag { background-image: url("https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.1/build/img/flags.png"); }
+    @media (min-resolution: 2x) {
+        .iti__flag { background-image: url("https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.1/build/img/flags@2x.png"); }
+    }
+    .iti__country-list {
+        background-color: var(--vhc-pure-white);
+        border: 1px solid var(--vhc-border);
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow-md);
+        font-family: var(--font-body);
+        z-index: 100;
+    }
+    .iti__country-name { color: var(--vhc-dark); }
+    .iti__dial-code { color: var(--vhc-mid-gray); }
+    .iti__country.iti__highlight { background-color: var(--vhc-light-bg); }
+    .iti__search-input { padding: 0.5rem; border: 1px solid var(--vhc-border); border-radius: 4px; margin-bottom: 0.5rem; width: 90%; }
+
     .section-padding { padding: var(--space-20) 0; }
     .container { max-width: var(--container-xl); margin: 0 auto; padding: 0 var(--space-6); width: 100%; }
     
@@ -349,7 +375,7 @@
 <body>
 
     <!-- WhatsApp Floating Button (Left) -->
-    <a href="https://wa.me/13464937541" target="_blank" class="float-wa" title="Contact via WhatsApp">
+    <a href="https://wa.me/13468481465" target="_blank" class="float-wa" title="Contact via WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -1936,8 +1962,8 @@
                     <div class="contact-actions">
                         <a href="mailto:sales@vhccompanytx.com" class="btn-primary"><i class="fas fa-envelope"></i>
                             Escribir a un Experto</a>
-                        <a href="tel:+13464937541" class="btn-outline"><i class="fas fa-phone"></i> Llama al (346)
-                            493-7541</a>
+                        <a href="tel:+13468481465" class="btn-outline"><i class="fas fa-phone"></i> Llama al (346)
+                            848-1465</a>
                     </div>
                 </div>
 
@@ -1945,24 +1971,39 @@
                     <form id="lead-form">
                         <div class="form-group">
                             <input type="text" class="form-control" id="name" name="name" placeholder="Tu Nombre Completo"
-                                required>
+                                required minlength="3" pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$" title="Por favor ingresa un nombre válido (solo letras).">
                         </div>
                         <div class="form-group">
                             <input type="email" class="form-control" id="email" name="email" placeholder="Correo Electrónico"
-                                required>
+                                required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Por favor ingresa un correo electrónico válido.">
                         </div>
                         <div class="form-group">
-                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Número Telefónico"
+                            <input type="tel" class="form-control" id="phone" name="phone_raw" placeholder="Número Telefónico"
                                 required>
+                            <input type="hidden" id="full_phone" name="phone">
+                            <div id="phone-error" class="error-msg" style="display: none; color: #B03A2E; font-size: 0.85rem; margin-top: 5px;"></div>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" id="address" name="address"
-                                placeholder="Dirección de tu Propiedad en Texas" required>
+                                placeholder="Dirección de tu Propiedad en Texas" required minlength="5">
                         </div>
                         <div class="form-group">
                             <textarea class="form-control" id="message" name="message"
-                                placeholder="¿En qué servicio estás interesado? Haznos cualquier pregunta (ej: mi factura de luz es de $250 / mes)"></textarea>
+                                placeholder="¿En qué servicio estás interesado? Haznos cualquier pregunta (ej: mi factura de luz es de $250 / mes)" required minlength="10"></textarea>
                         </div>
+                        <!-- Campos ocultos para auto-reply bilingüe -->
+                        <input type="hidden" name="client_lang" value="🇲🇽 Español">
+                        <input type="hidden" name="reply_subject" value="Recibimos tu solicitud | VHC Company Services">
+                        <input type="hidden" name="reply_heading" value="Recibimos tu solicitud">
+                        <input type="hidden" name="reply_subtitle" value="Un especialista te contactará pronto">
+                        <input type="hidden" name="reply_greeting" value="Hola">
+                        <input type="hidden" name="reply_body" value="Gracias por contactar a VHC Company Services. Hemos recibido tu solicitud correctamente y un especialista se pondrá en contacto contigo en las próximas 24 horas.">
+                        <input type="hidden" name="reply_summary_label" value="Resumen de tu solicitud">
+                        <input type="hidden" name="reply_name_label" value="Nombre">
+                        <input type="hidden" name="reply_phone_label" value="Teléfono">
+                        <input type="hidden" name="reply_location_label" value="Ubicación">
+                        <input type="hidden" name="reply_urgent" value="Para consultas urgentes, llámanos directamente al (346) 848-1465 o responde a este correo.">
+                        <input type="hidden" name="reply_signature" value="— El equipo de VHC Company Services">
                         <button type="submit" class="btn-gold"
                             style="width: 100%; justify-content: center; font-size: 1.1rem; padding: 1rem;">
                             Obtener Mi Análisis Gratuito
@@ -2001,7 +2042,7 @@
                     <h4>Contact</h4>
                     <ul>
                         <li><a href="mailto:sales@vhccompanytx.com">sales@vhccompanytx.com</a></li>
-                        <li><a href="tel:+13464937541">+1 (346) 493-7541</a></li>
+                        <li><a href="tel:+13468481465">+1 (346) 848-1465</a></li>
                         <li>Texas, USA</li>
                     </ul>
                 </div>
@@ -2142,7 +2183,7 @@
             } catch (err) {
                 console.error("Chat error:", err);
                 thinkingMsg.remove();
-                addMessage("No puedo conectarme con el asistente en este momento. Intenta de nuevo en unos minutos o llamanos al (346) 493-7541.", true);
+                addMessage("No puedo conectarme con el asistente en este momento. Intenta de nuevo en unos minutos o llamanos al (346) 848-1465.", true);
             } finally {
                 chatInput.disabled = false;
                 chatSend.disabled = false;
@@ -2158,39 +2199,71 @@
         }
 
         // EmailJS Init
-        emailjs.init({ publicKey: 'YOUR_PUBLIC_KEY' });
+        emailjs.init({ publicKey: 'pA_Bc2ZFgaBDvkvsL' });
+
+        // Intl-Tel-Input Initialization
+        const phoneInput = document.querySelector("#phone");
+        const phoneError = document.querySelector("#phone-error");
+        const iti = window.intlTelInput(phoneInput, {
+            initialCountry: "us",
+            separateDialCode: true,
+            strictMode: true,
+            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.1/build/js/utils.js",
+            i18n: {
+                searchPlaceholder: "Buscar",
+            }
+        });
 
         document.getElementById('lead-form').addEventListener('submit', function (e) {
             e.preventDefault();
             const btn = this.querySelector('button[type="submit"]');
             const originalHTML = btn.innerHTML;
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
-            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
-                .then(() => {
-                    btn.innerHTML = '<i class="fas fa-check"></i> ¡Solicitud Enviada! Te contactaremos pronto.';
-                    btn.style.background = '#2D7A4F';
-                    btn.style.color = 'white';
-                    this.reset();
-                    setTimeout(() => {
-                        btn.disabled = false;
-                        btn.innerHTML = originalHTML;
-                        btn.style.background = '';
-                        btn.style.color = '';
-                    }, 6000);
-                }, (error) => {
-                    console.error('EmailJS error:', error);
-                    btn.innerHTML = '<i class="fas fa-exclamation-circle"></i> Algo salió mal. Por favor llámanos.';
-                    btn.style.background = '#B03A2E';
-                    btn.style.color = 'white';
-                    setTimeout(() => {
-                        btn.disabled = false;
-                        btn.innerHTML = originalHTML;
-                        btn.style.background = '';
-                        btn.style.color = '';
-                    }, 5000);
-                });
+            // Validate Phone Number before sending
+            if (!iti.isValidNumber()) {
+                phoneInput.style.borderColor = '#B03A2E';
+                phoneError.textContent = 'Por favor ingresa un número telefónico válido.';
+                phoneError.style.display = 'block';
+                return;
+            } else {
+                phoneInput.style.borderColor = '';
+                phoneError.style.display = 'none';
+                // Set the hidden field to the fully formatted international number
+                document.getElementById('full_phone').value = iti.getNumber();
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+
+            Promise.all([
+                emailjs.sendForm('service_cefim4t', 'template_fhbh4j7', this),
+                emailjs.sendForm('service_cefim4t', 'template_4jp87m3', this)
+            ])
+            .then(() => {
+                btn.innerHTML = '<i class="fas fa-check"></i> ¡Solicitud Enviada! Te contactaremos pronto.';
+                btn.style.background = '#2D7A4F';
+                btn.style.color = 'white';
+                this.reset();
+                iti.setCountry("us"); // Reset to default flag
+                setTimeout(() => {
+                    btn.disabled = false;
+                    btn.innerHTML = originalHTML;
+                    btn.style.background = '';
+                    btn.style.color = '';
+                }, 6000);
+            })
+            .catch((error) => {
+                console.error('EmailJS error:', error);
+                btn.innerHTML = '<i class="fas fa-exclamation-circle"></i> Algo salió mal. Por favor llámanos.';
+                btn.style.background = '#B03A2E';
+                btn.style.color = 'white';
+                setTimeout(() => {
+                    btn.disabled = false;
+                    btn.innerHTML = originalHTML;
+                    btn.style.background = '';
+                    btn.style.color = '';
+                }, 5000);
+            });
         });
     </script>
 </body>
