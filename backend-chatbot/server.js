@@ -450,8 +450,8 @@ ${techRule}`;
 
   const strictRule =
     lang === "es"
-      ? "ESTRICTO: Nunca agradezcas ni asumas un dato si no aparece en la lista 'YA TIENES'. Si el usuario intentó dar un dato pero el sistema sigue diciendo 'SOLO FALTA', significa que el formato fue inválido (ej: el teléfono no tiene 10 dígitos o el correo es incorrecto). En ese caso, dile que el dato parece incorrecto y vuelve a pedirlo especificando el formato correcto."
-      : "STRICT: Never thank the user for or assume a detail if it is not in the 'YOU ALREADY HAVE' list. If the user tried to provide a detail but the system still says 'ONLY ASK FOR', it means the format was invalid (e.g. phone was not 10 digits or email was invalid). Tell them it seems incorrect, and ask again specifying the correct format.";
+      ? "ESTRICTO: Si el usuario dio un dato y este YA aparece en la lista 'YA TIENES' (aunque tenga otro formato, porque el sistema lo limpia), acéptalo y pasa a pedir lo que diga 'SOLO FALTA'. PERO si no aparece en 'YA TIENES' y el sistema sigue pidiendo lo mismo en 'SOLO FALTA', significa que el formato fue inválido (ej: teléfono sin 10 dígitos). Dile que el dato es incorrecto y vuelve a pedirlo."
+      : "STRICT: If the user provided a detail and it NOW appears in the 'YOU ALREADY HAVE' list (even in a cleaned format), accept it and ask for what is in 'ONLY ASK FOR'. BUT if it does not appear in 'YOU ALREADY HAVE', it means the backend rejected it (e.g. phone not 10 digits). In that case, tell them it was invalid and ask for it again.";
 
   return lang === "es"
     ? `Eres el asistente de ${BRAND}. Cliente tipo ${data.tipo}.
