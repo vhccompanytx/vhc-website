@@ -89,7 +89,9 @@ const DATE_RE = /\b(today|tomorrow|this week|next week|this month|next month|urg
 const LOCATION_RE = /\b(texas|tx|houston|katy|cypress|spring|the woodlands|pearland|pasadena|sugar land|missouri city|richmond|rosenberg|league city|galveston|conroe|tomball|humble|dallas|fort worth|arlington|plano|frisco|austin|san antonio|el paso|corpus christi|mcallen)\b/i;
 const TYPE_HOME_RE = /\b(home|house|residential|residence|townhome|condo|apartment|casa|hogar|residencial|vivienda|apartamento)\b/i;
 const TYPE_BIZ_RE = /\b(business|commercial|office|retail|warehouse|restaurant|shop|store|clinic|school|church|industrial|negocio|comercial|empresa|oficina|bodega|restaurante|local|industrial)\b/i;
-const PROJECT_RE = /\b(solar|panel(?:es)?|battery|backup|generator|ev charger|charger|electrical|breaker|main panel|subpanel|rewire|troubleshoot|inspection|permit|roof|roofing|inverter|powerwall|instalaci[oó]n|panel(?:es)? solares|bater[ií]a|respaldo|cargador ev|cargador|el[eé]ctrico|tablero|interruptor|medidor|inversor|generador|revisi[oó]n|mantenimiento|reparar|instalar)\b/i;
+const PROJECT_RE = /\b(solar|panels?|paneles?|battery|backup|generator|ev charger|charger|electrical|breaker|main panel|subpanel|rewire|troubleshoot|inspection|permit|roof|roofing|inverter|powerwall|instalaci[oó]n|paneles? solares|bater[ií]a|respaldo|cargador ev|cargador|el[eé]ctrico|tablero|interruptor|medidor|inversor|generador|revisi[oó]n|mantenimiento|reparar|instalar|agregar|a[ñn]adir|ampliar|expand|upgrade|monitoring|generation|energy storage|sistema solar|solar system)\b/i;
+// Catches layman intent phrases that clearly describe solar/electrical work even without explicit tech keywords
+const SOLAR_INTENT_RE = /\b(panel|solar|energy|battery|electric|install|add|expand|upgrade|system|inverter|backup|ev|charger|energ[ií]a|bater[ií]a|instalar|agregar|ampliar|sistema)\b/i;
 const NAME_TRIGGER_RE = /(?:(?:my name is|i am|i'm|call me|me llamo|soy|mi nombre es|nombre es)\s+)([A-Za-zÀ-ÿ][A-Za-zÀ-ÿ'\-]{1,}(?:\s+[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ'\-]{1,}){0,2})/i;
 const NAME_BLOCK_RE = /^(no|yes|si|ok|okay|hola|hello|gracias|thanks|quiero|necesito|i|we|our|para|for|de|la|el|san|santa|texas|houston|katy|cypress|spring)$/i;
 const NOT_A_NAME_RE = /\b(city|state|street|avenue|road|project|installation|quote|estimate|service|servicio|proyecto|instalaci[oó]n|cotizaci[oó]n|texas|houston|business|negocio|empresa)\b/i;
@@ -191,8 +193,9 @@ function lastAsked(history) {
   if (/city in texas|service address|property located|ubicacion|ubicación|ciudad en texas|direccion del proyecto|dirección del proyecto/.test(text)) return "ubicacion";
   if (/system size|capacity|kw|kva|capacidad/.test(text)) return "capacidad";
   if (/voltage|voltaje|tension|tensión/.test(text)) return "tension";
-  if (/project|service|need help with|trabajo|proyecto|servicio|necesitas/.test(text)) return "proyecto";
-  if (/timeline|when do you need|fecha|cuando lo necesitas|cuándo lo necesitas/.test(text)) return "fecha";
+  // Broad match: any phrasing asking for service/project type
+  if (/\b(project|service|need help|what service|what kind|type of service|type of project|trabajo|proyecto|servicio|necesitas|en qu[eé] (te |le )?podemos|qu[eé] (servicio|tipo|proyecto))\b/.test(text)) return "proyecto";
+  if (/timeline|when do you need|cuando lo necesitas|cuándo lo necesitas|cuando necesitas|cuándo necesitas|fecha deseada/.test(text)) return "fecha";
   return null;
 }
 
@@ -237,7 +240,8 @@ function extractData(message, session) {
     data.ubicacion = raw.slice(0, 120);
   }
 
-  if (!data.proyecto && PROJECT_RE.test(raw) && !BLOCK_PROJECT_RE.test(raw)) {
+  // Accept any solar/electrical intent — including layman phrasing like "add panels", "my system"
+  if (!data.proyecto && (PROJECT_RE.test(raw) || SOLAR_INTENT_RE.test(raw)) && !BLOCK_PROJECT_RE.test(raw)) {
     data.proyecto = raw.split(".")[0].slice(0, 220);
   }
 
@@ -292,10 +296,10 @@ function extractData(message, session) {
     else if (/^\d{2,4}$/.test(raw)) data.tension = `${raw}V`;
   }
 
-  if (asked === "proyecto" && !data.proyecto && raw.length >= 3) {
-    if (PROJECT_RE.test(raw) && !BLOCK_PROJECT_RE.test(raw)) {
-      data.proyecto = raw.slice(0, 220);
-    }
+  // KEY FIX: When the bot explicitly asked for the project, accept any non-blocked response.
+  // Don't double-gate with PROJECT_RE — the AI conversation handles understanding; we just need to store it.
+  if (asked === "proyecto" && !data.proyecto && raw.length >= 5 && !BLOCK_PROJECT_RE.test(raw)) {
+    data.proyecto = raw.slice(0, 220);
   }
 
   if (asked === "fecha" && !data.fecha && raw.length >= 2) {
@@ -310,7 +314,8 @@ function extractData(message, session) {
       TENSION_RE.test(raw) ||
       (LOCATION_RE.test(raw) && raw.split(/\s+/).length <= 4);
     if (!looksLikeContact && raw.split(/\s+/).length >= 3) {
-      if (PROJECT_RE.test(raw) && !BLOCK_PROJECT_RE.test(raw)) {
+      // Also catch layman solar intent (e.g. "add panels", "expand my system")
+      if ((PROJECT_RE.test(raw) || SOLAR_INTENT_RE.test(raw)) && !BLOCK_PROJECT_RE.test(raw)) {
         data.proyecto = raw.slice(0, 220);
       }
     }
