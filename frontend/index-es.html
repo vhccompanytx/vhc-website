@@ -1976,6 +1976,7 @@
                         <div class="form-group">
                             <input type="email" class="form-control" id="email" name="email" placeholder="Correo Electrónico"
                                 required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Por favor ingresa un correo electrónico válido.">
+                            <div id="email-error" class="error-msg" style="display: none; color: #B03A2E; font-size: 0.85rem; margin-top: 5px;"></div>
                         </div>
                         <div class="form-group">
                             <input type="tel" class="form-control" id="phone" name="phone_raw" placeholder="Número Telefónico"
@@ -1989,7 +1990,7 @@
                         </div>
                         <div class="form-group">
                             <textarea class="form-control" id="message" name="message"
-                                placeholder="¿En qué servicio estás interesado? Haznos cualquier pregunta (ej: mi factura de luz es de $250 / mes)" required minlength="10"></textarea>
+                                placeholder="¿En qué servicio estás interesado? Haznos cualquier pregunta (ej: mi factura de luz es de $250 / mes)" required minlength="3"></textarea>
                         </div>
                         <!-- Campos ocultos para auto-reply bilingüe -->
                         <input type="hidden" name="client_lang" value="🇲🇽 Español">
@@ -2204,6 +2205,9 @@
         // Intl-Tel-Input Initialization
         const phoneInput = document.querySelector("#phone");
         const phoneError = document.querySelector("#phone-error");
+        const emailInput = document.querySelector("#email");
+        const emailError = document.querySelector("#email-error");
+
         const iti = window.intlTelInput(phoneInput, {
             initialCountry: "us",
             separateDialCode: true,
@@ -2219,15 +2223,31 @@
             const btn = this.querySelector('button[type="submit"]');
             const originalHTML = btn.innerHTML;
 
+            // Clear prior errors
+            phoneInput.style.borderColor = '';
+            phoneError.style.display = 'none';
+            emailInput.style.borderColor = '';
+            emailError.style.display = 'none';
+
+            // Validate Email
+            const emailValue = emailInput.value.trim();
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailRegex.test(emailValue)) {
+                emailInput.style.borderColor = '#B03A2E';
+                emailError.textContent = 'Por favor ingresa un correo electrónico válido.';
+                emailError.style.display = 'block';
+                emailInput.focus();
+                return;
+            }
+
             // Validate Phone Number before sending
             if (!iti.isValidNumber()) {
                 phoneInput.style.borderColor = '#B03A2E';
                 phoneError.textContent = 'Por favor ingresa un número telefónico válido.';
                 phoneError.style.display = 'block';
+                phoneInput.focus();
                 return;
             } else {
-                phoneInput.style.borderColor = '';
-                phoneError.style.display = 'none';
                 // Set the hidden field to the fully formatted international number
                 document.getElementById('full_phone').value = iti.getNumber();
             }
