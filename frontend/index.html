@@ -3085,7 +3085,7 @@
         const chatbotSessionId = sessionStorage.getItem(chatbotSessionKey) || `vhc_${Math.random().toString(36).slice(2, 10)}`;
         const chatbotApiBase = window.VHC_CHATBOT_API_BASE || ((window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
             ? 'http://localhost:3000'
-            : 'https://vhccompanyservices.com/chatbot-api');
+            : 'https://vhc-chatbot-backend.onrender.com');
         sessionStorage.setItem(chatbotSessionKey, chatbotSessionId);
 
         function toggleChat() {

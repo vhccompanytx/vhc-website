@@ -2104,7 +2104,7 @@
         const chatbotSessionId = sessionStorage.getItem(chatbotSessionKey) || `vhc_${Math.random().toString(36).slice(2, 10)}`;
         const chatbotApiBase = window.VHC_CHATBOT_API_BASE || ((window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
             ? 'http://localhost:3000'
-            : 'https://vhccompanyservices.com/chatbot-api');
+            : 'https://vhc-chatbot-backend.onrender.com');
         sessionStorage.setItem(chatbotSessionKey, chatbotSessionId);
 
         function toggleChat() {
@@ -2126,30 +2126,7 @@
             return msgDiv;
         }
 
-        async function handleChatLegacy() {
-            const text = chatInput.value.trim();
-            if (!text) return;
 
-            addMessage(text, false);
-            chatInput.value = '';
-            chatInput.disabled = true;
-            chatSend.disabled = true;
-
-            const thinkingMsg = addMessage('El asistente esta pensando...', true);
-
-            try {
-                // Future Backend Endpoint: https://vhc-api.onrender.com/chat
-                // For now, mock a response after a delay
-                setTimeout(() => {
-                    thinkingMsg.remove();
-                    addMessage("Lo siento, actualmente estoy en configuración técnica. Pronto estaré impulsado por OpenAI para responder a todas tus dudas solares. Por ahora, por favor usa nuestro formulario o llámanos directamente.", true);
-                }, 1500);
-            } catch (err) {
-                console.error("Chat error:", err);
-                thinkingMsg.remove();
-                addMessage("¡Ups! Estoy teniendo problemas para conectarme con mi cerebro solar. Intenta más tarde.", true);
-            }
-        }
 
         async function handleChat() {
             const text = chatInput.value.trim();
