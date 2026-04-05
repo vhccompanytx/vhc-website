@@ -65,6 +65,7 @@ function getSession(id) {
       techQuestions: 0,
       conflict: null,
       emailUpdated: false,
+      emailRejected: false,
       lastActivity: Date.now(),
       lang: DEFAULT_LANG,
     });
@@ -202,6 +203,7 @@ function lastAsked(history) {
 function extractData(message, session) {
   const raw = String(message || "").trim();
   const lowered = raw.toLowerCase();
+  session.emailRejected = false; // reset each turn — re-set below if a bad email is detected
   const asked = lastAsked(session.history);
   const data = session.data;
 
@@ -278,7 +280,16 @@ function extractData(message, session) {
   if (asked === "correo" && !data.correo) {
     const fixed = fixCommonEmailTypos(raw);
     const match = fixed.match(EMAIL_RE);
-    if (match) data.correo = match[0].toLowerCase();
+    if (match) {
+      data.correo = match[0].toLowerCase();
+    } else {
+      // Detect if the user clearly tried to give an email but the format is invalid
+      const looksLikeEmailAttempt =
+        raw.includes('@') ||
+        /\b(gmail|yahoo|hotmail|outlook|icloud|mail)\b/i.test(raw) ||
+        /\b\w+\.\w{2,4}$/.test(raw);
+      if (looksLikeEmailAttempt) session.emailRejected = true;
+    }
   }
 
   if (asked === "ubicacion" && !data.ubicacion && raw.length >= 3) {
@@ -400,6 +411,12 @@ function buildPrompt(data, session) {
     lang === "es"
       ? "CIERRE PREMATURO: Si el usuario intenta despedirse pero faltan datos, dile amablemente que aun necesitas esa informacion (como telefono o correo) para enviar su solicitud, y vuelvesela a pedir. Si se niega rotundamente, despídete y no sigas preguntando."
       : "PREMATURE CLOSING: If the user tries to end the conversation but details are missing, politely explain that you still need that information to submit their request, and ask again. Stop asking only if they explicitly refuse to provide it.";
+  if (session.emailRejected) {
+    return lang === "es"
+      ? `Eres el asistente de ${BRAND}. El usuario acaba de intentar proporcionar su correo electrónico pero el formato no es válido—parece que falta "@" o el dominio (ej: nombre@gmail.com). Díselo amablemente y pídele que lo vuelva a escribir correctamente. Máximo 2 líneas.`
+      : `You are the assistant for ${BRAND}. The customer just tried to provide their email address but it wasn't valid—it appears to be missing "@" or the domain (e.g. name@gmail.com). Please politely let them know and ask them to re-enter it in the correct format. Maximum 2 lines.`;
+  }
+
   if (session.conflict) {
     return lang === "es"
       ? `Detectaste un conflicto en ${session.conflict.field}. Antes estaba guardado "${session.conflict.old}" y ahora recibiste "${session.conflict.new}". Haz una sola pregunta para confirmar cual dato es correcto y nada mas.`
