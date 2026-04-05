@@ -383,8 +383,8 @@ function buildPrompt(data, session) {
 
   const rejectionRule =
     lang === "es"
-      ? "DESPEDIDA: si el usuario dice que no necesita nada mas o cierra la conversacion, agradece su contacto y termina sin seguir recolectando datos."
-      : "CLOSING RULE: if the user says they do not need anything else or ends the conversation, thank them and stop without collecting more data.";
+      ? "CIERRE PREMATURO: Si el usuario intenta despedirse pero faltan datos, dile amablemente que aun necesitas esa informacion (como telefono o correo) para enviar su solicitud, y vuelvesela a pedir. Si se niega rotundamente, despídete y no sigas preguntando."
+      : "PREMATURE CLOSING: If the user tries to end the conversation but details are missing, politely explain that you still need that information to submit their request, and ask again. Stop asking only if they explicitly refuse to provide it.";
   if (session.conflict) {
     return lang === "es"
       ? `Detectaste un conflicto en ${session.conflict.field}. Antes estaba guardado "${session.conflict.old}" y ahora recibiste "${session.conflict.new}". Haz una sola pregunta para confirmar cual dato es correcto y nada mas.`
@@ -448,6 +448,11 @@ ${priceRule}
 ${techRule}`;
   }
 
+  const strictRule =
+    lang === "es"
+      ? "ESTRICTO: Nunca agradezcas ni asumas un dato si no aparece en la lista 'YA TIENES'. Si el usuario intentó dar un dato pero el sistema sigue diciendo 'SOLO FALTA', significa que el formato fue inválido (ej: el teléfono no tiene 10 dígitos o el correo es incorrecto). En ese caso, dile que el dato parece incorrecto y vuelve a pedirlo especificando el formato correcto."
+      : "STRICT: Never thank the user for or assume a detail if it is not in the 'YOU ALREADY HAVE' list. If the user tried to provide a detail but the system still says 'ONLY ASK FOR', it means the format was invalid (e.g. phone was not 10 digits or email was invalid). Tell them it seems incorrect, and ask again specifying the correct format.";
+
   return lang === "es"
     ? `Eres el asistente de ${BRAND}. Cliente tipo ${data.tipo}.
 YA TIENES: ${confirmed || "ningun dato"}.
@@ -462,7 +467,8 @@ REGLAS:
 ${rejectionRule}
 ${outOfScopeRule}
 ${priceRule}
-${techRule}`
+${techRule}
+${strictRule}`
     : `You are the assistant for ${BRAND}. Customer type: ${data.tipo}.
 YOU ALREADY HAVE: ${confirmed || "no details yet"}.
 ONLY ASK FOR: "${missing}".
@@ -476,7 +482,8 @@ RULES:
 ${rejectionRule}
 ${outOfScopeRule}
 ${priceRule}
-${techRule}`;
+${techRule}
+${strictRule}`;
 }
 
 function buildRows(data, lang) {
