@@ -91,7 +91,7 @@ const DATE_RE = /\b(today|tomorrow|this week|next week|this month|next month|urg
 const LOCATION_RE = /\b(texas|tx|houston|katy|cypress|spring|the woodlands|pearland|pasadena|sugar land|missouri city|richmond|rosenberg|league city|galveston|conroe|tomball|humble|dallas|fort worth|arlington|plano|frisco|austin|san antonio|el paso|corpus christi|mcallen)\b/i;
 const TYPE_HOME_RE = /\b(home|house|residential|residence|townhome|condo|apartment|casa|hogar|residencial|vivienda|apartamento)\b/i;
 const TYPE_BIZ_RE = /\b(business|commercial|office|retail|warehouse|restaurant|shop|store|clinic|school|church|industrial|negocio|comercial|empresa|oficina|bodega|restaurante|local|industrial)\b/i;
-const PROJECT_RE = /\b(solar|panels?|paneles?|battery|backup|generator|ev charger|charger|electrical|breaker|main panel|subpanel|rewire|troubleshoot|inspection|permit|roof|roofing|inverter|powerwall|instalaci[oó]n|paneles? solares|bater[ií]a|respaldo|cargador ev|cargador|el[eé]ctrico|tablero|interruptor|medidor|inversor|generador|revisi[oó]n|mantenimiento|reparar|instalar|agregar|a[ñn]adir|ampliar|expand|upgrade|monitoring|generation|energy storage|sistema solar|solar system)\b/i;
+const PROJECT_RE = /\b(solar|panels?|paneles?|battery|backup|generator|ev charger|charger|electrical|breaker|main panel|subpanel|rewire|troubleshoot|inspection|permit|roof|roofing|inverter|powerwall|instalaci[oó]n|paneles? solares|bater[ií]a|respaldo|cargador ev|cargador|el[eé]ctrico|tablero|interruptor|medidor|inversor|generador|revisi[oó]n|mantenimiento|reparar|instalar|agregar|a[ñn]adir|ampliar|expand|upgrade|monitoring|generation|energy storage|sistema solar|solar system|washing|cleaning|thermal|imaging|removal|reinstallation|reinstall|lavado|limpieza|térmica|termográfica|remoción|reinstalación)\b/i;
 // Catches layman intent phrases that clearly describe solar/electrical work even without explicit tech keywords
 const SOLAR_INTENT_RE = /\b(panel|solar|energy|battery|electric|install|add|expand|upgrade|system|inverter|backup|ev|charger|energ[ií]a|bater[ií]a|instalar|agregar|ampliar|sistema)\b/i;
 const NAME_TRIGGER_RE = /(?:(?:my name is|i am|i'm|call me|me llamo|soy|mi nombre es|nombre es)\s+)([A-Za-zÀ-ÿ][A-Za-zÀ-ÿ'\-]{1,}(?:\s+[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ'\-]{1,}){0,2})/i;
@@ -101,7 +101,7 @@ const BLOCK_PROJECT_RE = /\b(plumbing|hvac|air conditioning|ac|heater|leak|water
 const TECH_RE = /\b(voltage|amps?|ampacity|kw|kva|breaker|panel|inverter|battery|solar|roof|permit|electrical|wire|cable|ground|generator|voltaje|amperios|tension|tensión|tablero|inversor|bater[ií]a|solar|el[eé]ctrico|cable|generador)\b/i;
 const UPDATE_RE = /\b(update|change|correct|correction|that'?s not right|actualizar|cambiar|me equivoqu[eé]|corregir|correcci[oó]n|no es)\b/i;
 // Topics clearly related to VHC services — used to detect off-topic queries
-const VHC_TOPIC_RE = /\b(solar|panel|battery|backup|electric|ev|charger|energy|roof|permit|inverter|install|service|quote|grid|power|watt|kwh|maintenance|inspection|texas|houston|home|house|residential|commercial|vhc|generador|bater[ií]a|el[eé]ctrico|instalaci[oó]n|energ[ií]a|techo|precio|cotizaci[oó]n|servicio)\b/i;
+const VHC_TOPIC_RE = /\b(solar|panel|battery|backup|electric|ev|charger|energy|roof|permit|inverter|install|service|quote|grid|power|watt|kwh|maintenance|inspection|texas|houston|home|house|residential|commercial|vhc|generador|bater[ií]a|el[eé]ctrico|instalaci[oó]n|energ[ií]a|techo|precio|cotizaci[oó]n|servicio|washing|cleaning|thermal|imaging|removal|reinstall|lavado|limpieza|térmica)\b/i;
 
 function isOffTopicQuery(text) {
   if (VHC_TOPIC_RE.test(text)) return false;           // clearly VHC-related
@@ -416,8 +416,8 @@ function buildPrompt(data, session) {
 
   const outOfScopeRule =
     lang === "es"
-      ? "FUERA DE ALCANCE: solo atiendes servicios de VHC Company Services relacionados con instalacion solar residencial, sistemas de respaldo con bateria, cargadores EV, evaluaciones solares y servicios electricos residenciales en Texas. Si el usuario pide algo fuera de eso (ej: plomería, HVAC), dile amablemente que no ofrecemos ese servicio y pregúntale directamente si le interesa recibir información sobre nuestros paneles solares o servicios eléctricos."
-      : "OUT OF SCOPE: you only handle VHC Company Services requests related to residential solar installation, battery backup systems, EV chargers, solar evaluations, and residential electrical services in Texas. If the user asks for something else (e.g. plumbing, HVAC), politely decline and explicitly ask if they would be interested in learning about our solar panel or electrical services instead.";
+      ? "FUERA DE ALCANCE: solo atiendes servicios de VHC Company Services relacionados con instalacion solar residencial, sistemas de respaldo con bateria, cargadores EV, evaluaciones solares, servicios electricos residenciales, mantenimiento de sistemas, lavado de paneles, inspecciones con camara termica y remocion/reinstalacion de sistemas en Texas. Si el usuario pide algo fuera de eso (ej: plomería, HVAC), dile amablemente que no ofrecemos ese servicio y pregúntale directamente si le interesa recibir información sobre nuestros paneles solares o servicios eléctricos."
+      : "OUT OF SCOPE: you only handle VHC Company Services requests related to residential solar installation, battery backup systems, EV chargers, solar evaluations, residential electrical services, system maintenance, panel washing, thermal imaging inspections, and system removal/reinstallation in Texas. If the user asks for something else (e.g. plumbing, HVAC), politely decline and explicitly ask if they would be interested in learning about our solar panel or electrical services instead.";
 
   const rejectionRule =
     lang === "es"
@@ -447,7 +447,7 @@ function buildPrompt(data, session) {
 
   if (!data.tipo) {
     return lang === "es"
-      ? `Eres el asistente virtual de ${BRAND}. Atiendes clientes de Texas para instalacion solar residencial, sistemas de respaldo con bateria, cargadores EV, evaluaciones solares y servicios electricos residenciales.
+      ? `Eres el asistente virtual de ${BRAND}. Atiendes clientes de Texas para instalacion solar residencial, sistemas de respaldo con bateria, cargadores EV, evaluaciones solares, servicios electricos residenciales, mantenimiento, lavado de paneles y remocion/reinstalacion de sistemas.
 
 COMPORTAMIENTO:
 - Si el usuario solo saluda, presentate brevemente y pregunta en que puedes ayudar.
@@ -462,7 +462,7 @@ ${outOfScopeRule}
 ${priceRule}
 ${techRule}
 ${offTopicRule}`
-      : `You are the virtual assistant for ${BRAND}. You help Texas customers with residential solar installation, battery backup systems, EV chargers, solar site evaluations, and residential electrical services.
+      : `You are the virtual assistant for ${BRAND}. You help Texas customers with residential solar installation, battery backup systems, EV chargers, solar site evaluations, residential electrical services, maintenance, panel washing, and system removal/reinstallation.
 
 BEHAVIOR:
 - If the user only says hello, briefly introduce yourself and ask how you can help.

@@ -141,7 +141,12 @@
         .chat-send:hover { transform: scale(1.1); filter: brightness(1.1); }
 
         @media (max-width: 480px) {
-            .chat-window { width: calc(100vw - 40px); height: calc(100vh - 150px); right: 20px; bottom: 90px; }
+            .chat-window {
+                width: calc(100vw - 20px);
+                height: calc(100vh - 120px);
+                right: 10px;
+                bottom: 74px;
+            }
         }
 
         /* Portfolio Hero */
@@ -373,12 +378,119 @@
             mobileMenu.classList.toggle('open');
         });
 
-        // Chatbot (Mock)
+        // Chatbot Logic
         const chatToggle = document.getElementById('chatbot-toggle');
-        const chatWindow = document.getElementById('chat-window');
         const chatClose = document.getElementById('chat-close');
-        chatToggle.addEventListener('click', () => chatWindow.classList.toggle('open'));
-        chatClose.addEventListener('click', () => chatWindow.classList.remove('open'));
+        const chatWindow = document.getElementById('chat-window');
+        const chatInput = document.getElementById('chat-input');
+        const chatSend = document.getElementById('chat-send');
+        const chatMessages = document.getElementById('chat-messages');
+        const chatbotSessionKey = 'vhc-chat-session-es';
+        const chatbotSessionId = sessionStorage.getItem(chatbotSessionKey) || `vhc_${Math.random().toString(36).slice(2, 10)}`;
+        const chatbotApiBase = window.VHC_CHATBOT_API_BASE || ((window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+            ? 'http://localhost:3000'
+            : 'https://vhc-chatbot-backend.onrender.com');
+        sessionStorage.setItem(chatbotSessionKey, chatbotSessionId);
+
+        function toggleChat() {
+            chatWindow.classList.toggle('open');
+            if (chatWindow.classList.contains('open')) {
+                chatInput.focus();
+            }
+        }
+
+        if (chatToggle) chatToggle.addEventListener('click', toggleChat);
+        if (chatClose) chatClose.addEventListener('click', toggleChat);
+
+        function addMessage(text, isBot = false) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `msg msg-${isBot ? 'bot' : 'user'}`;
+            msgDiv.textContent = text;
+            chatMessages.appendChild(msgDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            return msgDiv;
+        }
+
+        async function handleChat() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+
+            addMessage(text, false);
+            chatInput.value = '';
+            chatInput.disabled = true;
+            chatSend.disabled = true;
+
+            const thinkingMsg = addMessage('El asistente esta pensando...', true);
+
+            try {
+                const response = await fetch(`${chatbotApiBase}/chat`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message: text,
+                        sessionId: chatbotSessionId,
+                        lang: 'es'
+                    })
+                });
+
+                const data = await response.json();
+                thinkingMsg.remove();
+
+                if (!response.ok || data.error) {
+                    throw new Error(data.error || 'No fue posible conectar con el asistente.');
+                }
+
+                addMessage(data.reply, true);
+
+                if (data.meta && data.meta.leadJustSent) {
+                    showToast("¡Información enviada con éxito al equipo de VHC!");
+                }
+            } catch (err) {
+                console.error("Chat error:", err);
+                thinkingMsg.remove();
+                addMessage("No puedo conectarme con el asistente en este momento. Intenta de nuevo en unos minutos o llamanos al (346) 848-1465.", true);
+            } finally {
+                chatInput.disabled = false;
+                chatSend.disabled = false;
+                chatInput.focus();
+            }
+        }
+
+        function showToast(text) {
+            let toast = document.getElementById('vhc-toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'vhc-toast';
+                toast.className = 'vhc-toast';
+                toast.style.cssText = "position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(11,19,50,0.9);color:#fff;padding:12px 24px;border-radius:12px;z-index:9999;font-family:var(--font-display);font-size:.9rem;display:flex;align-items:center;gap:10px;box-shadow:0 10px 30px rgba(0,0,0,0.2);opacity:0;visibility:hidden;transition:all .3s;";
+                toast.innerHTML = `<i class="fas fa-check-circle" style="color:var(--vhc-gold);"></i> <span>${text}</span>`;
+                document.body.appendChild(toast);
+                
+                // Add show class styles dynamically if needed, or just use inline transitions
+                toast.show = function() {
+                    this.style.opacity = "1";
+                    this.style.visibility = "visible";
+                    this.style.transform = "translateX(-50%) translateY(0)";
+                };
+                toast.hide = function() {
+                    this.style.opacity = "0";
+                    this.style.visibility = "hidden";
+                    this.style.transform = "translateX(-50%) translateY(20px)";
+                };
+            } else {
+                toast.querySelector('span').textContent = text;
+            }
+            
+            toast.show();
+            setTimeout(() => toast.hide(), 5000);
+        }
+
+        if (chatSend) chatSend.addEventListener('click', handleChat);
+        if (chatInput) {
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') handleChat();
+            });
+        }
 
         // Portfolio Logic
         const projects = [

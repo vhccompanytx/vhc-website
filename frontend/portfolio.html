@@ -485,10 +485,10 @@
 
         @media (max-width: 480px) {
             .chat-window {
-                width: calc(100vw - 40px);
-                height: calc(100vh - 150px);
-                right: 20px;
-                bottom: 90px;
+                width: calc(100vw - 20px);
+                height: calc(100vh - 120px);
+                right: 10px;
+                bottom: 74px;
             }
         }
 
@@ -1247,7 +1247,7 @@
         const chatbotSessionId = sessionStorage.getItem(chatbotSessionKey) || `vhc_${Math.random().toString(36).slice(2, 10)}`;
         const chatbotApiBase = window.VHC_CHATBOT_API_BASE || ((window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
             ? 'http://localhost:3000'
-            : 'https://vhccompanytx.com/chatbot-api');
+            : 'https://vhc-chatbot-backend.onrender.com');
         sessionStorage.setItem(chatbotSessionKey, chatbotSessionId);
 
         function toggleChat() {
